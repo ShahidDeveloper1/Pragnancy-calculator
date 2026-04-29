@@ -7,7 +7,7 @@ const path = require('path');
 const { weekData, foodData } = require('./seo-data');
 
 const SITE = 'https://mamacarepro.com';
-const OUT = path.join(__dirname, 'pages');
+const OUT = path.join(__dirname, 'public', 'pages');
 
 // Ensure output directory
 if (!fs.existsSync(OUT)) fs.mkdirSync(OUT, { recursive: true });
