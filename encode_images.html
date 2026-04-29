@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head><title>Image Encoder Helper</title>
+<style>
+  body { font-family: monospace; padding: 20px; background: #1a1a2e; color: #eee; }
+  h1 { color: #f490b0; }
+  .status { color: #78d8c0; margin: 8px 0; }
+  textarea { width:100%; height:120px; background:#0d0d1a; color:#aaa; border:1px solid #333; padding:8px; font-size:10px; margin-top:8px; }
+  #pickBtn { background: linear-gradient(135deg, #d63866, #f490b0); color:white; border:none; padding:14px 28px; border-radius:8px; cursor:pointer; font-size:1rem; font-weight:700; display:block; margin:20px 0; }
+  #fileInput { display:none; }
+  .result { margin:8px 0; padding:8px; background:#0d1117; border-radius:6px; }
+</style>
+</head>
+<body>
+<h1>Baby Image Encoder</h1>
+<p>Click the button, select all 5 baby_stage PNG files, and the base64 will appear below.</p>
+<button id="pickBtn" onclick="document.getElementById('fileInput').click()">SELECT BABY IMAGE FILES</button>
+<input type="file" id="fileInput" multiple accept="image/png,image/jpeg" onchange="encodeFiles(this.files)" />
+<div id="status"></div>
+<div id="results"></div>
+
+<script>
+const keyMap = { 0:'early', 1:'week12', 2:'week20', 3:'week28', 4:'week36' };
+
+async function encodeFiles(files) {
+  const statusEl = document.getElementById('status');
+  const resultsEl = document.getElementById('results');
+  statusEl.innerHTML = 'Encoding ' + files.length + ' image(s)...';
+  resultsEl.innerHTML = '';
+
+  const encoded = {};
+  const sorted = [...files].sort((a,b) => a.name.localeCompare(b.name));
+
+  for (let i = 0; i < sorted.length; i++) {
+    const file = sorted[i];
+    const b64 = await toBase64(file);
+    const jsKey = keyMap[i] || ('img' + i);
+    encoded[jsKey] = b64;
+    const kb = Math.round(b64.length / 1024);
+    statusEl.innerHTML += '<p class="status">OK: ' + file.name + ' => ' + jsKey + ' (' + kb + 'KB)</p>';
+  }
+
+  let js = 'const babyImages = {\n';
+  for (const [k,v] of Object.entries(encoded)) {
+    js += '  ' + k + ': "' + v + '",\n';
+  }
+  js += '  week40: null\n};\n';
+  js += 'function getBabyImage(w){if(w<=7)return babyImages.early;if(w<=15)return babyImages.week12;if(w<=23)return babyImages.week20;if(w<=31)return babyImages.week28;return babyImages.week36;}';
+
+  window._encodedJS = js;
+  resultsEl.innerHTML = '<div class="result"><strong>DONE - Base64 JS code:</strong><textarea id="out" readonly>' + js + '</textarea><br><button onclick="navigator.clipboard.writeText(document.getElementById(\'out\').value)" style="background:#3bb89a;color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;margin-top:6px">Copy</button></div>';
+}
+
+function toBase64(file) {
+  return new Promise(function(resolve) {
+    var fr = new FileReader();
+    fr.onloadend = function() { resolve(fr.result); };
+    fr.readAsDataURL(file);
+  });
+}
+</script>
+</body>
+</html>
