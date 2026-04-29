@@ -4,7 +4,7 @@
   "description": "MamaCare Pro — #1 AI Pregnancy Calculator & Health Platform",
   "private": true,
   "scripts": {
-    "start": "node server.js"
+    "dev": "node server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
