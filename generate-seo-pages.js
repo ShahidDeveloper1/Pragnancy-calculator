@@ -12,13 +12,13 @@ const OUT = path.join(__dirname, 'public', 'pages');
 // Ensure output directory
 if (!fs.existsSync(OUT)) fs.mkdirSync(OUT, { recursive: true });
 
-function trimesterName(t) { return ['','First','Second','Third'][t]; }
+function trimesterName(t) { return ['', 'First', 'Second', 'Third'][t]; }
 
 // ====== PAGE TEMPLATE ======
 function pageHTML({ title, metaDesc, canonical, h1, breadcrumbs, content, prev, next, relatedLinks }) {
   const bcSchema = JSON.stringify({
-    "@context":"https://schema.org","@type":"BreadcrumbList",
-    "itemListElement": breadcrumbs.map((b,i) => ({"@type":"ListItem","position":i+1,"name":b.name,"item":b.url}))
+    "@context": "https://schema.org", "@type": "BreadcrumbList",
+    "itemListElement": breadcrumbs.map((b, i) => ({ "@type": "ListItem", "position": i + 1, "name": b.name, "item": b.url }))
   });
 
   return `<!DOCTYPE html>
@@ -88,7 +88,7 @@ function pageHTML({ title, metaDesc, canonical, h1, breadcrumbs, content, prev, 
   </nav>
 
   <main class="seo-page">
-    <nav class="seo-bc" aria-label="Breadcrumb">${breadcrumbs.map((b,i) => i < breadcrumbs.length-1 ? `<a href="${b.url}">${b.name}</a><span>›</span>` : `<span>${b.name}</span>`).join('')}</nav>
+    <nav class="seo-bc" aria-label="Breadcrumb">${breadcrumbs.map((b, i) => i < breadcrumbs.length - 1 ? `<a href="${b.url}">${b.name}</a><span>›</span>` : `<span>${b.name}</span>`).join('')}</nav>
     <h1>${h1}</h1>
     ${content}
     <div class="seo-nav">
@@ -111,11 +111,11 @@ function pageHTML({ title, metaDesc, canonical, h1, breadcrumbs, content, prev, 
 // ====== GENERATE PREGNANCY WEEK PAGES ======
 console.log('📄 Generating pregnancy week pages...');
 weekData.forEach((w, i) => {
-  const prevW = i > 0 ? weekData[i-1] : null;
-  const nextW = i < weekData.length-1 ? weekData[i+1] : null;
+  const prevW = i > 0 ? weekData[i - 1] : null;
+  const nextW = i < weekData.length - 1 ? weekData[i + 1] : null;
   const slug = `pregnancy-week-${w.week}`;
-  
-  const relatedLinks = weekData.map(ww => 
+
+  const relatedLinks = weekData.map(ww =>
     `<a href="pregnancy-week-${ww.week}.html">Week ${ww.week}</a>`
   ).join('');
 
@@ -142,7 +142,7 @@ weekData.forEach((w, i) => {
     </details>
     <details class="seo-card" style="cursor:pointer">
       <summary style="font-weight:700">What trimester is week ${w.week}?</summary>
-      <p style="margin-top:8px">Week ${w.week} falls in the <strong>${trimesterName(w.trimester)} Trimester</strong> of pregnancy.${w.trimester===1?' The first trimester covers weeks 1-12.':w.trimester===2?' The second trimester covers weeks 13-26.':' The third trimester covers weeks 27-40.'}</p>
+      <p style="margin-top:8px">Week ${w.week} falls in the <strong>${trimesterName(w.trimester)} Trimester</strong> of pregnancy.${w.trimester === 1 ? ' The first trimester covers weeks 1-12.' : w.trimester === 2 ? ' The second trimester covers weeks 13-26.' : ' The third trimester covers weeks 27-40.'}</p>
     </details>
     <details class="seo-card" style="cursor:pointer">
       <summary style="font-weight:700">What symptoms should I expect at week ${w.week}?</summary>
@@ -152,15 +152,15 @@ weekData.forEach((w, i) => {
 
   const html = pageHTML({
     title: `Pregnancy Week ${w.week}: ${w.title} — Baby Size, Symptoms & Tips | MamaCare Pro`,
-    metaDesc: `Week ${w.week} of pregnancy: Your baby is the size of a ${w.size} (${w.weight}, ${w.length}). ${w.desc.substring(0,100)} Symptoms, development milestones & expert tips.`,
+    metaDesc: `Week ${w.week} of pregnancy: Your baby is the size of a ${w.size} (${w.weight}, ${w.length}). ${w.desc.substring(0, 100)} Symptoms, development milestones & expert tips.`,
     canonical: `${SITE}/pages/${slug}.html`,
     h1: `Pregnancy Week ${w.week}: ${w.title}`,
     breadcrumbs: [
-      {name:'Home',url:'/'},{name:'Pregnancy Week by Week',url:'/pages/'},{name:`Week ${w.week}`,url:`/pages/${slug}.html`}
+      { name: 'Home', url: '/' }, { name: 'Pregnancy Week by Week', url: '/pages/' }, { name: `Week ${w.week}`, url: `/pages/${slug}.html` }
     ],
     content,
-    prev: prevW ? {url:`pregnancy-week-${prevW.week}.html`,label:`Week ${prevW.week}`} : null,
-    next: nextW ? {url:`pregnancy-week-${nextW.week}.html`,label:`Week ${nextW.week}`} : null,
+    prev: prevW ? { url: `pregnancy-week-${prevW.week}.html`, label: `Week ${prevW.week}` } : null,
+    next: nextW ? { url: `pregnancy-week-${nextW.week}.html`, label: `Week ${nextW.week}` } : null,
     relatedLinks
   });
 
@@ -172,8 +172,8 @@ console.log(`  ✅ Generated ${weekData.length} week pages`);
 console.log('📄 Generating food safety pages...');
 foodData.forEach(f => {
   const slug = `can-i-eat-${f.food}`;
-  const relatedLinks = foodData.map(ff => 
-    `<a href="can-i-eat-${ff.food}.html">${ff.title.replace('Can Pregnant Women ','')}</a>`
+  const relatedLinks = foodData.map(ff =>
+    `<a href="can-i-eat-${ff.food}.html">${ff.title.replace('Can Pregnant Women ', '')}</a>`
   ).join('');
 
   const content = `
@@ -189,7 +189,7 @@ foodData.forEach(f => {
     <h2>Frequently Asked Questions</h2>
     <details class="seo-card" style="cursor:pointer">
       <summary style="font-weight:700">Is ${f.food} safe during pregnancy?</summary>
-      <p style="margin-top:8px">${f.safe ? `Yes, ${f.food} is generally considered safe during pregnancy when prepared properly.` : `${f.food} should be consumed with caution or avoided during pregnancy.`} ${f.answer.substring(0,120)}</p>
+      <p style="margin-top:8px">${f.safe ? `Yes, ${f.food} is generally considered safe during pregnancy when prepared properly.` : `${f.food} should be consumed with caution or avoided during pregnancy.`} ${f.answer.substring(0, 120)}</p>
     </details>
     <details class="seo-card" style="cursor:pointer">
       <summary style="font-weight:700">What are safe alternatives to ${f.food}?</summary>
@@ -199,11 +199,11 @@ foodData.forEach(f => {
 
   const html = pageHTML({
     title: `${f.title} — Pregnancy Food Safety Guide | MamaCare Pro`,
-    metaDesc: `${f.safe ? '✅ Safe:' : '⚠️ Caution:'} ${f.answer.substring(0,140)} Expert pregnancy nutrition advice from MamaCare Pro.`,
+    metaDesc: `${f.safe ? '✅ Safe:' : '⚠️ Caution:'} ${f.answer.substring(0, 140)} Expert pregnancy nutrition advice from MamaCare Pro.`,
     canonical: `${SITE}/pages/${slug}.html`,
     h1: f.title,
     breadcrumbs: [
-      {name:'Home',url:'/'},{name:'Food Safety',url:'/pages/'},{name:f.title,url:`/pages/${slug}.html`}
+      { name: 'Home', url: '/' }, { name: 'Food Safety', url: '/pages/' }, { name: f.title, url: `/pages/${slug}.html` }
     ],
     content,
     prev: null, next: null,
@@ -226,7 +226,7 @@ const indexHTML = pageHTML({
   metaDesc: 'Complete pregnancy guide with week-by-week development, food safety during pregnancy, symptoms, and expert tips. 52+ medically reviewed articles.',
   canonical: `${SITE}/pages/`,
   h1: 'Complete Pregnancy Guide',
-  breadcrumbs: [{name:'Home',url:'/'},{name:'Pregnancy Guides',url:'/pages/'}],
+  breadcrumbs: [{ name: 'Home', url: '/' }, { name: 'Pregnancy Guides', url: '/pages/' }],
   content: `<p>Explore our complete library of medically reviewed pregnancy guides — from week 1 to week 42, food safety, symptoms, and more.</p>${indexLinks}`,
   prev: null, next: null,
   relatedLinks: ''

@@ -4,7 +4,7 @@ const path = require('path');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 // Serve the frontend application
@@ -23,8 +23,9 @@ async function searchOSM(lat, lng, type) {
           node["healthcare:speciality"~"gynaecology|obstetrics",i];
           node["healthcare"="doctor"]["healthcare:speciality"~"gynaecology|obstetrics",i];
           node["amenity"~"clinic|doctors",i]["healthcare:speciality"~"gynaecology|obstetrics",i];
-          node["amenity"~"clinic|doctors",i]["name"~"gyn|obst|matern|wom|lady",i];
-          way["amenity"~"clinic|doctors",i]["name"~"gyn|obst|matern|wom|lady",i];
+          node["amenity"~"clinic|doctors|hospital",i]["name"~"gyn|obst|matern|wom|lady|mother|child",i];
+          way["amenity"~"clinic|doctors|hospital",i]["name"~"gyn|obst|matern|wom|lady|mother|child",i];
+          node["healthcare"="doctor"]["name"~"gyn|obst|matern|wom|lady",i];
         `;
     } else {
         // hospital fallback - more comprehensive
@@ -50,7 +51,10 @@ async function searchOSM(lat, lng, type) {
     const res = await fetch(url, {
         method: 'POST',
         body: "data=" + encodeURIComponent(overpassQuery),
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        headers: { 
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'User-Agent': 'MamaCarePro/1.0 (https://mamacarepro.com)'
+        }
     });
 
     if (!res.ok) {
@@ -212,6 +216,6 @@ app.get('/api/doctors', async (req, res) => {
 
 
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(3001, () => {
+    console.log(`Server is running on http://localhost:3001`);
 });
