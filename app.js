@@ -1254,7 +1254,6 @@ async function loadWeekData(w) {
     const src = getBabyImage(w);
     svgContainer.innerHTML = `<img src="${src}" alt="Baby development at week ${w}" 
       style="width:100%;height:auto;border-radius:16px;display:block;
-             animation:babyPulse 3.5s ease-in-out infinite;
              filter:drop-shadow(0 6px 18px rgba(108,59,228,0.15))"
       onerror="this.style.opacity=0.3" />`;
   }
@@ -1661,11 +1660,14 @@ function saveSymptoms() {
 
 // ====== INIT ======
 document.addEventListener('DOMContentLoaded', () => {
-  // Set today as default date for all inputs
+  // Set today as default date for all inputs (pre-fill so fields aren't empty)
   const today = new Date().toISOString().split('T')[0];
   ['lmpDate','conceptionDate','ivfDate','ultrasoundDate','fertLmpDate'].forEach(id => {
     const el = document.getElementById(id);
-    if (el) el.max = today;
+    if (el) {
+      el.max = today;
+      if (!el.value) el.value = today; // Pre-fill with today's date so it's never empty
+    }
   });
 
   // Restore state

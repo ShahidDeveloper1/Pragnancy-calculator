@@ -733,7 +733,7 @@ body::before {
 }
 @keyframes babyPulse {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.08); }
+  50% { transform: scale(1.02); }
 }
 .baby-size-label { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
 .baby-size-name {
@@ -1543,7 +1543,7 @@ input:checked + .slider-ui:before {
   width: 100%;
   max-width: 220px;
   margin: 0 auto 16px;
-  animation: babyPulse 3.5s ease-in-out infinite;
+  animation: babyPulse 5s ease-in-out infinite;
   filter: drop-shadow(0 6px 18px rgba(214, 56, 102, 0.15));
   font-family: 'Plus Jakarta Sans', sans-serif;
   transition: all 0.4s ease;
