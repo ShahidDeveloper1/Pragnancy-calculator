@@ -27,6 +27,14 @@ const CITIES = [
     ]
   },
   { 
+    name: 'Washington D.C.', slug: 'washington-dc', country: 'USA', lat: 38.9072, lng: -77.0369,
+    clinics: [
+      { name: 'Sibley Memorial Hospital', address: '5255 Loughboro Rd NW, Washington, DC', rating: 4.8, type: 'Private' },
+      { name: 'MedStar Washington Hospital Center', address: '110 Irving St NW, Washington, DC', rating: 4.6, type: 'Private' },
+      { name: 'George Washington University Hospital', address: '900 23rd St NW, Washington, DC', rating: 4.5, type: 'Private' }
+    ]
+  },
+  { 
     name: 'London', slug: 'london', country: 'UK', lat: 51.5074, lng: -0.1278,
     clinics: [
       { name: 'The Portland Hospital', address: '209-215 Great Portland St, London', rating: 4.9, type: 'Private' },
@@ -40,6 +48,14 @@ const CITIES = [
       { name: 'Mediclinic City Hospital', address: 'Dubai Healthcare City, Dubai', rating: 4.8, type: 'Private' },
       { name: 'Al Zahra Hospital Dubai', address: 'Sheikh Zayed Rd, Dubai', rating: 4.7, type: 'Private' },
       { name: 'Latifa Hospital for Women', address: 'Oud Metha Rd, Dubai', rating: 4.5, type: 'Public' }
+    ]
+  },
+  { 
+    name: 'Riyadh', slug: 'riyadh', country: 'Saudi Arabia', lat: 24.7136, lng: 46.6753,
+    clinics: [
+      { name: 'King Faisal Specialist Hospital', address: 'Zahrawi St, Al Maather, Riyadh', rating: 4.9, type: 'Public' },
+      { name: 'Dr. Sulaiman Al Habib Hospital', address: 'Olaya St, Riyadh', rating: 4.8, type: 'Private' },
+      { name: 'Specialized Medical Center Hospital', address: 'King Fahd Rd, Riyadh', rating: 4.7, type: 'Private' }
     ]
   },
   { 
@@ -59,11 +75,51 @@ const CITIES = [
     ]
   },
   { 
+    name: 'Ottawa', slug: 'ottawa', country: 'Canada', lat: 45.4215, lng: -75.6972,
+    clinics: [
+      { name: 'The Ottawa Hospital (Civic)', address: '1053 Carling Ave, Ottawa', rating: 4.7, type: 'Public' },
+      { name: 'Queensway Carleton Hospital', address: '3045 Baseline Rd, Ottawa', rating: 4.6, type: 'Public' },
+      { name: 'Montfort Hospital Maternity', address: '713 Montreal Rd, Ottawa', rating: 4.5, type: 'Public' }
+    ]
+  },
+  { 
     name: 'Sydney', slug: 'sydney', country: 'Australia', lat: -33.8688, lng: 151.2093,
     clinics: [
       { name: 'Royal Hospital for Women', address: 'Barker St, Randwick NSW 2031', rating: 4.7, type: 'Public' },
       { name: 'Prince of Wales Private Hospital', address: 'Barker St, Randwick NSW 2031', rating: 4.8, type: 'Private' },
       { name: 'St George Private OB-GYN', address: '1 South St, Kogarah NSW 2217', rating: 4.6, type: 'Private' }
+    ]
+  },
+  { 
+    name: 'Paris', slug: 'paris', country: 'France', lat: 48.8566, lng: 2.3522,
+    clinics: [
+      { name: 'Hôpital Necker-Enfants Malades', address: '149 Rue de Sèvres, 75015 Paris', rating: 4.8, type: 'Public' },
+      { name: 'Hôpital Américain de Paris', address: '63 Bd Victor Hugo, 92200 Neuilly-sur-Seine', rating: 4.9, type: 'Private' },
+      { name: 'Maternité des Lilas', address: '12-14 Rue du Coq Français, 93260 Les Lilas', rating: 4.7, type: 'Private' }
+    ]
+  },
+  { 
+    name: 'Berlin', slug: 'berlin', country: 'Germany', lat: 52.5200, lng: 13.4050,
+    clinics: [
+      { name: 'Charité – Universitätsmedizin Berlin', address: 'Charitépl. 1, 10117 Berlin', rating: 4.8, type: 'Public' },
+      { name: 'Vivantes Klinikum Neukölln', address: 'Rudower Str. 48, 12351 Berlin', rating: 4.6, type: 'Public' },
+      { name: 'Sankt Gertrauden-Krankenhaus', address: 'Paretzer Str. 12, 10713 Berlin', rating: 4.7, type: 'Private' }
+    ]
+  },
+  { 
+    name: 'Singapore', slug: 'singapore', country: 'Singapore', lat: 1.3521, lng: 103.8198,
+    clinics: [
+      { name: 'KK Women\'s and Children\'s Hospital', address: '100 Bukit Timah Rd, Singapore', rating: 4.7, type: 'Public' },
+      { name: 'Mount Elizabeth Hospital', address: '3 Mt Elizabeth, Singapore', rating: 4.9, type: 'Private' },
+      { name: 'Thomson Medical Centre', address: '339 Thomson Rd, Singapore', rating: 4.8, type: 'Private' }
+    ]
+  },
+  { 
+    name: 'Tokyo', slug: 'tokyo', country: 'Japan', lat: 35.6762, lng: 139.6503,
+    clinics: [
+      { name: 'St. Luke\'s International Hospital', address: '9-1 Akashicho, Chuo City, Tokyo', rating: 4.8, type: 'Private' },
+      { name: 'Aiiku Hospital', address: '1-16-10 Minamiazabu, Minato City, Tokyo', rating: 4.9, type: 'Private' },
+      { name: 'Sanno Hospital', address: '8-10-16 Akasaka, Minato City, Tokyo', rating: 4.7, type: 'Private' }
     ]
   }
 ];
@@ -403,7 +459,7 @@ CITIES.forEach(city => {
 
     <div style="margin-top: 40px; padding: 24px; background: var(--bg-secondary); border-radius: var(--radius-xl); text-align: center; border: 1px dashed var(--border-color);">
       <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 16px;">Need to find a clinic outside of ${city.name}?</p>
-      <a href="/#doctors" class="cta-btn" style="background: var(--indigo); color: white; padding: 12px 24px; font-size: 0.9rem;">📍 Use Live Doctor Finder</a>
+      <a href="/#calculator" class="cta-btn" style="background: var(--indigo); color: white; padding: 12px 24px; font-size: 0.9rem;">🤰 Use Due Date Calculator</a>
     </div>
   `;
 
