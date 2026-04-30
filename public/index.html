@@ -1,27 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+
 <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-XXXXXXXXXX');
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MomCalc — AI Pregnancy Calculator & Health Companion | Powered by RapidAPI</title>
-  <meta name="description" content="MomCalc is a $10B premium pregnancy calculator and health tracker for modern mothers. Calculate due dates, track fetal growth, and monitor health milestones.">
-  <meta name="google-site-verification" content="DlAoAxaOvkuDMmt4IeiWcqU0Poup27ppp9dc3fjlIQo" />
-  <meta name="keywords" content="pregnancy calculator, due date calculator, pregnancy week by week, baby development, pregnancy health" />
+  <meta name="description"
+    content="MomCalc is a $10B premium pregnancy calculator and health tracker for modern mothers. Calculate due dates, track fetal growth, and monitor health milestones.">
+
+  <meta name="keywords"
+    content="pregnancy calculator, due date calculator, pregnancy week by week, baby development, pregnancy health" />
   <link rel="icon" href="https://momcalc.com/icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="google-site-verification" content="DlAoAxaOvkuDMmt4IeiWcqU0Poup27ppp9dc3fjlIQo" />
   <script>
     tailwind.config = {
       darkMode: ['selector', '[data-theme="dark"]'],
@@ -46,787 +53,959 @@
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#6C3BE4" />
   <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3209/3209121.png" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤰</text></svg>" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤰</text></svg>" />
 </head>
+
 <body>
 
-<!-- Background Orbs -->
-<div class="bg-orbs" aria-hidden="true">
-  <div class="bg-orb bg-orb-1"></div>
-  <div class="bg-orb bg-orb-2"></div>
-  <div class="bg-orb bg-orb-3"></div>
-</div>
-
-<!-- Loading Overlay -->
-<div class="calculating" id="loadingOverlay" aria-live="polite">
-  <div class="calc-spinner">
-    <span class="spinner-icon">🤰</span>
-    <div class="spinner-text">Calculating your journey…</div>
+  <!-- Background Orbs -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
   </div>
-</div>
 
-<!-- ====== NAVBAR ====== -->
-<nav class="navbar" role="navigation" aria-label="Main navigation">
-  <a href="#hero" class="nav-brand" aria-label="MomCalc Home">
-    <div class="nav-logo" aria-hidden="true">🤰</div>
-    <div>
-      <div class="nav-title" data-i18n="nav_brand_title">MomCalc</div>
-      <div class="nav-sub" data-i18n="nav_brand_sub">Pregnancy Companion</div>
+  <!-- Loading Overlay -->
+  <div class="calculating" id="loadingOverlay" aria-live="polite">
+    <div class="calc-spinner">
+      <span class="spinner-icon">🤰</span>
+      <div class="spinner-text">Calculating your journey…</div>
     </div>
-  </a>
-
-
-  <ul class="nav-links" role="list">
-    <li><a href="#hero" class="active" id="nav-home" data-i18n="nav_home">Home</a></li>
-    <li><a href="#dashboard" id="nav-dash" data-i18n="nav_dashboard">Dashboard</a></li>
-    <li><a href="#features" id="nav-features" data-i18n="nav_features">Features</a></li>
-    <li><a href="/pages/" id="nav-guides" class="font-semibold text-indigo">Pregnancy Guides</a></li>
-  </ul>
-
-  <div class="nav-actions">
-    <div class="lang-switcher">
-      <button class="lang-btn" id="langBtn" aria-label="Switch language">🌐 <span id="currentLangLabel">English</span></button>
-      <div class="lang-dropdown" id="langDropdown">
-        <div class="lang-option" data-value="en">English</div>
-        <div class="lang-option" data-value="zh">中文 (Mandarin)</div>
-        <div class="lang-option" data-value="es">Español</div>
-        <div class="lang-option" data-value="ar">العربية (Arabic)</div>
-        <div class="lang-option" data-value="fr">Français</div>
-        <div class="lang-option" data-value="de">Deutsch</div>
-        <div class="lang-option" data-value="ms">Bahasa Melayu</div>
-      </div>
-    </div>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle theme">
-      <div class="theme-toggle-knob"></div>
-    </button>
-    <a href="#calculator" class="nav-cta-link"><button class="method-tab nav-cta" style="padding:8px 20px;border-radius:9999px;font-size:.875rem" data-i18n="btn_calc_now">Calculate Now</button></a>
   </div>
-</nav>
 
-<!-- ====== HERO SECTION ====== -->
-<section class="hero" id="hero">
-  <div class="hero-inner">
-    <!-- Hero Text -->
-    <div class="hero-content fade-in-up">
-      <div class="hero-badge">
-        <span data-i18n="hero_badge_text">⭐ Trusted by 2M+ Mamas Worldwide</span>
+  <!-- ====== NAVBAR ====== -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <a href="#hero" class="nav-brand" aria-label="MomCalc Home">
+      <div class="nav-logo" aria-hidden="true">🤰</div>
+      <div>
+        <div class="nav-title" data-i18n="nav_brand_title">MomCalc</div>
+        <div class="nav-sub" data-i18n="nav_brand_sub">Pregnancy Companion</div>
       </div>
-      <h1 class="hero-title">
-        <span data-i18n="hero_title_1">Your Complete</span><br/>
-        <span class="gradient-text" data-i18n="hero_title_2">Pregnancy Journey</span><br/>
-        <span data-i18n="hero_title_3">Starts Here</span>
-      </h1>
-      <p class="hero-desc">
-        Track every week of your pregnancy with detailed baby development milestones, mother health insights, personalized health trackers, appointment reminders, and expert nutrition guidance — all in one beautiful app.
-      </p>
-      <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-num">40</div>
-          <div class="stat-label">Weeks of Data</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">200+</div>
-          <div class="stat-label">Health Insights</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">6</div>
-          <div class="stat-label">Smart Trackers</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">100%</div>
-          <div class="stat-label">Medically Guided</div>
+    </a>
+
+
+    <ul class="nav-links" role="list">
+      <li><a href="#hero" class="active" id="nav-home" data-i18n="nav_home">Home</a></li>
+      <li><a href="#dashboard" id="nav-dash" data-i18n="nav_dashboard">Dashboard</a></li>
+      <li><a href="#features" id="nav-features" data-i18n="nav_features">Features</a></li>
+      <li><a href="/pages/" id="nav-guides" class="font-semibold text-indigo">Pregnancy Guides</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <div class="lang-switcher">
+        <button class="lang-btn" id="langBtn" aria-label="Switch language">🌐 <span
+            id="currentLangLabel">English</span></button>
+        <div class="lang-dropdown" id="langDropdown">
+          <div class="lang-option" data-value="en">English</div>
+          <div class="lang-option" data-value="zh">中文 (Mandarin)</div>
+          <div class="lang-option" data-value="es">Español</div>
+          <div class="lang-option" data-value="ar">العربية (Arabic)</div>
+          <div class="lang-option" data-value="fr">Français</div>
+          <div class="lang-option" data-value="de">Deutsch</div>
+          <div class="lang-option" data-value="ms">Bahasa Melayu</div>
         </div>
       </div>
-    </div>
-
-    <!-- Calculator Card -->
-    <div class="calculator-card fade-in-up" id="calculator" style="animation-delay:.15s">
-      <!-- API Key Row -->
-      <div class="api-key-row" id="apiKeyRow">
-        <div class="api-key-badge">🔗 RapidAPI Connected</div>
-        <div class="api-key-input-wrap">
-          <input type="password" class="input-field api-key-input" id="apiKey"
-            placeholder="Enter your RapidAPI Key…"
-            title="Get your key at rapidapi.com — Pregnancy Calculator API" />
-          <button class="api-key-save-btn" onclick="saveApiKey()" id="apiKeySaveBtn" data-i18n="btn_save_key">Save Key</button>
-        </div>
-        <p class="api-key-hint">🔒 Key stored locally. <a href="https://rapidapi.com/" target="_blank" rel="noopener">Get free key →</a></p>
-      </div>
-      <h2 class="calc-title" data-i18n="calc_title">Due Date Calculator</h2>
-      <p class="calc-subtitle" data-i18n="calc_subtitle">Choose your calculation method below</p>
-
-      <!-- Method Tabs -->
-      <div class="method-tabs" role="tablist">
-        <button class="method-tab active" role="tab" aria-selected="true" aria-controls="method-lmp" id="tab-lmp" onclick="switchMethod('lmp')" data-i18n="lbl_lmp">📅 Last Period (LMP)</button>
-        <button class="method-tab" role="tab" aria-selected="false" aria-controls="method-conception" id="tab-conception" onclick="switchMethod('conception')" data-i18n="tab_conception">💫 Conception Date</button>
-        <button class="method-tab" role="tab" aria-selected="false" aria-controls="method-ivf" id="tab-ivf" onclick="switchMethod('ivf')" data-i18n="tab_ivf">🧬 IVF Transfer</button>
-        <button class="method-tab" role="tab" aria-selected="false" aria-controls="method-ultrasound" id="tab-ultrasound" onclick="switchMethod('ultrasound')" data-i18n="tab_ultrasound">🔊 Ultrasound</button>
-      </div>
-
-      <!-- LMP Method -->
-      <div class="method-content active" id="method-lmp" role="tabpanel" aria-labelledby="tab-lmp">
-        <div class="input-group">
-          <label class="input-label" for="lmpDate" data-i18n="lbl_lmp_full">First day of your last period</label>
-          <input type="date" class="input-field" id="lmpDate" aria-required="true" />
-        </div>
-        <div class="input-group">
-          <label class="input-label" for="cycleLength" data-i18n="lbl_cycles">Average cycle length</label>
-          <select class="select-field" id="cycleLength">
-            <option value="21">21 days</option>
-            <option value="22">22 days</option>
-            <option value="23">23 days</option>
-            <option value="24">24 days</option>
-            <option value="25">25 days</option>
-            <option value="26">26 days</option>
-            <option value="27">27 days</option>
-            <option value="28" selected>28 days (Average)</option>
-            <option value="29">29 days</option>
-            <option value="30">30 days</option>
-            <option value="31">31 days</option>
-            <option value="32">32 days</option>
-            <option value="33">33 days</option>
-            <option value="34">34 days</option>
-            <option value="35">35 days</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Conception Method -->
-      <div class="method-content" id="method-conception" role="tabpanel" aria-labelledby="tab-conception">
-        <div class="input-group">
-          <label class="input-label" for="conceptionDate">Conception / Ovulation Date</label>
-          <input type="date" class="input-field" id="conceptionDate" />
-        </div>
-        <p style="font-size:.8rem;color:var(--text-muted);margin-top:-12px;margin-bottom:16px;">Due date = conception date + 266 days</p>
-      </div>
-
-      <!-- IVF Method -->
-      <div class="method-content" id="method-ivf" role="tabpanel" aria-labelledby="tab-ivf">
-        <div class="input-group">
-          <label class="input-label" for="ivfDate">IVF Transfer Date</label>
-          <input type="date" class="input-field" id="ivfDate" />
-        </div>
-        <div class="input-group">
-          <label class="input-label" for="embryoAge">Embryo Age at Transfer</label>
-          <select class="select-field" id="embryoAge">
-            <option value="3">Day 3 (Cleavage Stage)</option>
-            <option value="5" selected>Day 5 (Blastocyst)</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Ultrasound Method -->
-      <div class="method-content" id="method-ultrasound" role="tabpanel" aria-labelledby="tab-ultrasound">
-        <div class="input-group">
-          <label class="input-label" for="ultrasoundDate">Ultrasound Date</label>
-          <input type="date" class="input-field" id="ultrasoundDate" />
-        </div>
-        <div class="input-row">
-          <div class="input-group">
-            <label class="input-label" for="usWeeks">Weeks at scan</label>
-            <select class="select-field" id="usWeeks">
-              <!-- Filled by JS -->
-            </select>
-          </div>
-          <div class="input-group">
-            <label class="input-label" for="usDays">Days</label>
-            <select class="select-field" id="usDays">
-              <option value="0">0 days</option>
-              <option value="1">1 day</option>
-              <option value="2">2 days</option>
-              <option value="3">3 days</option>
-              <option value="4">4 days</option>
-              <option value="5">5 days</option>
-              <option value="6">6 days</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <!-- Calculate Button -->
-      <button class="calc-btn" id="calcBtn" onclick="calculate()" aria-label="Calculate due date">
-        ✨ Calculate My Due Date
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle theme">
+        <div class="theme-toggle-knob"></div>
       </button>
-
-      <!-- API Live Status -->
-      <div class="api-status-bar" id="apiStatusBar">
-        <span class="api-dot" id="apiDot"></span>
-        <span id="apiStatusText">API Ready — Enter your key above to enable live data</span>
-      </div>
-
-      <!-- Pre-fill hint -->
-      <p style="font-size:0.75rem;color:var(--text-muted);text-align:center;margin-top:12px;" id="calcHint">
-        Enter your date above and click Calculate
-      </p>
+      <a href="#calculator" class="nav-cta-link"><button class="method-tab nav-cta"
+          style="padding:8px 20px;border-radius:9999px;font-size:.875rem" data-i18n="btn_calc_now">Calculate
+          Now</button></a>
     </div>
-  </div>
-</section>
+  </nav>
 
-<!-- ====== DASHBOARD ====== -->
-<main class="dashboard" id="dashboard" aria-label="Pregnancy Dashboard">
-
-  <!-- Main Tabs (Moved to top of Dashboard) -->
-  <div class="main-tabs" role="tablist">
-    <button class="main-tab active" role="tab" aria-selected="true" id="mainTab-baby" onclick="switchMainTab('baby')">👶 Baby</button>
-    <button class="main-tab" role="tab" aria-selected="false" id="mainTab-mom" onclick="switchMainTab('mom')">🫀 Mom's Health</button>
-    <button class="main-tab" role="tab" aria-selected="false" id="mainTab-trackers" onclick="switchMainTab('trackers')">📊 Trackers</button>
-    <button class="main-tab" role="tab" aria-selected="false" id="mainTab-timeline" onclick="switchMainTab('timeline')">📅 Timeline</button>
-    <button class="main-tab" role="tab" aria-selected="false" id="mainTab-nutrition" onclick="switchMainTab('nutrition')">🥗 Nutrition</button>
-    <button class="main-tab" role="tab" aria-selected="false" id="mainTab-medical" onclick="switchMainTab('medical')">🏥 Medical</button>
-    <button class="main-tab api-tab" role="tab" aria-selected="false" id="mainTab-fertility" onclick="switchMainTab('fertility')">🌸 Fertility & Ovulation</button>
-    <button class="main-tab" role="tab" aria-selected="false" id="mainTab-doctors" onclick="switchMainTab('doctors')">🩺 Find a Doctor</button>
-  </div>
-
-  <!-- ====== TAB PANELS CONTAINER (MOVED HERE) ====== -->
-  <div class="tab-panels-container">
-    <!-- ====== BABY TAB ====== -->
-    <div class="tab-panel active" id="panel-baby">
-      <div class="section-heading">👶 <span id="babyWeekTitle">Week 1</span> — Baby Development</div>
-      <p class="section-sub" id="babyWeekSub">Your baby's incredible journey this week</p>
-      <div class="baby-panel">
-        <div class="baby-visual">
-          <div id="babyIllustration" class="baby-svg-illustration" aria-label="Baby development illustration"></div>
-          <div class="baby-size-label">Size of a</div>
-          <div class="baby-size-name" id="babySizeName">Poppy Seed</div>
-          <div class="baby-measurements">
-            <div class="measure-item"><span class="measure-val" id="babyLength">—</span><span class="measure-key">Length (cm)</span></div>
-            <div class="measure-item"><span class="measure-val" id="babyWeight">—</span><span class="measure-key">Weight (g/kg)</span></div>
-            <div class="measure-item"><span class="measure-val" id="babyWeightLbs">—</span><span class="measure-key">❤️ Weight (lbs)</span></div>
-            <div class="measure-item"><span class="measure-val" id="babyCrownHeel">—</span><span class="measure-key">Crown–Heel (in)</span></div>
+  <!-- ====== HERO SECTION ====== -->
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <!-- Hero Text -->
+      <div class="hero-content fade-in-up">
+        <div class="hero-badge">
+          <span data-i18n="hero_badge_text">⭐ Trusted by 2M+ Mamas Worldwide</span>
+        </div>
+        <h1 class="hero-title">
+          <span data-i18n="hero_title_1">Your Complete</span><br />
+          <span class="gradient-text" data-i18n="hero_title_2">Pregnancy Journey</span><br />
+          <span data-i18n="hero_title_3">Starts Here</span>
+        </h1>
+        <p class="hero-desc">
+          Track every week of your pregnancy with detailed baby development milestones, mother health insights,
+          personalized health trackers, appointment reminders, and expert nutrition guidance — all in one beautiful app.
+        </p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num">40</div>
+            <div class="stat-label">Weeks of Data</div>
           </div>
-        </div>
-        <div class="baby-info-cards" id="babyInfoCards"></div>
-      </div>
-      <div class="screening-panel" style="margin-top:28px">
-        <h3 class="section-heading" style="font-size:1.1rem;margin-bottom:8px">🔬 <span>Prenatal Screening Windows</span></h3>
-        <p class="section-sub" style="margin-bottom:14px">All dates auto-calculated from your LMP. 🟢 = active now &nbsp; ✅ = past &nbsp; ⏳ = upcoming</p>
-        <div id="screeningDates" class="screening-list"></div>
-      </div>
-    </div>
-
-    <!-- ====== MOM TAB ====== -->
-    <div class="tab-panel" id="panel-mom">
-      <div class="section-heading">🫀 <span id="momWeekTitle">Week 1</span> — Your Health This Week</div>
-      <p class="section-sub">What's happening in your body and what to expect</p>
-      <div class="mom-grid" id="momGrid"></div>
-      <div class="warning-card" id="momWarnings"></div>
-    </div>
-
-    <!-- ====== TRACKERS TAB ====== -->
-    <div class="tab-panel" id="panel-trackers">
-      <div class="section-heading">📊 <span>Health Trackers</span></div>
-      <p class="section-sub">Monitor your vital health metrics throughout your pregnancy</p>
-      <div class="trackers-grid">
-        <div class="tracker-card">
-          <div class="tracker-header">
-            <div class="tracker-icon icon-rose" style="background:rgba(214,56,102,0.12)">👣</div>
-            <div><div class="tracker-name">Kick Counter</div><div class="tracker-desc">Track 10 kicks in under 2 hours</div></div>
+          <div class="stat-item">
+            <div class="stat-num">200+</div>
+            <div class="stat-label">Health Insights</div>
           </div>
-          <div class="kick-display"><div class="kick-count" id="kickCount">0</div><div class="kick-goal">Goal: 10 kicks / session</div></div>
-          <button class="kick-btn" id="kickBtn" onclick="recordKick()">👣 Record a Kick!</button>
-          <div class="kick-info">
-            <div class="kick-info-item"><div class="kick-info-val" id="kickSession">0</div><div class="kick-info-key">Today's kicks</div></div>
-            <div class="kick-info-item"><div class="kick-info-val" id="kickTimer">00:00</div><div class="kick-info-key">Session time</div></div>
-            <div class="kick-info-item"><div class="kick-info-val" id="kickAvg">—</div><div class="kick-info-key">Avg / hour</div></div>
+          <div class="stat-item">
+            <div class="stat-num">6</div>
+            <div class="stat-label">Smart Trackers</div>
           </div>
-          <div style="margin-top:12px;display:flex;gap:8px;"><button class="secondary-btn" onclick="resetKicks()">Reset</button><button class="secondary-btn" onclick="newKickSession()">New Session</button></div>
-        </div>
-        <div class="tracker-card">
-          <div class="tracker-header">
-            <div class="tracker-icon" style="background:rgba(155,109,197,0.12)">⏱️</div>
-            <div><div class="tracker-name">Contraction Timer</div><div class="tracker-desc">Time contractions during labor</div></div>
+          <div class="stat-item">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Medically Guided</div>
           </div>
-          <div class="contraction-display"><div class="contraction-time" id="contractionTime">00:00</div><div class="contraction-status" id="contractionStatus">Ready to start</div></div>
-          <button class="contraction-btn" id="contractionBtn" onclick="toggleContraction()">▶ Start Contraction</button>
-          <div class="kick-info" style="margin-bottom:14px">
-            <div class="kick-info-item"><div class="kick-info-val" id="contractionCount">0</div><div class="kick-info-key">Count</div></div>
-            <div class="kick-info-item"><div class="kick-info-val" id="avgDuration">—</div><div class="kick-info-key">Avg Duration</div></div>
-            <div class="kick-info-item"><div class="kick-info-val" id="avgFrequency">—</div><div class="kick-info-key">Avg Frequency</div></div>
-          </div>
-          <div class="contraction-log" id="contractionLog"><div style="font-size:.8rem;color:var(--text-muted);text-align:center;padding:10px">No contractions recorded yet</div></div>
-          <button class="secondary-btn" style="margin-top:10px" onclick="resetContractions()">Clear All</button>
-        </div>
-        <div class="tracker-card">
-          <div class="tracker-header">
-            <div class="tracker-icon" style="background:rgba(212,168,68,0.12)">⚖️</div>
-            <div><div class="tracker-name">Weight Tracker</div><div class="tracker-desc">Monitor healthy pregnancy weight gain</div></div>
-          </div>
-          <div class="weight-form"><input type="number" class="input-field weight-input" id="weightInput" placeholder="Enter weight (kg)" step="0.1" min="30" max="200" /><button class="add-btn" onclick="addWeight()">+ Add</button></div>
-          <div class="weight-chart" id="weightChart"><div style="font-size:.8rem;color:var(--text-muted);margin:auto">Enter weight to start tracking</div></div>
-          <div class="weight-rec" id="weightRec">💡 Recommended gain: 11.5–16 kg for normal BMI</div>
-          <div style="margin-top:10px"><label class="input-label">Pre-pregnancy Weight (kg)</label><input type="number" class="input-field" id="preWeight" placeholder="e.g. 62" step="0.1" onchange="updateWeightRec()" /></div>
-        </div>
-        <div class="tracker-card">
-          <div class="tracker-header">
-            <div class="tracker-icon" style="background:rgba(155,109,197,0.12)">💜</div>
-            <div><div class="tracker-name">Mood Tracker</div><div class="tracker-desc">Daily emotional wellness check-in</div></div>
-          </div>
-          <p style="font-size:.85rem;color:var(--text-secondary);margin-bottom:12px">How are you feeling today?</p>
-          <div class="mood-grid">
-            <button class="mood-btn" onclick="selectMood('😊','Happy')" id="mood-happy">😊<span class="mood-label">Happy</span></button>
-            <button class="mood-btn" onclick="selectMood('😌','Calm')" id="mood-calm">😌<span class="mood-label">Calm</span></button>
-            <button class="mood-btn" onclick="selectMood('😴','Tired')" id="mood-tired">😴<span class="mood-label">Tired</span></button>
-            <button class="mood-btn" onclick="selectMood('🤢','Nauseous')" id="mood-nauseous">🤢<span class="mood-label">Nauseous</span></button>
-            <button class="mood-btn" onclick="selectMood('😰','Anxious')" id="mood-anxious">😰<span class="mood-label">Anxious</span></button>
-            <button class="mood-btn" onclick="selectMood('🥰','Excited')" id="mood-excited">🥰<span class="mood-label">Excited</span></button>
-            <button class="mood-btn" onclick="selectMood('😢','Emotional')" id="mood-emotional">😢<span class="mood-label">Emotional</span></button>
-            <button class="mood-btn" onclick="selectMood('💪','Strong')" id="mood-strong">💪<span class="mood-label">Strong</span></button>
-          </div>
-          <div class="mood-history" id="moodHistory" style="margin-top:14px"><div style="font-size:.8rem;color:var(--text-muted);text-align:center;padding:8px">Log your daily mood above</div></div>
-        </div>
-        <div class="tracker-card">
-          <div class="tracker-header">
-            <div class="tracker-icon" style="background:rgba(59,184,154,0.12)">❤️‍🩺</div>
-            <div><div class="tracker-name">Blood Pressure</div><div class="tracker-desc">Monitor for preeclampsia risk</div></div>
-          </div>
-          <div class="input-row" style="margin-bottom:12px"><div class="input-group" style="margin-bottom:0"><label class="input-label">Systolic (top)</label><input type="number" class="input-field" id="bpSystolic" placeholder="e.g. 120" /></div><div class="input-group" style="margin-bottom:0"><label class="input-label">Diastolic (bottom)</label><input type="number" class="input-field" id="bpDiastolic" placeholder="e.g. 80" /></div></div>
-          <button class="add-btn" style="width:100%;border-radius:12px;padding:12px;margin-bottom:14px" onclick="addBP()">+ Record BP</button>
-          <div id="bpReadings" style="max-height:150px;overflow-y:auto"><div style="font-size:.8rem;color:var(--text-muted);text-align:center;padding:8px">No readings recorded yet</div></div>
-          <div id="bpStatus" style="margin-top:10px;font-size:.8rem;padding:10px;border-radius:10px;display:none"></div>
-        </div>
-        <div class="tracker-card">
-          <div class="tracker-header">
-            <div class="tracker-icon" style="background:rgba(72,144,212,0.12)">📋</div>
-            <div><div class="tracker-name">Symptom Log</div><div class="tracker-desc">Track daily symptoms</div></div>
-          </div>
-          <div class="mood-grid" id="symptomGrid">
-            <button class="mood-btn" onclick="toggleSymptom('🤢','Nausea')">🤢<span class="mood-label">Nausea</span></button>
-            <button class="mood-btn" onclick="toggleSymptom('😴','Fatigue')">😴<span class="mood-label">Fatigue</span></button>
-            <button class="mood-btn" onclick="toggleSymptom('🤕','Headache')">🤕<span class="mood-label">Headache</span></button>
-            <button class="mood-btn" onclick="toggleSymptom('🔥','Heartburn')">🔥<span class="mood-label">Heartburn</span></button>
-            <button class="mood-btn" onclick="toggleSymptom('🦵','Cramps')">🦵<span class="mood-label">Cramps</span></button>
-            <button class="mood-btn" onclick="toggleSymptom('💨','Bloating')">💨<span class="mood-label">Bloating</span></button>
-            <button class="mood-btn" onclick="toggleSymptom('🩸','Spotting')">🩸<span class="mood-label">Spotting</span></button>
-            <button class="mood-btn" onclick="toggleSymptom('🌀','Dizzy')">🌀<span class="mood-label">Dizzy</span></button>
-          </div>
-          <div id="symptomLog" style="margin-top:14px;max-height:100px;overflow-y:auto"><div style="font-size:.8rem;color:var(--text-muted);text-align:center;padding:8px">Select symptoms above to log them</div></div>
-          <button class="secondary-btn" style="margin-top:10px" onclick="saveSymptoms()">💾 Save Today's Log</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ====== TIMELINE TAB ====== -->
-    <div class="tab-panel" id="panel-timeline">
-      <div class="section-heading">📅 Pregnancy <span>Timeline</span></div>
-      <p class="section-sub">Key appointments and milestones — automatically calculated from your due date</p>
-      <div class="timeline-wrapper" id="timelineWrapper"></div>
-    </div>
-
-    <!-- ====== NUTRITION TAB ====== -->
-    <div class="tab-panel" id="panel-nutrition">
-      <div class="section-heading">🥗 <span>Nutrition Guide</span></div>
-      <p class="section-sub">Essential vitamins, minerals, and food guidance for a healthy pregnancy</p>
-
-      <div class="nutrition-grid">
-        <div class="nutrient-card">
-          <div class="nutrient-icon">💊</div>
-          <div class="nutrient-name">Folic Acid</div>
-          <div class="nutrient-dose">400–600 mcg/day</div>
-          <div class="nutrient-desc">Critical for neural tube development. Start before conception and continue through the 1st trimester.</div>
-        </div>
-        <div class="nutrient-card">
-          <div class="nutrient-icon">🩸</div>
-          <div class="nutrient-name">Iron</div>
-          <div class="nutrient-dose">27 mg/day</div>
-          <div class="nutrient-desc">Supports increased blood volume and prevents anemia. Pair with Vitamin C for better absorption.</div>
-        </div>
-        <div class="nutrient-card">
-          <div class="nutrient-icon">🦴</div>
-          <div class="nutrient-name">Calcium</div>
-          <div class="nutrient-dose">1,000 mg/day</div>
-          <div class="nutrient-desc">Essential for baby's bones, teeth, heart, muscles, and nerves. Found in dairy and leafy greens.</div>
-        </div>
-        <div class="nutrient-card">
-          <div class="nutrient-icon">🐟</div>
-          <div class="nutrient-name">DHA / Omega-3</div>
-          <div class="nutrient-dose">200–300 mg/day</div>
-          <div class="nutrient-desc">Vital for baby's brain and eye development. Found in fatty fish, flaxseed, and prenatal supplements.</div>
-        </div>
-        <div class="nutrient-card">
-          <div class="nutrient-icon">☀️</div>
-          <div class="nutrient-name">Vitamin D</div>
-          <div class="nutrient-dose">600 IU/day</div>
-          <div class="nutrient-desc">Works with calcium for bone health. Many pregnant women are deficient — check with your doctor.</div>
-        </div>
-        <div class="nutrient-card">
-          <div class="nutrient-icon">🥑</div>
-          <div class="nutrient-name">Choline</div>
-          <div class="nutrient-dose">450 mg/day</div>
-          <div class="nutrient-desc">Supports baby's brain development and helps prevent neural tube defects, often underrated.</div>
         </div>
       </div>
 
-      <h3 class="section-heading" style="margin-top:32px;font-size:1.2rem">🍱 <span>Foods Guide</span></h3>
-      <p class="section-sub">What to eat and what to avoid during pregnancy</p>
-      <div class="foods-grid">
-        <div class="foods-card">
-          <div class="foods-card-title">✅ Best Foods to Eat</div>
-          <ul class="food-list">
-            <li class="food-item"><span class="food-dot"></span>Leafy greens (spinach, kale)</li>
-            <li class="food-item"><span class="food-dot"></span>Salmon & sardines — DHA</li>
-            <li class="food-item"><span class="food-dot"></span>Eggs — choline, protein</li>
-            <li class="food-item"><span class="food-dot"></span>Avocado — healthy fats</li>
-            <li class="food-item"><span class="food-dot"></span>Berries — antioxidants</li>
-            <li class="food-item"><span class="food-dot"></span>Greek yogurt — calcium</li>
-            <li class="food-item"><span class="food-dot"></span>Lentils & beans — iron, fiber</li>
-          </ul>
-        </div>
-        <div class="foods-card">
-          <div class="foods-card-title">❌ Foods to Avoid</div>
-          <ul class="food-list">
-            <li class="food-item avoid"><span class="food-dot"></span>Raw / undercooked meat</li>
-            <li class="food-item avoid"><span class="food-dot"></span>High-mercury fish</li>
-            <li class="food-item avoid"><span class="food-dot"></span>Unpasteurized dairy</li>
-            <li class="food-item avoid"><span class="food-dot"></span>Alcohol — AVOID</li>
-            <li class="food-item avoid"><span class="food-dot"></span>High-caffeine drinks</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- ====== MEDICAL TAB ====== -->
-    <div class="tab-panel" id="panel-medical">
-      <div class="section-heading">🏥 <span>Medical Guide</span></div>
-      <p class="section-sub">Important health conditions, warning signs, and when to call your doctor</p>
-      <div class="medical-grid">
-        <div class="medical-card danger">
-          <div class="medical-title">🚨 Call 911 Immediately If…</div>
-          <ul class="medical-list">
-            <li><span class="bullet">🔴</span>Heavy vaginal bleeding</li>
-            <li><span class="bullet">🔴</span>Severe abdominal or pelvic pain</li>
-            <li><span class="bullet">🔴</span>Sudden severe headache</li>
-            <li><span class="bullet">🔴</span>Chest pain or difficulty breathing</li>
-          </ul>
-        </div>
-        <div class="medical-card caution">
-          <div class="medical-title">⚠️ Call Your Doctor Today If…</div>
-          <ul class="medical-list">
-            <li><span class="bullet">🟡</span>Fever over 38°C (100.4°F)</li>
-            <li><span class="bullet">🟡</span>Sudden swelling of face or hands</li>
-            <li><span class="bullet">🟡</span>Reduced fetal movement</li>
-            <li><span class="bullet">🟡</span>Vaginal bleeding or unusual discharge</li>
-          </ul>
-        </div>
-        <div class="medical-card">
-          <div class="medical-title">🩺 Preeclampsia Warning Signs</div>
-          <ul class="medical-list">
-            <li><span class="bullet">⚡</span>BP reading ≥ 140/90</li>
-            <li><span class="bullet">⚡</span>Sudden severe headache</li>
-            <li><span class="bullet">⚡</span>Visual disturbances (spots/lights)</li>
-            <li><span class="bullet">⚡</span>Sudden significant face/hand swelling</li>
-          </ul>
-        </div>
-        <div class="medical-card">
-          <div class="medical-title">💊 Safe Medications Guide</div>
-          <ul class="medical-list">
-            <li><span class="bullet">✅</span>Acetaminophen (Tylenol)</li>
-            <li><span class="bullet">✅</span>Prenatal vitamins with DHA</li>
-            <li><span class="bullet">❌</span>Ibuprofen (Advil) — AVOID after 20 wks</li>
-            <li><span class="bullet">⚠️</span>Consult doctor before any medication</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- ====== FERTILITY & OVULATION TAB ====== -->
-    <div class="tab-panel" id="panel-fertility">
-      <div class="section-heading">🌸 <span>Fertility & Ovulation</span></div>
-      <p class="section-sub">Track your cycle, fertile window, and ovulation — powered by live API calculations</p>
-
-      <!-- Fertility Calculator -->
-      <div class="fertility-calc-card">
-        <div class="fertility-calc-header">
-          <div class="fertility-icon">🌺</div>
-          <div>
-            <div class="fertility-title">Ovulation & Fertile Window Calculator</div>
-            <div class="fertility-subtitle">Enter your cycle details for precise predictions</div>
+      <!-- Calculator Card -->
+      <div class="calculator-card fade-in-up" id="calculator" style="animation-delay:.15s">
+        <!-- API Key Row -->
+        <div class="api-key-row" id="apiKeyRow">
+          <div class="api-key-badge">🔗 RapidAPI Connected</div>
+          <div class="api-key-input-wrap">
+            <input type="password" class="input-field api-key-input" id="apiKey" placeholder="Enter your RapidAPI Key…"
+              title="Get your key at rapidapi.com — Pregnancy Calculator API" />
+            <button class="api-key-save-btn" onclick="saveApiKey()" id="apiKeySaveBtn" data-i18n="btn_save_key">Save
+              Key</button>
           </div>
+          <p class="api-key-hint">🔒 Key stored locally. <a href="https://rapidapi.com/" target="_blank"
+              rel="noopener">Get free key →</a></p>
         </div>
-        <div class="fertility-inputs">
+        <h2 class="calc-title" data-i18n="calc_title">Due Date Calculator</h2>
+        <p class="calc-subtitle" data-i18n="calc_subtitle">Choose your calculation method below</p>
+
+        <!-- Method Tabs -->
+        <div class="method-tabs" role="tablist">
+          <button class="method-tab active" role="tab" aria-selected="true" aria-controls="method-lmp" id="tab-lmp"
+            onclick="switchMethod('lmp')" data-i18n="lbl_lmp">📅 Last Period (LMP)</button>
+          <button class="method-tab" role="tab" aria-selected="false" aria-controls="method-conception"
+            id="tab-conception" onclick="switchMethod('conception')" data-i18n="tab_conception">💫 Conception
+            Date</button>
+          <button class="method-tab" role="tab" aria-selected="false" aria-controls="method-ivf" id="tab-ivf"
+            onclick="switchMethod('ivf')" data-i18n="tab_ivf">🧬 IVF Transfer</button>
+          <button class="method-tab" role="tab" aria-selected="false" aria-controls="method-ultrasound"
+            id="tab-ultrasound" onclick="switchMethod('ultrasound')" data-i18n="tab_ultrasound">🔊 Ultrasound</button>
+        </div>
+
+        <!-- LMP Method -->
+        <div class="method-content active" id="method-lmp" role="tabpanel" aria-labelledby="tab-lmp">
           <div class="input-group">
-            <label class="input-label" for="fertLmpDate">First Day of Last Period</label>
-            <input type="date" class="input-field" id="fertLmpDate" />
+            <label class="input-label" for="lmpDate" data-i18n="lbl_lmp_full">First day of your last period</label>
+            <input type="date" class="input-field" id="lmpDate" aria-required="true" />
           </div>
           <div class="input-group">
-            <label class="input-label" for="fertCycleLen">Average Cycle Length</label>
-            <select class="select-field" id="fertCycleLen">
+            <label class="input-label" for="cycleLength" data-i18n="lbl_cycles">Average cycle length</label>
+            <select class="select-field" id="cycleLength">
               <option value="21">21 days</option>
+              <option value="22">22 days</option>
+              <option value="23">23 days</option>
+              <option value="24">24 days</option>
+              <option value="25">25 days</option>
+              <option value="26">26 days</option>
+              <option value="27">27 days</option>
               <option value="28" selected>28 days (Average)</option>
+              <option value="29">29 days</option>
               <option value="30">30 days</option>
+              <option value="31">31 days</option>
+              <option value="32">32 days</option>
+              <option value="33">33 days</option>
+              <option value="34">34 days</option>
               <option value="35">35 days</option>
             </select>
           </div>
         </div>
-        <button class="calc-btn" id="fertCalcBtn" onclick="calcFertility()" style="margin-top:4px;">🌺 Calculate Fertile Window</button>
-      </div>
 
-      <!-- Fertility Results -->
-      <div class="fertility-results" id="fertilityResults" style="display:none">
-        <div class="fert-result-grid">
-          <div class="fert-card fert-card-ovulation">
-            <div class="fert-card-icon">🥚</div>
-            <div class="fert-card-label">Ovulation Day</div>
-            <div class="fert-card-value" id="fertOvulation">—</div>
+        <!-- Conception Method -->
+        <div class="method-content" id="method-conception" role="tabpanel" aria-labelledby="tab-conception">
+          <div class="input-group">
+            <label class="input-label" for="conceptionDate">Conception / Ovulation Date</label>
+            <input type="date" class="input-field" id="conceptionDate" />
           </div>
-          <div class="fert-card fert-card-window">
-            <div class="fert-card-icon">✨</div>
-            <div class="fert-card-label">Fertile Window</div>
-            <div class="fert-card-value" id="fertWindow">—</div>
-          </div>
-          <div class="fert-card fert-card-next">
-            <div class="fert-card-icon">📅</div>
-            <div class="fert-card-label">Next Period</div>
-            <div class="fert-card-value" id="fertNextPeriod">—</div>
-          </div>
-        </div>
-        <!-- Cycle Calendar -->
-        <div class="cycle-calendar-card">
-          <div class="cycle-cal-header">📆 Your Cycle Calendar</div>
-          <div class="cycle-cal-grid" id="cycleCalGrid"><!-- Filled by JS --></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ====== DOCTORS TAB ====== -->
-    <div class="tab-panel" id="panel-doctors">
-      <div class="section-heading">🩺 <span>Find a Doctor Nearby</span></div>
-      <p class="section-sub">Locate gynecologists, obstetricians, and women's clinics near you.</p>
-
-      <!-- Search and Filter Bar -->
-      <div class="doctor-search-container" style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px;">
-        <div class="doctor-btn-row" style="display: flex; gap: 12px; flex-wrap: wrap;">
-          <input type="text" class="input-field" id="addressSearch" placeholder="Enter city, zip, or address..." style="flex: 1; min-width: 200px;">
-          <button class="calc-btn doctor-action-btn" style="flex: 0 0 auto; width: auto; padding: 0 28px; font-size: 0.9rem;" onclick="searchByAddress()" id="addressSearchBtn">🔍 Search</button>
-          <button class="calc-btn doctor-action-btn" style="flex: 0 0 auto; width: auto; padding: 0 28px; font-size: 0.9rem; background: var(--gradient-rose); box-shadow: 0 4px 14px rgba(190,24,93,0.3);" onclick="detectLocation()" id="locateBtn">📍 Locate Me</button>
+          <p style="font-size:.8rem;color:var(--text-muted);margin-top:-12px;margin-bottom:16px;">Due date = conception
+            date + 266 days</p>
         </div>
 
-        <!-- Inline Filters -->
-        <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between; padding: 12px; background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
-          <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary);">Min Rating:</span>
-              <select id="docFilterRating" onchange="applyDoctorFilters()" style="padding: 4px 8px; border-radius: 8px; border: 1px solid var(--border-color); font-family: var(--font-body);">
-                <option value="0">Any</option>
-                <option value="3">3+ ⭐</option>
-                <option value="4">4+ ⭐</option>
-                <option value="4.5">4.5+ ⭐</option>
+        <!-- IVF Method -->
+        <div class="method-content" id="method-ivf" role="tabpanel" aria-labelledby="tab-ivf">
+          <div class="input-group">
+            <label class="input-label" for="ivfDate">IVF Transfer Date</label>
+            <input type="date" class="input-field" id="ivfDate" />
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="embryoAge">Embryo Age at Transfer</label>
+            <select class="select-field" id="embryoAge">
+              <option value="3">Day 3 (Cleavage Stage)</option>
+              <option value="5" selected>Day 5 (Blastocyst)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Ultrasound Method -->
+        <div class="method-content" id="method-ultrasound" role="tabpanel" aria-labelledby="tab-ultrasound">
+          <div class="input-group">
+            <label class="input-label" for="ultrasoundDate">Ultrasound Date</label>
+            <input type="date" class="input-field" id="ultrasoundDate" />
+          </div>
+          <div class="input-row">
+            <div class="input-group">
+              <label class="input-label" for="usWeeks">Weeks at scan</label>
+              <select class="select-field" id="usWeeks">
+                <!-- Filled by JS -->
               </select>
             </div>
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary);">Max Distance:</span>
-              <select id="docFilterDistance" onchange="applyDoctorFilters()" style="padding: 4px 8px; border-radius: 8px; border: 1px solid var(--border-color); font-family: var(--font-body);">
-                <option value="100000">100 km</option>
-                <option value="50000">50 km</option>
-                <option value="20000">20 km</option>
-                <option value="10000">10 km</option>
-                <option value="5000">5 km</option>
+            <div class="input-group">
+              <label class="input-label" for="usDays">Days</label>
+              <select class="select-field" id="usDays">
+                <option value="0">0 days</option>
+                <option value="1">1 day</option>
+                <option value="2">2 days</option>
+                <option value="3">3 days</option>
+                <option value="4">4 days</option>
+                <option value="5">5 days</option>
+                <option value="6">6 days</option>
               </select>
             </div>
           </div>
-          
-          <div style="display: flex; align-items: center; gap: 8px; padding-left: 12px; border-left: 1px solid var(--border-color);">
-            <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary);">Saved Only:</span>
-            <label class="switch-ui" style="position: relative; display: inline-block; width: 34px; height: 20px;">
-              <input type="checkbox" id="showSavedOnly" onchange="applyDoctorFilters()" style="opacity: 0; width: 0; height: 0;">
-              <span class="slider-ui" style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px;"></span>
-            </label>
+        </div>
+
+        <!-- Calculate Button -->
+        <button class="calc-btn" id="calcBtn" onclick="calculate()" aria-label="Calculate due date">
+          ✨ Calculate My Due Date
+        </button>
+
+        <!-- API Live Status -->
+        <div class="api-status-bar" id="apiStatusBar">
+          <span class="api-dot" id="apiDot"></span>
+          <span id="apiStatusText">API Ready — Enter your key above to enable live data</span>
+        </div>
+
+        <!-- Pre-fill hint -->
+        <p style="font-size:0.75rem;color:var(--text-muted);text-align:center;margin-top:12px;" id="calcHint">
+          Enter your date above and click Calculate
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== DASHBOARD ====== -->
+  <main class="dashboard" id="dashboard" aria-label="Pregnancy Dashboard">
+
+    <!-- Main Tabs (Moved to top of Dashboard) -->
+    <div class="main-tabs" role="tablist">
+      <button class="main-tab active" role="tab" aria-selected="true" id="mainTab-baby"
+        onclick="switchMainTab('baby')">👶 Baby</button>
+      <button class="main-tab" role="tab" aria-selected="false" id="mainTab-mom" onclick="switchMainTab('mom')">🫀 Mom's
+        Health</button>
+      <button class="main-tab" role="tab" aria-selected="false" id="mainTab-trackers"
+        onclick="switchMainTab('trackers')">📊 Trackers</button>
+      <button class="main-tab" role="tab" aria-selected="false" id="mainTab-timeline"
+        onclick="switchMainTab('timeline')">📅 Timeline</button>
+      <button class="main-tab" role="tab" aria-selected="false" id="mainTab-nutrition"
+        onclick="switchMainTab('nutrition')">🥗 Nutrition</button>
+      <button class="main-tab" role="tab" aria-selected="false" id="mainTab-medical"
+        onclick="switchMainTab('medical')">🏥 Medical</button>
+      <button class="main-tab api-tab" role="tab" aria-selected="false" id="mainTab-fertility"
+        onclick="switchMainTab('fertility')">🌸 Fertility & Ovulation</button>
+      <button class="main-tab" role="tab" aria-selected="false" id="mainTab-doctors"
+        onclick="switchMainTab('doctors')">🩺 Find a Doctor</button>
+    </div>
+
+    <!-- ====== TAB PANELS CONTAINER (MOVED HERE) ====== -->
+    <div class="tab-panels-container">
+      <!-- ====== BABY TAB ====== -->
+      <div class="tab-panel active" id="panel-baby">
+        <div class="section-heading">👶 <span id="babyWeekTitle">Week 1</span> — Baby Development</div>
+        <p class="section-sub" id="babyWeekSub">Your baby's incredible journey this week</p>
+        <div class="baby-panel">
+          <div class="baby-visual">
+            <div id="babyIllustration" class="baby-svg-illustration" aria-label="Baby development illustration"></div>
+            <div class="baby-size-label">Size of a</div>
+            <div class="baby-size-name" id="babySizeName">Poppy Seed</div>
+            <div class="baby-measurements">
+              <div class="measure-item"><span class="measure-val" id="babyLength">—</span><span
+                  class="measure-key">Length (cm)</span></div>
+              <div class="measure-item"><span class="measure-val" id="babyWeight">—</span><span
+                  class="measure-key">Weight (g/kg)</span></div>
+              <div class="measure-item"><span class="measure-val" id="babyWeightLbs">—</span><span
+                  class="measure-key">❤️ Weight (lbs)</span></div>
+              <div class="measure-item"><span class="measure-val" id="babyCrownHeel">—</span><span
+                  class="measure-key">Crown–Heel (in)</span></div>
+            </div>
+          </div>
+          <div class="baby-info-cards" id="babyInfoCards"></div>
+        </div>
+        <div class="screening-panel" style="margin-top:28px">
+          <h3 class="section-heading" style="font-size:1.1rem;margin-bottom:8px">🔬 <span>Prenatal Screening
+              Windows</span></h3>
+          <p class="section-sub" style="margin-bottom:14px">All dates auto-calculated from your LMP. 🟢 = active now
+            &nbsp; ✅ = past &nbsp; ⏳ = upcoming</p>
+          <div id="screeningDates" class="screening-list"></div>
+        </div>
+      </div>
+
+      <!-- ====== MOM TAB ====== -->
+      <div class="tab-panel" id="panel-mom">
+        <div class="section-heading">🫀 <span id="momWeekTitle">Week 1</span> — Your Health This Week</div>
+        <p class="section-sub">What's happening in your body and what to expect</p>
+        <div class="mom-grid" id="momGrid"></div>
+        <div class="warning-card" id="momWarnings"></div>
+      </div>
+
+      <!-- ====== TRACKERS TAB ====== -->
+      <div class="tab-panel" id="panel-trackers">
+        <div class="section-heading">📊 <span>Health Trackers</span></div>
+        <p class="section-sub">Monitor your vital health metrics throughout your pregnancy</p>
+        <div class="trackers-grid">
+          <div class="tracker-card">
+            <div class="tracker-header">
+              <div class="tracker-icon icon-rose" style="background:rgba(214,56,102,0.12)">👣</div>
+              <div>
+                <div class="tracker-name">Kick Counter</div>
+                <div class="tracker-desc">Track 10 kicks in under 2 hours</div>
+              </div>
+            </div>
+            <div class="kick-display">
+              <div class="kick-count" id="kickCount">0</div>
+              <div class="kick-goal">Goal: 10 kicks / session</div>
+            </div>
+            <button class="kick-btn" id="kickBtn" onclick="recordKick()">👣 Record a Kick!</button>
+            <div class="kick-info">
+              <div class="kick-info-item">
+                <div class="kick-info-val" id="kickSession">0</div>
+                <div class="kick-info-key">Today's kicks</div>
+              </div>
+              <div class="kick-info-item">
+                <div class="kick-info-val" id="kickTimer">00:00</div>
+                <div class="kick-info-key">Session time</div>
+              </div>
+              <div class="kick-info-item">
+                <div class="kick-info-val" id="kickAvg">—</div>
+                <div class="kick-info-key">Avg / hour</div>
+              </div>
+            </div>
+            <div style="margin-top:12px;display:flex;gap:8px;"><button class="secondary-btn"
+                onclick="resetKicks()">Reset</button><button class="secondary-btn" onclick="newKickSession()">New
+                Session</button></div>
+          </div>
+          <div class="tracker-card">
+            <div class="tracker-header">
+              <div class="tracker-icon" style="background:rgba(155,109,197,0.12)">⏱️</div>
+              <div>
+                <div class="tracker-name">Contraction Timer</div>
+                <div class="tracker-desc">Time contractions during labor</div>
+              </div>
+            </div>
+            <div class="contraction-display">
+              <div class="contraction-time" id="contractionTime">00:00</div>
+              <div class="contraction-status" id="contractionStatus">Ready to start</div>
+            </div>
+            <button class="contraction-btn" id="contractionBtn" onclick="toggleContraction()">▶ Start
+              Contraction</button>
+            <div class="kick-info" style="margin-bottom:14px">
+              <div class="kick-info-item">
+                <div class="kick-info-val" id="contractionCount">0</div>
+                <div class="kick-info-key">Count</div>
+              </div>
+              <div class="kick-info-item">
+                <div class="kick-info-val" id="avgDuration">—</div>
+                <div class="kick-info-key">Avg Duration</div>
+              </div>
+              <div class="kick-info-item">
+                <div class="kick-info-val" id="avgFrequency">—</div>
+                <div class="kick-info-key">Avg Frequency</div>
+              </div>
+            </div>
+            <div class="contraction-log" id="contractionLog">
+              <div style="font-size:.8rem;color:var(--text-muted);text-align:center;padding:10px">No contractions
+                recorded yet</div>
+            </div>
+            <button class="secondary-btn" style="margin-top:10px" onclick="resetContractions()">Clear All</button>
+          </div>
+          <div class="tracker-card">
+            <div class="tracker-header">
+              <div class="tracker-icon" style="background:rgba(212,168,68,0.12)">⚖️</div>
+              <div>
+                <div class="tracker-name">Weight Tracker</div>
+                <div class="tracker-desc">Monitor healthy pregnancy weight gain</div>
+              </div>
+            </div>
+            <div class="weight-form"><input type="number" class="input-field weight-input" id="weightInput"
+                placeholder="Enter weight (kg)" step="0.1" min="30" max="200" /><button class="add-btn"
+                onclick="addWeight()">+ Add</button></div>
+            <div class="weight-chart" id="weightChart">
+              <div style="font-size:.8rem;color:var(--text-muted);margin:auto">Enter weight to start tracking</div>
+            </div>
+            <div class="weight-rec" id="weightRec">💡 Recommended gain: 11.5–16 kg for normal BMI</div>
+            <div style="margin-top:10px"><label class="input-label">Pre-pregnancy Weight (kg)</label><input
+                type="number" class="input-field" id="preWeight" placeholder="e.g. 62" step="0.1"
+                onchange="updateWeightRec()" /></div>
+          </div>
+          <div class="tracker-card">
+            <div class="tracker-header">
+              <div class="tracker-icon" style="background:rgba(155,109,197,0.12)">💜</div>
+              <div>
+                <div class="tracker-name">Mood Tracker</div>
+                <div class="tracker-desc">Daily emotional wellness check-in</div>
+              </div>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-secondary);margin-bottom:12px">How are you feeling today?</p>
+            <div class="mood-grid">
+              <button class="mood-btn" onclick="selectMood('😊','Happy')" id="mood-happy">😊<span
+                  class="mood-label">Happy</span></button>
+              <button class="mood-btn" onclick="selectMood('😌','Calm')" id="mood-calm">😌<span
+                  class="mood-label">Calm</span></button>
+              <button class="mood-btn" onclick="selectMood('😴','Tired')" id="mood-tired">😴<span
+                  class="mood-label">Tired</span></button>
+              <button class="mood-btn" onclick="selectMood('🤢','Nauseous')" id="mood-nauseous">🤢<span
+                  class="mood-label">Nauseous</span></button>
+              <button class="mood-btn" onclick="selectMood('😰','Anxious')" id="mood-anxious">😰<span
+                  class="mood-label">Anxious</span></button>
+              <button class="mood-btn" onclick="selectMood('🥰','Excited')" id="mood-excited">🥰<span
+                  class="mood-label">Excited</span></button>
+              <button class="mood-btn" onclick="selectMood('😢','Emotional')" id="mood-emotional">😢<span
+                  class="mood-label">Emotional</span></button>
+              <button class="mood-btn" onclick="selectMood('💪','Strong')" id="mood-strong">💪<span
+                  class="mood-label">Strong</span></button>
+            </div>
+            <div class="mood-history" id="moodHistory" style="margin-top:14px">
+              <div style="font-size:.8rem;color:var(--text-muted);text-align:center;padding:8px">Log your daily mood
+                above</div>
+            </div>
+          </div>
+          <div class="tracker-card">
+            <div class="tracker-header">
+              <div class="tracker-icon" style="background:rgba(59,184,154,0.12)">❤️‍🩺</div>
+              <div>
+                <div class="tracker-name">Blood Pressure</div>
+                <div class="tracker-desc">Monitor for preeclampsia risk</div>
+              </div>
+            </div>
+            <div class="input-row" style="margin-bottom:12px">
+              <div class="input-group" style="margin-bottom:0"><label class="input-label">Systolic (top)</label><input
+                  type="number" class="input-field" id="bpSystolic" placeholder="e.g. 120" /></div>
+              <div class="input-group" style="margin-bottom:0"><label class="input-label">Diastolic
+                  (bottom)</label><input type="number" class="input-field" id="bpDiastolic" placeholder="e.g. 80" />
+              </div>
+            </div>
+            <button class="add-btn" style="width:100%;border-radius:12px;padding:12px;margin-bottom:14px"
+              onclick="addBP()">+ Record BP</button>
+            <div id="bpReadings" style="max-height:150px;overflow-y:auto">
+              <div style="font-size:.8rem;color:var(--text-muted);text-align:center;padding:8px">No readings recorded
+                yet</div>
+            </div>
+            <div id="bpStatus" style="margin-top:10px;font-size:.8rem;padding:10px;border-radius:10px;display:none">
+            </div>
+          </div>
+          <div class="tracker-card">
+            <div class="tracker-header">
+              <div class="tracker-icon" style="background:rgba(72,144,212,0.12)">📋</div>
+              <div>
+                <div class="tracker-name">Symptom Log</div>
+                <div class="tracker-desc">Track daily symptoms</div>
+              </div>
+            </div>
+            <div class="mood-grid" id="symptomGrid">
+              <button class="mood-btn" onclick="toggleSymptom('🤢','Nausea')">🤢<span
+                  class="mood-label">Nausea</span></button>
+              <button class="mood-btn" onclick="toggleSymptom('😴','Fatigue')">😴<span
+                  class="mood-label">Fatigue</span></button>
+              <button class="mood-btn" onclick="toggleSymptom('🤕','Headache')">🤕<span
+                  class="mood-label">Headache</span></button>
+              <button class="mood-btn" onclick="toggleSymptom('🔥','Heartburn')">🔥<span
+                  class="mood-label">Heartburn</span></button>
+              <button class="mood-btn" onclick="toggleSymptom('🦵','Cramps')">🦵<span
+                  class="mood-label">Cramps</span></button>
+              <button class="mood-btn" onclick="toggleSymptom('💨','Bloating')">💨<span
+                  class="mood-label">Bloating</span></button>
+              <button class="mood-btn" onclick="toggleSymptom('🩸','Spotting')">🩸<span
+                  class="mood-label">Spotting</span></button>
+              <button class="mood-btn" onclick="toggleSymptom('🌀','Dizzy')">🌀<span
+                  class="mood-label">Dizzy</span></button>
+            </div>
+            <div id="symptomLog" style="margin-top:14px;max-height:100px;overflow-y:auto">
+              <div style="font-size:.8rem;color:var(--text-muted);text-align:center;padding:8px">Select symptoms above
+                to log them</div>
+            </div>
+            <button class="secondary-btn" style="margin-top:10px" onclick="saveSymptoms()">💾 Save Today's Log</button>
           </div>
         </div>
       </div>
-      <div id="doctorStatusMsg" style="margin-bottom:16px; font-size:0.9rem; font-weight:600; display:none; padding:12px; border-radius:12px; background:var(--bg-secondary);"></div>
-      <div id="doctorsMap" style="height:350px; border-radius:var(--radius-lg); margin-bottom:24px; display:none; border:1px solid var(--border-color); z-index: 1;"></div>
-      <div class="doctors-grid" id="doctorsGrid">
-        <div style="text-align:center;width:100%;font-size:0.9rem;color:var(--text-muted);padding:24px;">
-          Click "Locate Me" to find nearby specialists.
+
+      <!-- ====== TIMELINE TAB ====== -->
+      <div class="tab-panel" id="panel-timeline">
+        <div class="section-heading">📅 Pregnancy <span>Timeline</span></div>
+        <p class="section-sub">Key appointments and milestones — automatically calculated from your due date</p>
+        <div class="timeline-wrapper" id="timelineWrapper"></div>
+      </div>
+
+      <!-- ====== NUTRITION TAB ====== -->
+      <div class="tab-panel" id="panel-nutrition">
+        <div class="section-heading">🥗 <span>Nutrition Guide</span></div>
+        <p class="section-sub">Essential vitamins, minerals, and food guidance for a healthy pregnancy</p>
+
+        <div class="nutrition-grid">
+          <div class="nutrient-card">
+            <div class="nutrient-icon">💊</div>
+            <div class="nutrient-name">Folic Acid</div>
+            <div class="nutrient-dose">400–600 mcg/day</div>
+            <div class="nutrient-desc">Critical for neural tube development. Start before conception and continue
+              through the 1st trimester.</div>
+          </div>
+          <div class="nutrient-card">
+            <div class="nutrient-icon">🩸</div>
+            <div class="nutrient-name">Iron</div>
+            <div class="nutrient-dose">27 mg/day</div>
+            <div class="nutrient-desc">Supports increased blood volume and prevents anemia. Pair with Vitamin C for
+              better absorption.</div>
+          </div>
+          <div class="nutrient-card">
+            <div class="nutrient-icon">🦴</div>
+            <div class="nutrient-name">Calcium</div>
+            <div class="nutrient-dose">1,000 mg/day</div>
+            <div class="nutrient-desc">Essential for baby's bones, teeth, heart, muscles, and nerves. Found in dairy and
+              leafy greens.</div>
+          </div>
+          <div class="nutrient-card">
+            <div class="nutrient-icon">🐟</div>
+            <div class="nutrient-name">DHA / Omega-3</div>
+            <div class="nutrient-dose">200–300 mg/day</div>
+            <div class="nutrient-desc">Vital for baby's brain and eye development. Found in fatty fish, flaxseed, and
+              prenatal supplements.</div>
+          </div>
+          <div class="nutrient-card">
+            <div class="nutrient-icon">☀️</div>
+            <div class="nutrient-name">Vitamin D</div>
+            <div class="nutrient-dose">600 IU/day</div>
+            <div class="nutrient-desc">Works with calcium for bone health. Many pregnant women are deficient — check
+              with your doctor.</div>
+          </div>
+          <div class="nutrient-card">
+            <div class="nutrient-icon">🥑</div>
+            <div class="nutrient-name">Choline</div>
+            <div class="nutrient-dose">450 mg/day</div>
+            <div class="nutrient-desc">Supports baby's brain development and helps prevent neural tube defects, often
+              underrated.</div>
+          </div>
+        </div>
+
+        <h3 class="section-heading" style="margin-top:32px;font-size:1.2rem">🍱 <span>Foods Guide</span></h3>
+        <p class="section-sub">What to eat and what to avoid during pregnancy</p>
+        <div class="foods-grid">
+          <div class="foods-card">
+            <div class="foods-card-title">✅ Best Foods to Eat</div>
+            <ul class="food-list">
+              <li class="food-item"><span class="food-dot"></span>Leafy greens (spinach, kale)</li>
+              <li class="food-item"><span class="food-dot"></span>Salmon & sardines — DHA</li>
+              <li class="food-item"><span class="food-dot"></span>Eggs — choline, protein</li>
+              <li class="food-item"><span class="food-dot"></span>Avocado — healthy fats</li>
+              <li class="food-item"><span class="food-dot"></span>Berries — antioxidants</li>
+              <li class="food-item"><span class="food-dot"></span>Greek yogurt — calcium</li>
+              <li class="food-item"><span class="food-dot"></span>Lentils & beans — iron, fiber</li>
+            </ul>
+          </div>
+          <div class="foods-card">
+            <div class="foods-card-title">❌ Foods to Avoid</div>
+            <ul class="food-list">
+              <li class="food-item avoid"><span class="food-dot"></span>Raw / undercooked meat</li>
+              <li class="food-item avoid"><span class="food-dot"></span>High-mercury fish</li>
+              <li class="food-item avoid"><span class="food-dot"></span>Unpasteurized dairy</li>
+              <li class="food-item avoid"><span class="food-dot"></span>Alcohol — AVOID</li>
+              <li class="food-item avoid"><span class="food-dot"></span>High-caffeine drinks</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====== MEDICAL TAB ====== -->
+      <div class="tab-panel" id="panel-medical">
+        <div class="section-heading">🏥 <span>Medical Guide</span></div>
+        <p class="section-sub">Important health conditions, warning signs, and when to call your doctor</p>
+        <div class="medical-grid">
+          <div class="medical-card danger">
+            <div class="medical-title">🚨 Call 911 Immediately If…</div>
+            <ul class="medical-list">
+              <li><span class="bullet">🔴</span>Heavy vaginal bleeding</li>
+              <li><span class="bullet">🔴</span>Severe abdominal or pelvic pain</li>
+              <li><span class="bullet">🔴</span>Sudden severe headache</li>
+              <li><span class="bullet">🔴</span>Chest pain or difficulty breathing</li>
+            </ul>
+          </div>
+          <div class="medical-card caution">
+            <div class="medical-title">⚠️ Call Your Doctor Today If…</div>
+            <ul class="medical-list">
+              <li><span class="bullet">🟡</span>Fever over 38°C (100.4°F)</li>
+              <li><span class="bullet">🟡</span>Sudden swelling of face or hands</li>
+              <li><span class="bullet">🟡</span>Reduced fetal movement</li>
+              <li><span class="bullet">🟡</span>Vaginal bleeding or unusual discharge</li>
+            </ul>
+          </div>
+          <div class="medical-card">
+            <div class="medical-title">🩺 Preeclampsia Warning Signs</div>
+            <ul class="medical-list">
+              <li><span class="bullet">⚡</span>BP reading ≥ 140/90</li>
+              <li><span class="bullet">⚡</span>Sudden severe headache</li>
+              <li><span class="bullet">⚡</span>Visual disturbances (spots/lights)</li>
+              <li><span class="bullet">⚡</span>Sudden significant face/hand swelling</li>
+            </ul>
+          </div>
+          <div class="medical-card">
+            <div class="medical-title">💊 Safe Medications Guide</div>
+            <ul class="medical-list">
+              <li><span class="bullet">✅</span>Acetaminophen (Tylenol)</li>
+              <li><span class="bullet">✅</span>Prenatal vitamins with DHA</li>
+              <li><span class="bullet">❌</span>Ibuprofen (Advil) — AVOID after 20 wks</li>
+              <li><span class="bullet">⚠️</span>Consult doctor before any medication</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====== FERTILITY & OVULATION TAB ====== -->
+      <div class="tab-panel" id="panel-fertility">
+        <div class="section-heading">🌸 <span>Fertility & Ovulation</span></div>
+        <p class="section-sub">Track your cycle, fertile window, and ovulation — powered by live API calculations</p>
+
+        <!-- Fertility Calculator -->
+        <div class="fertility-calc-card">
+          <div class="fertility-calc-header">
+            <div class="fertility-icon">🌺</div>
+            <div>
+              <div class="fertility-title">Ovulation & Fertile Window Calculator</div>
+              <div class="fertility-subtitle">Enter your cycle details for precise predictions</div>
+            </div>
+          </div>
+          <div class="fertility-inputs">
+            <div class="input-group">
+              <label class="input-label" for="fertLmpDate">First Day of Last Period</label>
+              <input type="date" class="input-field" id="fertLmpDate" />
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="fertCycleLen">Average Cycle Length</label>
+              <select class="select-field" id="fertCycleLen">
+                <option value="21">21 days</option>
+                <option value="28" selected>28 days (Average)</option>
+                <option value="30">30 days</option>
+                <option value="35">35 days</option>
+              </select>
+            </div>
+          </div>
+          <button class="calc-btn" id="fertCalcBtn" onclick="calcFertility()" style="margin-top:4px;">🌺 Calculate
+            Fertile Window</button>
+        </div>
+
+        <!-- Fertility Results -->
+        <div class="fertility-results" id="fertilityResults" style="display:none">
+          <div class="fert-result-grid">
+            <div class="fert-card fert-card-ovulation">
+              <div class="fert-card-icon">🥚</div>
+              <div class="fert-card-label">Ovulation Day</div>
+              <div class="fert-card-value" id="fertOvulation">—</div>
+            </div>
+            <div class="fert-card fert-card-window">
+              <div class="fert-card-icon">✨</div>
+              <div class="fert-card-label">Fertile Window</div>
+              <div class="fert-card-value" id="fertWindow">—</div>
+            </div>
+            <div class="fert-card fert-card-next">
+              <div class="fert-card-icon">📅</div>
+              <div class="fert-card-label">Next Period</div>
+              <div class="fert-card-value" id="fertNextPeriod">—</div>
+            </div>
+          </div>
+          <!-- Cycle Calendar -->
+          <div class="cycle-calendar-card">
+            <div class="cycle-cal-header">📆 Your Cycle Calendar</div>
+            <div class="cycle-cal-grid" id="cycleCalGrid"><!-- Filled by JS --></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====== DOCTORS TAB ====== -->
+      <div class="tab-panel" id="panel-doctors">
+        <div class="section-heading">🩺 <span>Find a Doctor Nearby</span></div>
+        <p class="section-sub">Locate gynecologists, obstetricians, and women's clinics near you.</p>
+
+        <!-- Search and Filter Bar -->
+        <div class="doctor-search-container"
+          style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px;">
+          <div class="doctor-btn-row" style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <input type="text" class="input-field" id="addressSearch" placeholder="Enter city, zip, or address..."
+              style="flex: 1; min-width: 200px;">
+            <button class="calc-btn doctor-action-btn"
+              style="flex: 0 0 auto; width: auto; padding: 0 28px; font-size: 0.9rem;" onclick="searchByAddress()"
+              id="addressSearchBtn">🔍 Search</button>
+            <button class="calc-btn doctor-action-btn"
+              style="flex: 0 0 auto; width: auto; padding: 0 28px; font-size: 0.9rem; background: var(--gradient-rose); box-shadow: 0 4px 14px rgba(190,24,93,0.3);"
+              onclick="detectLocation()" id="locateBtn">📍 Locate Me</button>
+          </div>
+
+          <!-- Inline Filters -->
+          <div
+            style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between; padding: 12px; background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+            <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary);">Min Rating:</span>
+                <select id="docFilterRating" onchange="applyDoctorFilters()"
+                  style="padding: 4px 8px; border-radius: 8px; border: 1px solid var(--border-color); font-family: var(--font-body);">
+                  <option value="0">Any</option>
+                  <option value="3">3+ ⭐</option>
+                  <option value="4">4+ ⭐</option>
+                  <option value="4.5">4.5+ ⭐</option>
+                </select>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary);">Max Distance:</span>
+                <select id="docFilterDistance" onchange="applyDoctorFilters()"
+                  style="padding: 4px 8px; border-radius: 8px; border: 1px solid var(--border-color); font-family: var(--font-body);">
+                  <option value="100000">100 km</option>
+                  <option value="50000">50 km</option>
+                  <option value="20000">20 km</option>
+                  <option value="10000">10 km</option>
+                  <option value="5000">5 km</option>
+                </select>
+              </div>
+            </div>
+
+            <div
+              style="display: flex; align-items: center; gap: 8px; padding-left: 12px; border-left: 1px solid var(--border-color);">
+              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary);">Saved Only:</span>
+              <label class="switch-ui" style="position: relative; display: inline-block; width: 34px; height: 20px;">
+                <input type="checkbox" id="showSavedOnly" onchange="applyDoctorFilters()"
+                  style="opacity: 0; width: 0; height: 0;">
+                <span class="slider-ui"
+                  style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px;"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div id="doctorStatusMsg"
+          style="margin-bottom:16px; font-size:0.9rem; font-weight:600; display:none; padding:12px; border-radius:12px; background:var(--bg-secondary);">
+        </div>
+        <div id="doctorsMap"
+          style="height:350px; border-radius:var(--radius-lg); margin-bottom:24px; display:none; border:1px solid var(--border-color); z-index: 1;">
+        </div>
+        <div class="doctors-grid" id="doctorsGrid">
+          <div style="text-align:center;width:100%;font-size:0.9rem;color:var(--text-muted);padding:24px;">
+            Click "Locate Me" to find nearby specialists.
+          </div>
+        </div>
+      </div>
+    </div><!-- /tab-panels-container -->
+
+    <!-- Results Banner -->
+    <div class="results-banner" id="resultsBanner">
+      <div class="result-item">
+        <div class="result-label" data-i18n="res_due_date">Due Date</div>
+        <div class="result-value" id="rDueDate">—</div>
+        <div class="result-sub" id="rDueSub">Estimated</div>
+      </div>
+      <div class="result-item">
+        <div class="result-label" data-i18n="res_weeks">Current Week</div>
+        <div class="result-value" id="rWeek">—</div>
+        <div class="result-sub" id="rTrimester">—</div>
+      </div>
+      <div class="result-item">
+        <div class="result-label" data-i18n="res_days_left">Days Remaining</div>
+        <div class="result-value" id="rDaysLeft">—</div>
+        <div class="result-sub">Until your due date</div>
+      </div>
+      <div class="result-item">
+        <div class="result-label" data-i18n="res_conception">Conception Date</div>
+        <div class="result-value" id="rConception">—</div>
+        <div class="result-sub">Estimated</div>
+      </div>
+    </div>
+
+    <!-- ====== API LIVE DATA PANEL ====== -->
+    <div class="api-live-panel" id="apiLivePanel" style="display:none">
+      <div class="api-live-grid">
+        <div class="api-live-card" id="apiCard-trimester">
+          <div class="api-live-icon">🌸</div>
+          <div class="api-live-label" data-i18n="res_trimester">Trimester</div>
+          <div class="api-live-value" id="apiTrimester">—</div>
+          <div class="api-live-desc" id="apiTrimesterDesc">—</div>
+        </div>
+        <div class="api-live-card" id="apiCard-week">
+          <div class="api-live-icon">📅</div>
+          <div class="api-live-label">Weeks Pregnant</div>
+          <div class="api-live-value" id="apiWeeks">—</div>
+          <div class="api-live-desc" id="apiWeeksDesc">—</div>
+        </div>
+        <div class="api-live-card" id="apiCard-remaining">
+          <div class="api-live-icon">🗓️</div>
+          <div class="api-live-label">Weeks Remaining</div>
+          <div class="api-live-value" id="apiWeeksLeft">—</div>
+          <div class="api-live-desc" id="apiWeeksLeftDesc">—</div>
+        </div>
+      </div>
+
+      <!-- Trimester Journey Map -->
+      <div class="api-trimester-map" id="localTrimesterMap" style="margin-top: 24px; display: none;">
+        <div class="tri-map-label">Trimester Journey</div>
+        <div class="tri-map-bar">
+          <div id="triMapSeg1" class="tri-map-seg tri-map-1"><span>1st</span><small>Wk 1-13</small></div>
+          <div id="triMapSeg2" class="tri-map-seg tri-map-2"><span>2nd</span><small>Wk 14-27</small></div>
+          <div id="triMapSeg3" class="tri-map-seg tri-map-3"><span>3rd</span><small>Wk 28-40</small></div>
+          <div class="tri-map-indicator" id="triMapIndicator">📍</div>
+        </div>
+      </div>
+
+      <!-- Trimester Info Grid -->
+      <div class="tri-info-grid" id="triInfoGrid" style="margin-top: 16px; display: none;">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+
+    <!-- EDD Live Countdown -->
+    <div class="countdown-card">
+      <div class="countdown-label">⏳ Countdown to Your Due Date</div>
+      <div class="countdown-timer" id="eddCountdown">Calculate your due date to start the countdown</div>
+    </div>
+
+    <!-- Pregnancy Progress -->
+    <div class="pregnancy-progress">
+      <div class="progress-header">
+        <div class="progress-title">🌱 Pregnancy Progress</div>
+        <div class="progress-pct" id="progressPct">0%</div>
+      </div>
+      <div class="trimester-bar" id="trimesterBar"></div>
+      <div class="trimester-labels" id="trimesterLabels">
+        <span class="tri-label">🌸 1st Trimester (Wk 1–13)</span>
+        <span class="tri-label">✨ 2nd Trimester (Wk 14–27)</span>
+        <span class="tri-label">⭐ 3rd Trimester (Wk 28–40)</span>
+      </div>
+    </div>
+
+    <!-- Week Navigator -->
+    <div class="week-nav">
+      <div class="week-nav-header">
+        <div class="week-nav-title">📆 Navigate Your Pregnancy</div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <button class="week-pm-btn" onclick="prevWeek()">−</button>
+          <div class="current-week-badge" id="currentWeekBadge">Week 1</div>
+          <button class="week-pm-btn" onclick="nextWeek()">+</button>
+        </div>
+      </div>
+      <div class="week-scroll" id="weekScroll"></div>
+    </div>
+
+  </main><!-- /dashboard -->
+
+  <!-- ====== FEATURES SECTION ====== -->
+  <section class="features-section" id="features">
+    <div class="features-inner">
+      <h2 class="features-title">Everything You Need in <span
+          style="background:var(--gradient-rose);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">One
+          Place</span></h2>
+      <p class="features-sub">More comprehensive than BabyCenter. More beautiful than The Bump. Powered by live RapidAPI
+        data. Built with love for every mama.</p>
+      <div class="features-grid">
+        <div class="feature-card feature-card-link" onclick="navigateToFeature('calculator')" role="button" tabindex="0"
+          aria-label="Go to Due Date Calculator">
+          <div class="feature-icon icon-rose" style="background:rgba(214,56,102,0.12)">🧮</div>
+          <div class="feature-name">4 Calculation Methods</div>
+          <div class="feature-desc">Calculate from LMP, conception date, IVF transfer date (day 3 or day 5), or
+            ultrasound date with adjustable cycle lengths.</div>
+          <div class="feature-cta">Calculate Now <span class="feature-arrow">&rarr;</span></div>
+        </div>
+        <div class="feature-card feature-card-link" onclick="navigateToFeature('baby')" role="button" tabindex="0"
+          aria-label="Go to Baby Development">
+          <div class="feature-icon icon-lavender" style="background:rgba(155,109,197,0.12)">👶</div>
+          <div class="feature-name">Full 40-Week Baby Data</div>
+          <div class="feature-desc">Every single week includes fruit size comparison, exact measurements, organ
+            development, sensory milestones, and brain development.</div>
+          <div class="feature-cta">View Baby Data <span class="feature-arrow">&rarr;</span></div>
+        </div>
+        <div class="feature-card feature-card-link" onclick="navigateToFeature('mom')" role="button" tabindex="0"
+          aria-label="Go to Mom Health">
+          <div class="feature-icon icon-gold" style="background:rgba(212,168,68,0.12)">🫀</div>
+          <div class="feature-name">Mother Health Tracker</div>
+          <div class="feature-desc">Week-by-week symptoms, body changes, hormonal shifts, recommended tests, sleep tips,
+            and exercise guidance.</div>
+          <div class="feature-cta">View Health Guide <span class="feature-arrow">&rarr;</span></div>
+        </div>
+        <div class="feature-card feature-card-link" onclick="navigateToFeature('trackers')" role="button" tabindex="0"
+          aria-label="Go to Kick Counter">
+          <div class="feature-icon icon-mint" style="background:rgba(59,184,154,0.12)">👣</div>
+          <div class="feature-name">Kick Counter</div>
+          <div class="feature-desc">Time and count fetal movements. Get alerts when you reach the 10-kick goal and track
+            daily averages.</div>
+          <div class="feature-cta">Open Kick Counter <span class="feature-arrow">&rarr;</span></div>
+        </div>
+        <div class="feature-card feature-card-link" onclick="navigateToFeature('trackers')" role="button" tabindex="0"
+          aria-label="Go to Contraction Timer">
+          <div class="feature-icon icon-rose" style="background:rgba(214,56,102,0.12)">⏱️</div>
+          <div class="feature-name">Contraction Timer</div>
+          <div class="feature-desc">Track duration and frequency of contractions with automatic averaging. Know when to
+            head to the hospital.</div>
+          <div class="feature-cta">Open Timer <span class="feature-arrow">&rarr;</span></div>
+        </div>
+        <div class="feature-card feature-card-link" onclick="navigateToFeature('fertility')" role="button" tabindex="0"
+          aria-label="Go to Fertility and Ovulation">
+          <div class="feature-icon" style="background:rgba(214,56,102,0.12)">🌺</div>
+          <div class="feature-name">Fertility &amp; Ovulation Tracker</div>
+          <div class="feature-desc">Calculate your fertile window, ovulation day, and predict your next 3 cycles with a
+            visual cycle calendar.</div>
+          <div class="feature-cta">Track Fertility <span class="feature-arrow">&rarr;</span></div>
+        </div>
+        <div class="feature-card feature-card-link" onclick="navigateToFeature('timeline')" role="button" tabindex="0"
+          aria-label="Go to Appointment Timeline">
+          <div class="feature-icon icon-sky" style="background:rgba(72,144,212,0.12)">📅</div>
+          <div class="feature-name">Appointment Timeline</div>
+          <div class="feature-desc">All key prenatal appointments auto-calculated from your due date with descriptions
+            of what each visit involves.</div>
+          <div class="feature-cta">View Timeline <span class="feature-arrow">&rarr;</span></div>
+        </div>
+        <div class="feature-card feature-card-link" onclick="navigateToFeature('nutrition')" role="button" tabindex="0"
+          aria-label="Go to Nutrition Guide">
+          <div class="feature-icon" style="background:rgba(59,184,154,0.12)">🥗</div>
+          <div class="feature-name">Nutrition Guide</div>
+          <div class="feature-desc">Essential vitamins, minerals, foods to eat and avoid — a complete pregnancy
+            nutrition reference for every trimester.</div>
+          <div class="feature-cta">View Nutrition <span class="feature-arrow">&rarr;</span></div>
+        </div>
+        <div class="feature-card feature-card-link" onclick="navigateToFeature('medical')" role="button" tabindex="0"
+          aria-label="Go to Medical Guide">
+          <div class="feature-icon" style="background:rgba(72,144,212,0.12)">🏥</div>
+          <div class="feature-name">Medical Safety Guide</div>
+          <div class="feature-desc">Warning signs, preeclampsia info, safe medications, gestational diabetes, and
+            pregnancy-safe exercises.</div>
+          <div class="feature-cta">View Medical Guide <span class="feature-arrow">&rarr;</span></div>
         </div>
       </div>
     </div>
-  </div><!-- /tab-panels-container -->
+  </section>
 
-  <!-- Results Banner -->
-  <div class="results-banner" id="resultsBanner">
-    <div class="result-item">
-      <div class="result-label" data-i18n="res_due_date">Due Date</div>
-      <div class="result-value" id="rDueDate">—</div>
-      <div class="result-sub" id="rDueSub">Estimated</div>
-    </div>
-    <div class="result-item">
-      <div class="result-label" data-i18n="res_weeks">Current Week</div>
-      <div class="result-value" id="rWeek">—</div>
-      <div class="result-sub" id="rTrimester">—</div>
-    </div>
-    <div class="result-item">
-      <div class="result-label" data-i18n="res_days_left">Days Remaining</div>
-      <div class="result-value" id="rDaysLeft">—</div>
-      <div class="result-sub">Until your due date</div>
-    </div>
-    <div class="result-item">
-      <div class="result-label" data-i18n="res_conception">Conception Date</div>
-      <div class="result-value" id="rConception">—</div>
-      <div class="result-sub">Estimated</div>
-    </div>
-  </div>
+  <!-- ====== FOOTER ====== -->
 
-  <!-- ====== API LIVE DATA PANEL ====== -->
-  <div class="api-live-panel" id="apiLivePanel" style="display:none">
-    <div class="api-live-grid">
-      <div class="api-live-card" id="apiCard-trimester">
-        <div class="api-live-icon">🌸</div><div class="api-live-label" data-i18n="res_trimester">Trimester</div><div class="api-live-value" id="apiTrimester">—</div><div class="api-live-desc" id="apiTrimesterDesc">—</div>
-      </div>
-      <div class="api-live-card" id="apiCard-week">
-        <div class="api-live-icon">📅</div><div class="api-live-label">Weeks Pregnant</div><div class="api-live-value" id="apiWeeks">—</div><div class="api-live-desc" id="apiWeeksDesc">—</div>
-      </div>
-      <div class="api-live-card" id="apiCard-remaining">
-        <div class="api-live-icon">🗓️</div><div class="api-live-label">Weeks Remaining</div><div class="api-live-value" id="apiWeeksLeft">—</div><div class="api-live-desc" id="apiWeeksLeftDesc">—</div>
-      </div>
+
+  <footer class="footer">
+    <div class="footer-brand">MomCalc 🤰</div>
+    <p class="footer-disc">
+      ⚠️ This app provides general educational information only and is not medical advice. Always consult your
+      healthcare provider for pregnancy concerns.
+    </p>
+
+    <div class="footer-links"
+      style="margin: 12px 0; display: flex; gap: 16px; justify-content: center; font-size: 0.85rem;">
+      <a href="/pages/" style="color: var(--indigo); font-weight: 600; text-decoration: none;">📚 Pregnancy Guides (Week
+        by Week)</a>
+      <a href="/sitemap.xml" style="color: var(--text-muted); text-decoration: none;">🗺️ Sitemap</a>
     </div>
 
-    <!-- Trimester Journey Map -->
-    <div class="api-trimester-map" id="localTrimesterMap" style="margin-top: 24px; display: none;">
-      <div class="tri-map-label">Trimester Journey</div>
-      <div class="tri-map-bar">
-        <div id="triMapSeg1" class="tri-map-seg tri-map-1"><span>1st</span><small>Wk 1-13</small></div>
-        <div id="triMapSeg2" class="tri-map-seg tri-map-2"><span>2nd</span><small>Wk 14-27</small></div>
-        <div id="triMapSeg3" class="tri-map-seg tri-map-3"><span>3rd</span><small>Wk 28-40</small></div>
-        <div class="tri-map-indicator" id="triMapIndicator">📍</div>
-      </div>
-    </div>
+    <p class="footer-copy">© 2026 MomCalc. Made with 💗 for every mama.</p>
+  </footer>
 
-    <!-- Trimester Info Grid -->
-    <div class="tri-info-grid" id="triInfoGrid" style="margin-top: 16px; display: none;">
-      <!-- Filled by JS -->
-    </div>
-  </div>
-
-  <!-- EDD Live Countdown -->
-  <div class="countdown-card">
-    <div class="countdown-label">⏳ Countdown to Your Due Date</div>
-    <div class="countdown-timer" id="eddCountdown">Calculate your due date to start the countdown</div>
-  </div>
-
-  <!-- Pregnancy Progress -->
-  <div class="pregnancy-progress">
-    <div class="progress-header">
-      <div class="progress-title">🌱 Pregnancy Progress</div>
-      <div class="progress-pct" id="progressPct">0%</div>
-    </div>
-    <div class="trimester-bar" id="trimesterBar"></div>
-    <div class="trimester-labels" id="trimesterLabels">
-      <span class="tri-label">🌸 1st Trimester (Wk 1–13)</span>
-      <span class="tri-label">✨ 2nd Trimester (Wk 14–27)</span>
-      <span class="tri-label">⭐ 3rd Trimester (Wk 28–40)</span>
-    </div>
-  </div>
-
-  <!-- Week Navigator -->
-  <div class="week-nav">
-    <div class="week-nav-header">
-      <div class="week-nav-title">📆 Navigate Your Pregnancy</div>
-      <div style="display:flex;align-items:center;gap:10px">
-        <button class="week-pm-btn" onclick="prevWeek()">−</button>
-        <div class="current-week-badge" id="currentWeekBadge">Week 1</div>
-        <button class="week-pm-btn" onclick="nextWeek()">+</button>
-      </div>
-    </div>
-    <div class="week-scroll" id="weekScroll"></div>
-  </div>
-
-</main><!-- /dashboard -->
-
-<!-- ====== FEATURES SECTION ====== -->
-<section class="features-section" id="features">
-  <div class="features-inner">
-    <h2 class="features-title">Everything You Need in <span style="background:var(--gradient-rose);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">One Place</span></h2>
-    <p class="features-sub">More comprehensive than BabyCenter. More beautiful than The Bump. Powered by live RapidAPI data. Built with love for every mama.</p>
-    <div class="features-grid">
-      <div class="feature-card feature-card-link" onclick="navigateToFeature('calculator')" role="button" tabindex="0" aria-label="Go to Due Date Calculator">
-        <div class="feature-icon icon-rose" style="background:rgba(214,56,102,0.12)">🧮</div>
-        <div class="feature-name">4 Calculation Methods</div>
-        <div class="feature-desc">Calculate from LMP, conception date, IVF transfer date (day 3 or day 5), or ultrasound date with adjustable cycle lengths.</div>
-        <div class="feature-cta">Calculate Now <span class="feature-arrow">&rarr;</span></div>
-      </div>
-      <div class="feature-card feature-card-link" onclick="navigateToFeature('baby')" role="button" tabindex="0" aria-label="Go to Baby Development">
-        <div class="feature-icon icon-lavender" style="background:rgba(155,109,197,0.12)">👶</div>
-        <div class="feature-name">Full 40-Week Baby Data</div>
-        <div class="feature-desc">Every single week includes fruit size comparison, exact measurements, organ development, sensory milestones, and brain development.</div>
-        <div class="feature-cta">View Baby Data <span class="feature-arrow">&rarr;</span></div>
-      </div>
-      <div class="feature-card feature-card-link" onclick="navigateToFeature('mom')" role="button" tabindex="0" aria-label="Go to Mom Health">
-        <div class="feature-icon icon-gold" style="background:rgba(212,168,68,0.12)">🫀</div>
-        <div class="feature-name">Mother Health Tracker</div>
-        <div class="feature-desc">Week-by-week symptoms, body changes, hormonal shifts, recommended tests, sleep tips, and exercise guidance.</div>
-        <div class="feature-cta">View Health Guide <span class="feature-arrow">&rarr;</span></div>
-      </div>
-      <div class="feature-card feature-card-link" onclick="navigateToFeature('trackers')" role="button" tabindex="0" aria-label="Go to Kick Counter">
-        <div class="feature-icon icon-mint" style="background:rgba(59,184,154,0.12)">👣</div>
-        <div class="feature-name">Kick Counter</div>
-        <div class="feature-desc">Time and count fetal movements. Get alerts when you reach the 10-kick goal and track daily averages.</div>
-        <div class="feature-cta">Open Kick Counter <span class="feature-arrow">&rarr;</span></div>
-      </div>
-      <div class="feature-card feature-card-link" onclick="navigateToFeature('trackers')" role="button" tabindex="0" aria-label="Go to Contraction Timer">
-        <div class="feature-icon icon-rose" style="background:rgba(214,56,102,0.12)">⏱️</div>
-        <div class="feature-name">Contraction Timer</div>
-        <div class="feature-desc">Track duration and frequency of contractions with automatic averaging. Know when to head to the hospital.</div>
-        <div class="feature-cta">Open Timer <span class="feature-arrow">&rarr;</span></div>
-      </div>
-      <div class="feature-card feature-card-link" onclick="navigateToFeature('fertility')" role="button" tabindex="0" aria-label="Go to Fertility and Ovulation">
-        <div class="feature-icon" style="background:rgba(214,56,102,0.12)">🌺</div>
-        <div class="feature-name">Fertility &amp; Ovulation Tracker</div>
-        <div class="feature-desc">Calculate your fertile window, ovulation day, and predict your next 3 cycles with a visual cycle calendar.</div>
-        <div class="feature-cta">Track Fertility <span class="feature-arrow">&rarr;</span></div>
-      </div>
-      <div class="feature-card feature-card-link" onclick="navigateToFeature('timeline')" role="button" tabindex="0" aria-label="Go to Appointment Timeline">
-        <div class="feature-icon icon-sky" style="background:rgba(72,144,212,0.12)">📅</div>
-        <div class="feature-name">Appointment Timeline</div>
-        <div class="feature-desc">All key prenatal appointments auto-calculated from your due date with descriptions of what each visit involves.</div>
-        <div class="feature-cta">View Timeline <span class="feature-arrow">&rarr;</span></div>
-      </div>
-      <div class="feature-card feature-card-link" onclick="navigateToFeature('nutrition')" role="button" tabindex="0" aria-label="Go to Nutrition Guide">
-        <div class="feature-icon" style="background:rgba(59,184,154,0.12)">🥗</div>
-        <div class="feature-name">Nutrition Guide</div>
-        <div class="feature-desc">Essential vitamins, minerals, foods to eat and avoid — a complete pregnancy nutrition reference for every trimester.</div>
-        <div class="feature-cta">View Nutrition <span class="feature-arrow">&rarr;</span></div>
-      </div>
-      <div class="feature-card feature-card-link" onclick="navigateToFeature('medical')" role="button" tabindex="0" aria-label="Go to Medical Guide">
-        <div class="feature-icon" style="background:rgba(72,144,212,0.12)">🏥</div>
-        <div class="feature-name">Medical Safety Guide</div>
-        <div class="feature-desc">Warning signs, preeclampsia info, safe medications, gestational diabetes, and pregnancy-safe exercises.</div>
-        <div class="feature-cta">View Medical Guide <span class="feature-arrow">&rarr;</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ====== FOOTER ====== -->
-
-
-<footer class="footer">
-  <div class="footer-brand">MomCalc 🤰</div>
-  <p class="footer-disc">
-    ⚠️ This app provides general educational information only and is not medical advice. Always consult your healthcare provider for pregnancy concerns.
-  </p>
-
-  <div class="footer-links" style="margin: 12px 0; display: flex; gap: 16px; justify-content: center; font-size: 0.85rem;">
-    <a href="/pages/" style="color: var(--indigo); font-weight: 600; text-decoration: none;">📚 Pregnancy Guides (Week by Week)</a>
-    <a href="/sitemap.xml" style="color: var(--text-muted); text-decoration: none;">🗺️ Sitemap</a>
-  </div>
-
-  <p class="footer-copy">© 2026 MomCalc. Made with 💗 for every mama.</p>
-</footer>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script src="app.js?v=3"></script>
-<script>
-  if ('serviceWorker' in navigator && (window.location.protocol === 'http:' || window.location.protocol === 'https:')) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js')
-        .then(reg => console.log('SW registered:', reg.scope))
-        .catch(err => console.log('SW registration failed:', err));
-    });
-  } else {
-    console.log('Service Worker registration skipped: Protocol not supported (likely opening file directly).');
-  }
-</script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="app.js?v=3"></script>
+  <script>
+    if ('serviceWorker' in navigator && (window.location.protocol === 'http:' || window.location.protocol === 'https:')) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('SW registered:', reg.scope))
+          .catch(err => console.log('SW registration failed:', err));
+      });
+    } else {
+      console.log('Service Worker registration skipped: Protocol not supported (likely opening file directly).');
+    }
+  </script>
 </body>
+
 </html>
