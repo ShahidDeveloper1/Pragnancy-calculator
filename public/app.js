@@ -1001,7 +1001,7 @@ function showValidationError(id) {
 
 // ====== CALCULATION METHOD SWITCHER ======
 function switchMethod(method) {
-  state.calcMethod = method;
+  state.activeMethod = method;
   saveState();
   if (typeof gtag === 'function') {
     gtag('event', 'switch_method', { method: method });
@@ -2551,6 +2551,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+});
 // ====== PWA INSTALL LOGIC ======
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => {
@@ -2573,5 +2574,28 @@ async function installApp() {
 }
 
 window.installApp = installApp;
+
+// ====== SECURITY: INPUT SANITIZATION ======
+function sanitizeHTML(str) {
+  const p = document.createElement('p');
+  p.textContent = str;
+  return p.innerHTML;
+}
+window.sanitizeHTML = sanitizeHTML;
+
+// Export globals for HTML onclick handlers
+window.switchMethod = switchMethod;
+window.prevWeek = prevWeek;
+window.nextWeek = nextWeek;
+window.recordKick = recordKick;
+window.resetKicks = resetKicks;
+window.newKickSession = newKickSession;
+window.toggleContraction = toggleContraction;
+window.resetContractions = resetContractions;
+window.switchMainTab = switchMainTab;
+window.saveApiKey = saveApiKey;
+window.applyTheme = applyTheme;
+window.i18n = i18n;
+window.state = state;
 
 

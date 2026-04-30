@@ -193,6 +193,11 @@ function pageHTML({ title, metaDesc, canonical, h1, breadcrumbs, content, faqs, 
   <meta name="twitter:description" content="${metaDesc}"/>
   <meta name="twitter:image" content="${ogImage || 'https://momcalc.com/icon.png'}"/>
   <meta name="google-site-verification" content="DlAoAxaOvkuDMmt4IeiWcqU0Poup27ppp9dc3fjlIQo" />
+
+  <!-- Security Hardening -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://localhost:3000 http://127.0.0.1:3000; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:3000 http://127.0.0.1:3000 https://www.googletagmanager.com https://unpkg.com https://cdn.jsdelivr.net https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' http://localhost:3000 http://127.0.0.1:3000 https://fonts.googleapis.com https://unpkg.com https://cdn.jsdelivr.net; img-src 'self' data: https: https://images.unsplash.com https://cdn-icons-png.flaticon.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' http://localhost:3000 http://127.0.0.1:3000 https://www.google-analytics.com https://libretranslate.de https://nominatim.openstreetmap.org; frame-src 'none'; object-src 'none';">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <script type="application/ld+json">${bcSchema}</script>
   ${faqSchema ? `<script type="application/ld+json">${faqSchema}</script>` : ''}
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
