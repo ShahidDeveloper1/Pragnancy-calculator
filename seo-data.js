@@ -332,12 +332,84 @@ const foodData = [
     alternatives: "Canned salmon is a great high-protein, low-mercury alternative that works perfectly in sandwiches and salads."
   },
   {
-    food: "shrimp",
-    title: "Shrimp: Protein-Packed and Safe",
+    food: "chocolate",
+    title: "Chocolate: A Sweet Pregnancy Treat?",
     safe: true,
-    image: "https://images.unsplash.com/photo-1559742811-822873691df8?auto=format&fit=crop&q=80&w=800",
-    answer: "Shrimp is a fantastic pregnancy food! It's low in mercury, high in protein, and very versatile. As long as it's fully cooked (until it's opaque and firm), it's a safe and nutritious addition to your diet.",
-    alternatives: "Scallops, crab, and lobster (all fully cooked) are also safe, low-mercury seafood options for a little variety."
+    image: "https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&q=80&w=800",
+    answer: "Indulge your cravings! Chocolate is safe and may even have benefits for blood pressure and mood. Just keep an eye on the caffeine content (especially in dark chocolate) and the added sugars.",
+    alternatives: "Dark chocolate (70%+ cocoa) is the healthiest choice for a rich flavor with less sugar. Cocoa powder in smoothies is also a great option."
+  },
+  {
+    food: "peanuts",
+    title: "Peanuts & Pregnancy: Allergy Myths Debunked",
+    safe: true,
+    image: "https://images.unsplash.com/photo-1567894340315-735d7c361db0?auto=format&fit=crop&q=80&w=800",
+    answer: "Unless you have a peanut allergy yourself, peanuts and peanut butter are perfectly safe. In fact, eating peanuts during pregnancy may actually reduce the risk of your child developing a nut allergy later in life!",
+    alternatives: "Almond butter, sunflower seed butter, or walnuts are also excellent sources of healthy fats and protein."
+  },
+  {
+    food: "spicy-food",
+    title: "Spicy Food: Will it Affect Your Baby?",
+    safe: true,
+    image: "https://images.unsplash.com/photo-1544333346-64e4fe1f8fa2?auto=format&fit=crop&q=80&w=800",
+    answer: "Spice things up! Spicy food is 100% safe for your baby. While it might cause you some heartburn or indigestion as your pregnancy progresses, it won't harm the little one. Your baby even gets a tiny 'preview' of the flavors through the amniotic fluid!",
+    alternatives: "If spice causes too much heartburn, try milder aromatics like ginger, garlic, or fresh herbs like cilantro and basil."
+  },
+  {
+    food: "papaya",
+    title: "Papaya: Ripe vs. Unripe Warning",
+    safe: true,
+    image: "https://images.unsplash.com/photo-1517282003859-744491f21165?auto=format&fit=crop&q=80&w=800",
+    answer: "The safety of papaya depends entirely on how ripe it is. Fully ripe papaya (yellow/orange skin) is safe and packed with vitamins. However, unripe or semi-ripe papaya contains a latex substance that can trigger uterine contractions, so it must be avoided.",
+    alternatives: "Mango, cantaloupe, and oranges are safe, vitamin-rich alternatives if you're unsure about the ripeness of a papaya."
+  },
+  {
+    food: "herbal-tea",
+    title: "Herbal Teas: Which Ones Are Safe?",
+    safe: true,
+    image: "https://images.unsplash.com/photo-1576091160550-2173bdd99625?auto=format&fit=crop&q=80&w=800",
+    answer: "Most common herbal teas like Ginger (great for nausea!) and Peppermint are safe and soothing. However, some herbs like Hibiscus, Nettle, or Raspberry Leaf (in early pregnancy) should be avoided or used with caution. Always check the ingredients list.",
+    alternatives: "Rooibos is a fantastic caffeine-free and safe option. Hot water with a slice of lemon and a bit of honey is also a classic and safe choice."
+  },
+  {
+    food: "mayo",
+    title: "Mayonnaise: The Pasteurization Rule",
+    safe: true,
+    image: "https://images.unsplash.com/photo-1582230689914-7226685f0962?auto=format&fit=crop&q=80&w=800",
+    answer: "Commercial mayonnaise (the kind you find on the shelf at the grocery store) is safe because it's made with pasteurized eggs. The only ones to avoid are 'house-made' or 'artisan' mayos often found in fancy restaurants, as they may use raw eggs.",
+    alternatives: "Greek yogurt or smashed avocado can be used as a delicious and safe creamy substitute in sandwiches and salads."
+  },
+  {
+    food: "yogurt",
+    title: "Yogurt: Probiotics for Two",
+    safe: true,
+    image: "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&q=80&w=800",
+    answer: "Yogurt is an amazing pregnancy food! It's rich in calcium and probiotics that support your gut health. Just ensure it's pasteurized (which almost all commercial brands are) and try to choose low-sugar options when possible.",
+    alternatives: "Kefir is another great probiotic drink. For a dairy-free option, coconut or almond milk yogurts are also safe and delicious."
+  },
+  {
+    food: "steak",
+    title: "Steak & Red Meat: The Temperature Guide",
+    safe: true,
+    image: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&q=80&w=800",
+    answer: "Steak is a great source of iron and protein, which you need more of right now. The catch? It must be well-done. Raw or medium-rare meat can harbor parasites like Toxoplasma. Cook your steak to an internal temperature of 160°F (71°C) to be safe.",
+    alternatives: "Slow-cooked stews, pot roasts, or ground meat (fully cooked) are easy ways to ensure your meat is safe and tender."
+  },
+  {
+    food: "energy-drinks",
+    title: "Energy Drinks: High Voltage Warning",
+    safe: false,
+    image: "https://images.unsplash.com/photo-1622543953495-a1796493a7a7?auto=format&fit=crop&q=80&w=800",
+    answer: "It's best to skip the energy drinks for now. They often contain very high levels of caffeine and 'proprietary blends' of herbs (like ginseng or taurine) that haven't been thoroughly studied for safety during pregnancy.",
+    alternatives: "If you need an energy boost, try a small cup of coffee, a glass of cold sparkling water with lime, or a protein-rich snack like almonds."
+  },
+  {
+    food: "mushrooms",
+    title: "Mushrooms: Cooked vs. Raw",
+    safe: true,
+    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=800",
+    answer: "Mushrooms are safe and provide unique B-vitamins. However, you should always eat them cooked. Cooking breaks down tough cell walls and any mild toxins. Also, stick to store-bought varieties and avoid foraging for wild mushrooms unless you're an expert.",
+    alternatives: "Button, Cremini, Portobello, and Shiitake mushrooms are all safe and nutritious when sautéed, roasted, or added to soups."
   }
 ];
 
