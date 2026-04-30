@@ -4,18 +4,18 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"/>
   <title>Pregnancy Library: Guides & Resources | MomCalc</title>
-  <meta name="description" content="Explore our complete library of medically-guided pregnancy resources, including week-by-week tracking and food safety advice."/>
+  <meta name="description" content="Complete library of pregnancy resources."/>
   <meta name="robots" content="index,follow"/>
   <link rel="canonical" href="https://momcalc.com/pages/"/>
   <meta property="og:type" content="article"/>
   <meta property="og:title" content="Pregnancy Library: Guides & Resources | MomCalc"/>
-  <meta property="og:description" content="Explore our complete library of medically-guided pregnancy resources, including week-by-week tracking and food safety advice."/>
+  <meta property="og:description" content="Complete library of pregnancy resources."/>
   <meta property="og:image" content="https://momcalc.com/icon.png"/>
   <meta property="og:url" content="https://momcalc.com/pages/"/>
   <meta property="og:site_name" content="MomCalc"/>
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="Pregnancy Library: Guides & Resources | MomCalc"/>
-  <meta name="twitter:description" content="Explore our complete library of medically-guided pregnancy resources, including week-by-week tracking and food safety advice."/>
+  <meta name="twitter:description" content="Complete library of pregnancy resources."/>
   <meta name="twitter:image" content="https://momcalc.com/icon.png"/>
   <meta name="google-site-verification" content="DlAoAxaOvkuDMmt4IeiWcqU0Poup27ppp9dc3fjlIQo" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"/"},{"@type":"ListItem","position":2,"name":"Guides","item":"/pages/"}]}</script>
@@ -23,233 +23,32 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../style.css?v=11"/>
+  <link rel="stylesheet" href="../style.css?v=12"/>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤰</text></svg>"/>
   <style>
-    body { 
-      background: var(--bg-primary); 
-      color: var(--text-primary); 
-      font-family: var(--font-body);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* Fixed Header Fix */
-    .navbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 80px;
-      padding: 0 clamp(20px, 5vw, 60px);
-      background: var(--bg-nav);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 2000;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .theme-toggle {
-      width: 56px; height: 28px;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-color);
-      border-radius: 20px;
-      cursor: pointer;
-      position: relative;
-      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-      display: flex;
-      align-items: center;
-      padding: 0 4px;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-    }
-
-    .theme-toggle::before { content: '☀️'; position: absolute; left: 6px; font-size: 12px; opacity: 0.5; }
-    .theme-toggle::after { content: '🌙'; position: absolute; right: 6px; font-size: 12px; opacity: 0.5; }
-
-    .theme-toggle-knob {
-      width: 20px; height: 20px;
-      background: var(--gradient-primary);
-      border-radius: 50%;
-      position: relative;
-      z-index: 2;
-      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-      box-shadow: 0 2px 8px rgba(108, 59, 228, 0.3);
-    }
-
-    [data-theme="dark"] .theme-toggle-knob {
-      transform: translateX(28px);
-      background: var(--gradient-rose);
-      box-shadow: 0 2px 8px rgba(219, 39, 119, 0.3);
-    }
-
-    [data-theme="dark"] .theme-toggle::after { opacity: 1; }
-    [data-theme="light"] .theme-toggle::before { opacity: 1; }
-
-    .seo-container { 
-      max-width: 800px; 
-      margin: 0 auto; 
-      padding: 120px 24px 80px; 
-    }
-
-    .article-header { 
-      margin-bottom: 48px; 
-      text-align: left; 
-    }
-
-    .article-title {
-      font-family: var(--font-display); 
-      font-size: clamp(2.2rem, 8vw, 3.2rem);
-      font-weight: 800; 
-      line-height: 1.1; 
-      margin-bottom: 16px;
-      color: var(--text-primary);
-      letter-spacing: -0.03em;
-    }
-
-    .seo-bc { 
-      display: inline-flex; 
-      align-items: center; 
-      gap: 6px; 
-      font-size: 0.8rem; 
-      margin-bottom: 24px;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-    .seo-bc a { 
-      color: var(--indigo-light); 
-      text-decoration: none; 
-      transition: var(--transition); 
-    }
-    .seo-bc a:hover { color: var(--rose); }
-
-    .content-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-2xl); 
-      padding: 48px;
-      box-shadow: var(--shadow-sm);
-      margin-bottom: 32px;
-    }
-
-    .seo-grid { 
-      display: grid; 
-      grid-template-columns: repeat(3, 1fr); 
-      gap: 20px; 
-      margin: 40px 0; 
-    }
-    
-    .feature-tag {
-      background: var(--bg-secondary); 
-      padding: 24px 16px; 
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--border-color); 
-      text-align: center;
-      transition: var(--transition);
-    }
-    .feature-tag:hover { transform: translateY(-4px); border-color: var(--indigo-light); }
-    .feature-tag .icon { font-size: 28px; margin-bottom: 12px; display: block; }
-    .feature-tag .label { font-weight: 800; color: var(--text-primary); font-size: 1.1rem; display: block; }
-    .feature-tag .sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; display: block; }
-
-    .seo-badge {
-      display: inline-block; 
-      padding: 8px 20px; 
-      border-radius: var(--radius-full);
-      font-size: 0.8rem; 
-      font-weight: 800; 
-      text-transform: uppercase;
-      letter-spacing: 0.05em; 
-      margin-bottom: 24px;
-    }
-    .seo-safe { background: var(--gradient-primary); color: white; border: none; }
-
-    .faq-item {
-      background: var(--bg-secondary); 
-      border-radius: var(--radius-lg);
-      margin-bottom: 16px; 
-      border: 1px solid var(--border-color);
-      overflow: hidden;
-    }
-    .faq-summary {
-      padding: 20px 24px; 
-      font-weight: 700; 
-      cursor: pointer;
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center;
-      list-style: none;
-    }
-    .faq-summary::after { content: '→'; font-size: 1.2rem; color: var(--indigo-light); transition: var(--transition); }
-    .faq-item[open] .faq-summary::after { transform: rotate(90deg); }
-    .faq-content { padding: 0 24px 24px; line-height: 1.7; color: var(--text-secondary); font-size: 1rem; }
-
-    .nav-buttons { 
-      display: grid; 
-      grid-template-columns: 1fr 1fr; 
-      gap: 16px; 
-      margin-top: 64px; 
-    }
-    .nav-btn {
-      padding: 18px; 
-      border-radius: var(--radius-xl);
-      background: var(--bg-card); 
-      border: 1px solid var(--border-color);
-      text-decoration: none; 
-      color: var(--text-primary); 
-      font-weight: 700;
-      text-align: center; 
-      font-size: 0.95rem;
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-    .nav-btn:hover { border-color: var(--indigo-light); background: var(--bg-secondary); transform: scale(1.02); }
-
-    .cta-banner {
-      background: var(--gradient-primary); 
-      padding: 64px 40px;
-      border-radius: var(--radius-2xl); 
-      text-align: center; 
-      color: white;
-      margin-top: 80px;
-      box-shadow: var(--shadow-xl);
-    }
-    .cta-btn {
-      display: inline-block; 
-      padding: 16px 40px; 
-      background: white;
-      color: var(--indigo); 
-      border-radius: var(--radius-full); 
-      text-decoration: none;
-      font-weight: 900; 
-      font-size: 1.1rem; 
-      margin-top: 32px;
-      transition: var(--transition);
-    }
-    .cta-btn:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.2); }
-
-    @media (max-width: 768px) {
-      .navbar { 
-        height: auto; 
-        padding: 16px; 
-        flex-direction: column;
-        gap: 12px;
-        text-align: center; 
-      }
-      .nav-brand { width: 100%; justify-content: center; }
-      .nav-actions { width: 100%; justify-content: center; gap: 12px; flex-wrap: wrap; }
-      .seo-container { padding-top: 160px; padding-bottom: 60px; }
-      .article-title { font-size: 2rem; }
-      .content-card { padding: 32px 20px; }
-      .seo-grid { grid-template-columns: 1fr; gap: 16px; }
-      .nav-buttons { grid-template-columns: 1fr; }
-      .feature-tag { text-align: left; display: flex; align-items: center; gap: 20px; padding: 20px; }
-      .feature-tag .icon { margin-bottom: 0; font-size: 24px; }
-    }
+    body { background: var(--bg-primary); color: var(--text-primary); font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    .navbar { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: var(--nav-height); background: var(--bg-nav); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-color); position: fixed; top: 0; width: 100%; z-index: 1000; box-sizing: border-box; }
+    .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-primary); }
+    .nav-logo { font-size: 28px; }
+    .nav-title { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; letter-spacing: -0.5px; }
+    .nav-sub { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+    .nav-actions { display: flex; align-items: center; gap: 16px; }
+    .nav-cta { background: var(--gradient-primary); color: white; border: none; padding: 10px 24px; border-radius: var(--radius-full); font-weight: 700; font-family: var(--font-display); cursor: pointer; transition: var(--transition); box-shadow: var(--shadow-md); font-size: 0.9rem; }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); filter: brightness(1.1); }
+    .install-btn { background: var(--gradient-primary); color: white; padding: 10px 20px; border-radius: var(--radius-full); font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; border: none; cursor: pointer; transition: var(--transition); box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+    .theme-toggle { width: 56px; height: 32px; background: var(--bg-secondary); border-radius: 100px; border: 1px solid var(--border-color); position: relative; cursor: pointer; transition: all 0.4s; }
+    .theme-toggle-knob { width: 20px; height: 20px; background: var(--gradient-primary); border-radius: 50%; position: relative; z-index: 2; transition: all 0.4s; }
+    [data-theme="dark"] .theme-toggle-knob { transform: translateX(28px); background: var(--gradient-rose); }
+    .seo-container { max-width: 800px; margin: 0 auto; padding: 120px 24px 80px; }
+    .content-card { background: var(--bg-card); border-radius: var(--radius-2xl); border: 1px solid var(--border-card); padding: 48px; box-shadow: var(--shadow-xl); backdrop-filter: blur(10px); margin-bottom: 40px; }
+    .footer { background: var(--bg-secondary); padding: 60px 40px; border-top: 1px solid var(--border-color); text-align: center; }
+    .faq-item { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); margin-bottom: 12px; overflow: hidden; }
+    .faq-summary { padding: 20px 24px; font-weight: 700; cursor: pointer; color: var(--text-primary); display: flex; align-items: center; justify-content: space-between; list-style: none; }
+    .faq-content { padding: 0 24px 24px; color: var(--text-secondary); line-height: 1.7; }
+    .seo-links a { padding: 12px 20px; background: var(--bg-secondary); border-radius: var(--radius-md); text-decoration: none; color: var(--text-primary); font-weight: 600; border: 1px solid var(--border-color); transition: var(--transition); }
+    .seo-links a:hover { border-color: var(--indigo-light); background: var(--bg-card-hover); color: var(--indigo-light); transform: translateY(-2px); }
+    .cta-banner { background: var(--gradient-primary); border-radius: var(--radius-2xl); padding: 60px 40px; text-align: center; margin-top: 80px; box-shadow: var(--shadow-glow); }
+    .cta-btn { background: white; color: var(--indigo); padding: 16px 32px; border-radius: var(--radius-full); font-weight: 800; text-decoration: none; display: inline-block; transition: var(--transition); font-family: var(--font-display); }
   </style>
 </head>
 <body data-theme="light">
@@ -261,16 +60,14 @@
         <div class="nav-sub">Pregnancy Companion</div>
       </div>
     </a>
-
     <div class="nav-actions">
-      <button class="install-btn" id="pwaInstallBtn" onclick="installApp()" style="display:none;" aria-label="Install App">📥 Install App</button>
+      <button class="install-btn" id="pwaInstallBtn" onclick="installApp()" style="display:none;">📥 Install App</button>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
         <div class="theme-toggle-knob"></div>
       </button>
       <a href="/#calculator" class="nav-cta-link"><button class="nav-cta">Pregnancy Calculator</button></a>
     </div>
   </nav>
-
 
   <main class="seo-container">
     <header class="article-header">
@@ -282,29 +79,30 @@
 
     <article class="content-card">
       
-    <p style="font-size: 1.25rem; line-height: 1.7; color: var(--text-secondary); text-align: center; max-width: 600px; margin: 0 auto 48px;">
-      Expert insights for every stage of motherhood. Select a category below to dive deeper.
-    </p>
-    
     <div style="display: flex; flex-direction: column; gap: 48px;">
-      <div class="content-card" style="margin-bottom: 0; padding: 48px;">
-        <h2 style="font-family:var(--font-display); font-size:1.8rem; margin-bottom:32px; text-align: center; color:var(--text-primary);">📅 Week by Week Development</h2>
-        <div style="display: flex; flex-direction: column; gap: 12px; max-width: 600px; margin: 0 auto;">
-          <a href="pregnancy-week-1.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 1: The Beginning of Your Journey</a><a href="pregnancy-week-2.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 2: The Magic of Ovulation</a><a href="pregnancy-week-3.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 3: Implantation & Tiny Spark</a><a href="pregnancy-week-4.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 4: A Heartbeat Begins</a><a href="pregnancy-week-5.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 5: Brain & Beauty in the Making</a><a href="pregnancy-week-6.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 6: Tiny Wiggles & Little Toes</a><a href="pregnancy-week-7.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 7: The Senses Awaken</a><a href="pregnancy-week-8.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 8: A Little Human Form</a><a href="pregnancy-week-9.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 9: Practicing for Life</a><a href="pregnancy-week-10.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 10: Graduation Day!</a><a href="pregnancy-week-11.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 11: Rapid Growth & Tiny Nails</a><a href="pregnancy-week-12.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 12: Reflexes & Face Refinement</a><a href="pregnancy-week-13.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 13: Hello, Second Trimester!</a><a href="pregnancy-week-14.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 14: Little Facial Expressions</a><a href="pregnancy-week-15.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 15: Hearing the World</a><a href="pregnancy-week-16.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 16: Gender Reveal Readiness</a><a href="pregnancy-week-17.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 17: Building the Fat Stores</a><a href="pregnancy-week-18.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 18: The First Fluttering Kicks</a><a href="pregnancy-week-19.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 19: Senses Going Live</a><a href="pregnancy-week-20.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 20: The Halfway Celebration</a><a href="pregnancy-week-21.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 21: Coordinated Acrobatics</a><a href="pregnancy-week-22.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 22: Developing Touch</a><a href="pregnancy-week-23.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 23: Sharp Ears & Rhythmic Beats</a><a href="pregnancy-week-24.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 24: The Viability Milestone</a><a href="pregnancy-week-25.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 25: Startling at Sounds</a><a href="pregnancy-week-26.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 26: Opening Tiny Eyes</a><a href="pregnancy-week-27.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 27: Entering the Home Stretch</a><a href="pregnancy-week-28.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 28: Dreaming & Breathing</a><a href="pregnancy-week-29.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 29: Brain Power Surge</a><a href="pregnancy-week-30.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 30: Developing a Personality</a><a href="pregnancy-week-31.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 31: Getting Ready to Meet</a><a href="pregnancy-week-32.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 32: Practicing the Big Breath</a><a href="pregnancy-week-33.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 33: Immune System Boost</a><a href="pregnancy-week-34.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 34: Stronger & Chunkier</a><a href="pregnancy-week-35.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 35: Final Brain Maturation</a><a href="pregnancy-week-36.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 36: Almost Full Term!</a><a href="pregnancy-week-37.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 37: Early Term Readiness</a><a href="pregnancy-week-38.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 38: Full Term Perfection</a><a href="pregnancy-week-39.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 39: Packing for the Big Day</a><a href="pregnancy-week-40.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 40: Your Due Date Arrival</a><a href="pregnancy-week-41.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 41: Taking Extra Time</a><a href="pregnancy-week-42.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Week 42: The Final Countdown</a>
+      <div class="content-card">
+        <h2>📅 Week by Week</h2>
+        <div class="seo-links" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:10px;">
+          <a href="pregnancy-week-1.html">Week 1</a><a href="pregnancy-week-2.html">Week 2</a><a href="pregnancy-week-3.html">Week 3</a><a href="pregnancy-week-4.html">Week 4</a><a href="pregnancy-week-5.html">Week 5</a><a href="pregnancy-week-6.html">Week 6</a><a href="pregnancy-week-7.html">Week 7</a><a href="pregnancy-week-8.html">Week 8</a><a href="pregnancy-week-9.html">Week 9</a><a href="pregnancy-week-10.html">Week 10</a><a href="pregnancy-week-11.html">Week 11</a><a href="pregnancy-week-12.html">Week 12</a><a href="pregnancy-week-13.html">Week 13</a><a href="pregnancy-week-14.html">Week 14</a><a href="pregnancy-week-15.html">Week 15</a><a href="pregnancy-week-16.html">Week 16</a><a href="pregnancy-week-17.html">Week 17</a><a href="pregnancy-week-18.html">Week 18</a><a href="pregnancy-week-19.html">Week 19</a><a href="pregnancy-week-20.html">Week 20</a><a href="pregnancy-week-21.html">Week 21</a><a href="pregnancy-week-22.html">Week 22</a><a href="pregnancy-week-23.html">Week 23</a><a href="pregnancy-week-24.html">Week 24</a><a href="pregnancy-week-25.html">Week 25</a><a href="pregnancy-week-26.html">Week 26</a><a href="pregnancy-week-27.html">Week 27</a><a href="pregnancy-week-28.html">Week 28</a><a href="pregnancy-week-29.html">Week 29</a><a href="pregnancy-week-30.html">Week 30</a><a href="pregnancy-week-31.html">Week 31</a><a href="pregnancy-week-32.html">Week 32</a><a href="pregnancy-week-33.html">Week 33</a><a href="pregnancy-week-34.html">Week 34</a><a href="pregnancy-week-35.html">Week 35</a><a href="pregnancy-week-36.html">Week 36</a><a href="pregnancy-week-37.html">Week 37</a><a href="pregnancy-week-38.html">Week 38</a><a href="pregnancy-week-39.html">Week 39</a><a href="pregnancy-week-40.html">Week 40</a><a href="pregnancy-week-41.html">Week 41</a><a href="pregnancy-week-42.html">Week 42</a>
         </div>
       </div>
-      
-      <div class="content-card" style="margin-bottom: 0; padding: 48px;">
-        <h2 style="font-family:var(--font-display); font-size:1.8rem; margin-bottom:32px; text-align: center; color:var(--text-primary);">🥗 Pregnancy Food Safety</h2>
-        <div style="display: flex; flex-direction: column; gap: 12px; max-width: 600px; margin: 0 auto;">
-          <a href="can-i-eat-sushi.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Sushi During Pregnancy: What You Need to Know</a><a href="can-i-eat-coffee.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Your Morning Brew: Is Coffee Safe?</a><a href="can-i-eat-soft-cheese.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">The Cheese Guide: Brie, Feta, and More</a><a href="can-i-eat-deli-meat.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Deli Meats & Sandwiches: Safety First</a><a href="can-i-eat-eggs.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">The Power of Eggs for Baby's Brain</a><a href="can-i-eat-salmon.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Salmon: The Ultimate Pregnancy Superfood</a><a href="can-i-eat-honey.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Honey: Sweet and Safe</a><a href="can-i-eat-pineapple.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Pineapple Myths vs. Reality</a><a href="can-i-eat-tuna.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Tuna: Finding the Mercury Balance</a><a href="can-i-eat-shrimp.html" style="padding: 20px 24px; background: var(--bg-secondary); border-radius: var(--radius-lg); text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 1.1rem; border: 1px solid var(--border-color); transition: var(--transition); display: block; text-align: center; box-shadow: var(--shadow-sm);">Shrimp: Protein-Packed and Safe</a>
+      <div class="content-card">
+        <h2>🥗 Food Safety</h2>
+        <div class="seo-links" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:10px;">
+          <a href="can-i-eat-sushi.html">sushi</a><a href="can-i-eat-coffee.html">coffee</a><a href="can-i-eat-soft-cheese.html">soft-cheese</a><a href="can-i-eat-deli-meat.html">deli-meat</a><a href="can-i-eat-eggs.html">eggs</a><a href="can-i-eat-salmon.html">salmon</a><a href="can-i-eat-honey.html">honey</a><a href="can-i-eat-pineapple.html">pineapple</a><a href="can-i-eat-tuna.html">tuna</a><a href="can-i-eat-shrimp.html">shrimp</a>
+        </div>
+      </div>
+      <div class="content-card">
+        <h2>🏥 Local Clinics</h2>
+        <div class="seo-links" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:10px;">
+          <a href="pregnancy-doctors-in-new-york.html">New York</a><a href="pregnancy-doctors-in-london.html">London</a><a href="pregnancy-doctors-in-dubai.html">Dubai</a><a href="pregnancy-doctors-in-mumbai.html">Mumbai</a><a href="pregnancy-doctors-in-toronto.html">Toronto</a><a href="pregnancy-doctors-in-sydney.html">Sydney</a>
         </div>
       </div>
     </div>
   
     </article>
 
-    <div class="nav-buttons">
+    <div class="nav-buttons" style="display:flex; justify-content:space-between; margin-top:40px;">
       <div></div>
       <div></div>
     </div>
@@ -327,37 +125,14 @@
   <script>
     const themeToggle = document.getElementById('themeToggle');
     const html = document.documentElement;
-
-    function updateTheme(theme) {
-      html.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-    }
-
+    function updateTheme(theme) { html.setAttribute('data-theme', theme); localStorage.setItem('theme', theme); }
     const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     updateTheme(savedTheme);
-
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = html.getAttribute('data-theme');
-      updateTheme(currentTheme === 'dark' ? 'light' : 'dark');
-    });
-
-    // PWA Install Logic
+    themeToggle.addEventListener('click', () => { const currentTheme = html.getAttribute('data-theme'); updateTheme(currentTheme === 'dark' ? 'light' : 'dark'); });
+    
     let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      const installBtn = document.getElementById('pwaInstallBtn');
-      if (installBtn) installBtn.style.display = 'block';
-    });
-
-    async function installApp() {
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      deferredPrompt = null;
-      const installBtn = document.getElementById('pwaInstallBtn');
-      if (installBtn) installBtn.style.display = 'none';
-    }
+    window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; const installBtn = document.getElementById('pwaInstallBtn'); if (installBtn) installBtn.style.display = 'block'; });
+    async function installApp() { if (!deferredPrompt) return; deferredPrompt.prompt(); const { outcome } = await deferredPrompt.userChoice; deferredPrompt = null; const installBtn = document.getElementById('pwaInstallBtn'); if (installBtn) installBtn.style.display = 'none'; }
   </script>
 </body>
 </html>
