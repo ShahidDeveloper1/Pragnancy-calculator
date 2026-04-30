@@ -2195,10 +2195,9 @@ async function searchByAddress() {
   try {
     const geoRes = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&limit=1`);
     const geoData = await geoRes.json();
+    
     if (!geoData || geoData.length === 0) throw new Error('Address not found.');
-
-    const { lat, lon } = geoData[0];
-    userLocation = { lat: parseFloat(lat), lng: parseFloat(lon) };
+    userLocation = { lat: parseFloat(geoData[0].lat), lng: parseFloat(geoData[0].lon) };
     await fetchDoctors(userLocation.lat, userLocation.lng);
   } catch (error) {
     if (statusMsg) {
