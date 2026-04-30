@@ -15,11 +15,21 @@ if (!fs.existsSync(OUT)) fs.mkdirSync(OUT, { recursive: true });
 function trimesterName(t) { return ['', 'First', 'Second', 'Third'][t]; }
 
 // ====== PAGE TEMPLATE ======
-function pageHTML({ title, metaDesc, canonical, h1, breadcrumbs, content, prev, next, relatedLinks }) {
+function pageHTML({ title, metaDesc, canonical, h1, breadcrumbs, content, faqs, ogImage, prev, next, relatedLinks }) {
   const bcSchema = JSON.stringify({
     "@context": "https://schema.org", "@type": "BreadcrumbList",
     "itemListElement": breadcrumbs.map((b, i) => ({ "@type": "ListItem", "position": i + 1, "name": b.name, "item": b.url }))
   });
+
+  const faqSchema = faqs ? JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(f => ({
+      "@type": "Question",
+      "name": f.q,
+      "acceptedAnswer": { "@type": "Answer", "text": f.a }
+    }))
+  }) : null;
 
   return `<!DOCTYPE html>
 <html lang="en" data-theme="light">
@@ -33,13 +43,16 @@ function pageHTML({ title, metaDesc, canonical, h1, breadcrumbs, content, prev, 
   <meta property="og:type" content="article"/>
   <meta property="og:title" content="${title}"/>
   <meta property="og:description" content="${metaDesc}"/>
+  <meta property="og:image" content="${ogImage || 'https://momcalc.com/icon.png'}"/>
   <meta property="og:url" content="${canonical}"/>
   <meta property="og:site_name" content="MomCalc"/>
-  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="${title}"/>
   <meta name="twitter:description" content="${metaDesc}"/>
+  <meta name="twitter:image" content="${ogImage || 'https://momcalc.com/icon.png'}"/>
   <meta name="google-site-verification" content="DlAoAxaOvkuDMmt4IeiWcqU0Poup27ppp9dc3fjlIQo" />
   <script type="application/ld+json">${bcSchema}</script>
+  ${faqSchema ? `<script type="application/ld+json">${faqSchema}</script>` : ''}
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet"/>
@@ -452,6 +465,17 @@ weekData.forEach((w, i) => {
     </div>
   `;
 
+  const faqs = [
+    { q: `How large is the baby at ${w.week} weeks?`, a: `Your baby is roughly the size of a ${w.size}, measuring about ${w.length} and weighing around ${w.weight}.` },
+    { q: `Which trimester is week ${w.week}?`, a: `Week ${w.week} is part of your ${trimesterName(w.trimester)} Trimester.` }
+  ];
+
+  let ogImage = 'https://momcalc.com/images/stage1.png';
+  if (w.week >= 32) ogImage = 'https://momcalc.com/images/stage5.png';
+  else if (w.week >= 24) ogImage = 'https://momcalc.com/images/stage4.png';
+  else if (w.week >= 16) ogImage = 'https://momcalc.com/images/stage3.png';
+  else if (w.week >= 8)  ogImage = 'https://momcalc.com/images/stage2.png';
+
   const html = pageHTML({
     title: `Week ${w.week} Pregnancy Guide: ${w.title} | MomCalc`,
     metaDesc: `Learn about Week ${w.week} of pregnancy. Your baby is the size of a ${w.size}. Discover development milestones, symptoms, and health tips.`,
@@ -461,6 +485,8 @@ weekData.forEach((w, i) => {
       { name: 'Home', url: '/' }, { name: 'Guides', url: '/pages/' }, { name: `Week ${w.week}`, url: `/pages/${slug}.html` }
     ],
     content,
+    faqs,
+    ogImage,
     prev: prevW ? { url: `pregnancy-week-${prevW.week}.html`, label: `Week ${prevW.week}` } : null,
     next: nextW ? { url: `pregnancy-week-${nextW.week}.html`, label: `Week ${nextW.week}` } : null,
     relatedLinks
@@ -509,6 +535,10 @@ foodData.forEach(f => {
     </div>
   `;
 
+  const faqs = [
+    { q: `Can I eat ${f.food} while pregnant?`, a: `${f.safe ? `Yes, ${f.food} is generally safe when prepared correctly.` : `${f.food} is typically avoided or restricted during pregnancy.`} ${f.answer}` }
+  ];
+
   const html = pageHTML({
     title: `${f.title} | Pregnancy Food Safety Guide`,
     metaDesc: `Wondering if you can eat ${f.food} during pregnancy? Read our expert safety guide and nutritional advice.`,
@@ -518,6 +548,7 @@ foodData.forEach(f => {
       { name: 'Home', url: '/' }, { name: 'Food Safety', url: '/pages/' }, { name: f.food, url: `/pages/${slug}.html` }
     ],
     content,
+    faqs,
     prev: null, next: null,
     relatedLinks
   });
@@ -561,6 +592,8 @@ const indexHTML = pageHTML({
       </div>
     </div>
   `,
+  faqs: null,
+  ogImage: 'https://momcalc.com/icon.png',
   prev: null, next: null,
   relatedLinks: ''
 });
