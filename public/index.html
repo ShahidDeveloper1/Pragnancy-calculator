@@ -54,7 +54,7 @@
       },
     }
   </script>
-  <link rel="stylesheet" href="style.css?v=4" />
+  <link rel="stylesheet" href="style.css?v=15" />
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#6C3BE4" />
   <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3209/3209121.png" />
@@ -721,7 +721,64 @@
         </div>
       </div>
 
-      <!-- Doctor Finder Removed -->
+              <!-- Doctor Finder -->
+        <div class="tab-panel" id="panel-doctors">
+          <div class="section-header mb-16">
+            <h2 class="section-heading">🩺 <span>Find a Doctor</span></h2>
+            <p class="section-sub">Locate top-rated maternity clinics and obstetricians near you.</p>
+          </div>
+
+          <div class="doctor-search-container">
+            <div class="doctor-search-box">
+              <input type="text" id="addressSearch" placeholder="Enter city, zip, or full address..." onkeypress="if(event.key==='Enter') searchByAddress()">
+              <button class="nav-cta" id="addressSearchBtn" onclick="searchByAddress()">🔍 Search</button>
+            </div>
+            
+            <div class="doctor-filters">
+              <button class="secondary-btn" id="locateBtn" onclick="detectLocation()">📡 Detect My Location</button>
+              <div class="filter-group">
+                <label>Distance:</label>
+                <select id="docFilterDistance" class="select-field" style="padding: 8px 32px 8px 12px; font-size: 0.85rem;" onchange="applyDoctorFilters()">
+                  <option value="5000">Within 5 km</option>
+                  <option value="10000" selected>Within 10 km</option>
+                  <option value="25000">Within 25 km</option>
+                  <option value="50000">Within 50 km</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label>Rating:</label>
+                <select id="docFilterRating" class="select-field" style="padding: 8px 32px 8px 12px; font-size: 0.85rem;" onchange="applyDoctorFilters()">
+                  <option value="0">All Ratings</option>
+                  <option value="4">4.0+ Stars</option>
+                  <option value="4.5">4.5+ Stars</option>
+                </select>
+              </div>
+              <div class="filter-group" style="margin-left: auto;">
+                <label class="switch-ui">
+                  <input type="checkbox" id="showSavedOnly" onchange="applyDoctorFilters()">
+                  <span class="slider-ui"></span>
+                </label>
+                <span style="font-size: 0.85rem; font-weight: 600;">Show Saved ❤️</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="doctorStatusMsg" style="text-align:center; margin-bottom:16px; font-weight:600; display:none;"></div>
+          
+          <div id="doctorsMap" class="doctors-map" style="display:none;"></div>
+
+          <div id="doctorAiRecommendation" class="api-key-row" style="display:none; margin-bottom:24px; font-size:0.9rem; border-left:4px solid var(--lavender);">
+            <!-- AI Recommendation injected here -->
+          </div>
+
+          <div id="doctorsGrid" class="doctors-grid">
+            <div style="text-align:center; padding:40px; color:var(--text-muted);">
+              <div style="font-size:3rem; margin-bottom:16px;">🏥</div>
+              <p>Search above to find healthcare providers in your area.</p>
+            </div>
+          </div>
+        </div>
+
     </div><!-- /tab-panels-container -->
 
     <!-- Results Banner -->

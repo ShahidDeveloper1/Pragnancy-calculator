@@ -1760,7 +1760,7 @@ function toApiDate(dateObj) {
 // ── Call trimester-calculator endpoint ───────────────────────
 async function callTrimesterAPI(lmpDateObj) {
   if (!_apiKey) {
-    setApiStatus('error', '⚠️ No API key — showing local calculations only');
+    setApiStatus('ready', '✨ Local calculation mode active');
     return null;
   }
 
@@ -2597,5 +2597,12 @@ window.saveApiKey = saveApiKey;
 window.applyTheme = applyTheme;
 window.i18n = i18n;
 window.state = state;
+window.searchByAddress = searchByAddress;
+window.detectLocation = detectLocation;
+window.applyDoctorFilters = applyDoctorFilters;
+window.toggleSaveDoctor = toggleSaveDoctor;
+window.calculate = calculate;
+window.calcFertility = calcFertility;
+window.navigateToFeature = navigateToFeature;
 
 
