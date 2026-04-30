@@ -23,7 +23,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../style.css?v=12"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="../../style.css?v=13"/>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤰</text></svg>"/>
   <style>
     body { background: var(--bg-primary); color: var(--text-primary); font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; }
@@ -49,9 +50,15 @@
     .seo-links a:hover { border-color: var(--indigo-light); background: var(--bg-card-hover); color: var(--indigo-light); transform: translateY(-2px); }
     .cta-banner { background: var(--gradient-primary); border-radius: var(--radius-2xl); padding: 60px 40px; text-align: center; margin-top: 80px; box-shadow: var(--shadow-glow); }
     .cta-btn { background: white; color: var(--indigo); padding: 16px 32px; border-radius: var(--radius-full); font-weight: 800; text-decoration: none; display: inline-block; transition: var(--transition); font-family: var(--font-display); }
+    .loader { width: 48px; height: 48px; border: 5px solid var(--bg-secondary); border-bottom-color: var(--indigo-light); border-radius: 50%; display: inline-block; box-sizing: border-box; animation: rotation 1s linear infinite; }
+    @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
   </style>
 </head>
 <body data-theme="light">
+  <script>window.state = { savedDoctors: [], currentWeek: 20 };</script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="../../app.js?v=13"></script>
+
   <nav class="navbar" role="navigation">
     <a href="/" class="nav-brand">
       <div class="nav-logo">🤰</div>
@@ -166,10 +173,6 @@
     const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     updateTheme(savedTheme);
     themeToggle.addEventListener('click', () => { const currentTheme = html.getAttribute('data-theme'); updateTheme(currentTheme === 'dark' ? 'light' : 'dark'); });
-    
-    let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; const installBtn = document.getElementById('pwaInstallBtn'); if (installBtn) installBtn.style.display = 'block'; });
-    async function installApp() { if (!deferredPrompt) return; deferredPrompt.prompt(); const { outcome } = await deferredPrompt.userChoice; deferredPrompt = null; const installBtn = document.getElementById('pwaInstallBtn'); if (installBtn) installBtn.style.display = 'none'; }
   </script>
 </body>
 </html>
