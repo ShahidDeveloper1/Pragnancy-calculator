@@ -1001,7 +1001,11 @@ function showValidationError(id) {
 
 // ====== CALCULATION METHOD SWITCHER ======
 function switchMethod(method) {
-  state.activeMethod = method;
+  state.calcMethod = method;
+  saveState();
+  if (typeof gtag === 'function') {
+    gtag('event', 'switch_method', { method: method });
+  }
   document.querySelectorAll('.method-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.method-content').forEach(c => { c.classList.remove('active'); c.style.display = 'none'; });
   document.getElementById(`tab-${method}`).classList.add('active');
@@ -1363,12 +1367,17 @@ function buildTimeline(lmpDate, currentWeek) {
 
 // ====== KICK COUNTER ======
 function recordKick() {
+  const now = new Date();
   if (!state.kickSessionStart) {
     state.kickSessionStart = Date.now();
     startKickTimer();
   }
   state.kickCount++;
   state.kickSession = (state.kickSession || 0) + 1;
+  saveState();
+  if (typeof gtag === 'function') {
+    gtag('event', 'record_kick', { timestamp: now.toISOString() });
+  }
   document.getElementById('kickCount').textContent = state.kickCount;
   document.getElementById('kickSession').textContent = state.kickSession;
 
@@ -1501,6 +1510,10 @@ function addWeight() {
   const val = parseFloat(el.value);
   if (!val || val < 30 || val > 250) { alert('Please enter a valid weight (30–250 kg)'); return; }
   state.weightLog.push({ date: new Date().toLocaleDateString(), val });
+  saveState();
+  if (typeof gtag === 'function') {
+    gtag('event', 'add_weight', { weight: val });
+  }
   el.value = '';
   renderWeightChart();
   saveState();
@@ -1658,6 +1671,12 @@ function saveSymptoms() {
 
 // ====== INIT ======
 document.addEventListener('DOMContentLoaded', () => {
+  // PWA Install listener
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    window.deferredPrompt = e;
+  });
+
   // Set today as default date for all inputs (pre-fill so fields aren't empty)
   const today = new Date().toISOString().split('T')[0];
   ['lmpDate','conceptionDate','ivfDate','ultrasoundDate','fertLmpDate'].forEach(id => {
@@ -1890,6 +1909,16 @@ function renderApiLivePanel(apiData, lmpDateObj) {
 
 // ── Async calculate() replaces the local-only version ────────
 async function calculate() {
+  const btn = document.getElementById('calcBtn');
+  if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = '<span class="loader"></span> Calculating...';
+  }
+
+  if (typeof gtag === 'function') {
+    gtag('event', 'calculate_due_date', { method: state.calcMethod });
+  }
+
   const overlay = document.getElementById('loadingOverlay');
   overlay.classList.add('show');
 
@@ -2522,6 +2551,27 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+// ====== PWA INSTALL LOGIC ======
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  const installBtn = document.getElementById('pwaInstallBtn');
+  if (installBtn) installBtn.style.display = 'block';
 });
+
+async function installApp() {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  if (outcome === 'accepted') {
+    if (typeof gtag === 'function') gtag('event', 'pwa_install_accepted');
+  }
+  deferredPrompt = null;
+  const installBtn = document.getElementById('pwaInstallBtn');
+  if (installBtn) installBtn.style.display = 'none';
+}
+
+window.installApp = installApp;
 
 

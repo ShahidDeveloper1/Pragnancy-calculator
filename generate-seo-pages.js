@@ -283,6 +283,7 @@ function pageHTML({ title, metaDesc, canonical, h1, breadcrumbs, content, prev, 
     </a>
 
     <div class="nav-actions">
+      <button class="install-btn" id="pwaInstallBtn" onclick="installApp()" style="display:none;" aria-label="Install App">📥 Install App</button>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
         <div class="theme-toggle-knob"></div>
       </button>
@@ -345,6 +346,24 @@ function pageHTML({ title, metaDesc, canonical, h1, breadcrumbs, content, prev, 
       const currentTheme = html.getAttribute('data-theme');
       updateTheme(currentTheme === 'dark' ? 'light' : 'dark');
     });
+
+    // PWA Install Logic
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      const installBtn = document.getElementById('pwaInstallBtn');
+      if (installBtn) installBtn.style.display = 'block';
+    });
+
+    async function installApp() {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      const installBtn = document.getElementById('pwaInstallBtn');
+      if (installBtn) installBtn.style.display = 'none';
+    }
   </script>
 </body>
 </html>`;

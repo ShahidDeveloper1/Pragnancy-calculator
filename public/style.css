@@ -1964,6 +1964,31 @@ input:checked + .slider-ui:before {
 .lang-switcher {
   position: relative;
 }
+.install-btn {
+  background: var(--gradient-primary);
+  color: white;
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-md);
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.install-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  filter: brightness(1.1);
+}
+
 .lang-btn {
   background: rgba(108, 59, 228, 0.08);
   border: 1px solid rgba(108, 59, 228, 0.15);

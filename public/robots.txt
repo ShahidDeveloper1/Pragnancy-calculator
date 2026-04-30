@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap Location
+Sitemap: https://momcalc.com/sitemap.xml
+
+# Host
+Host: https://momcalc.com
