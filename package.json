@@ -1,7 +1,7 @@
 {
-  "name": "mamacare-pro",
+  "name": "momcalc",
   "version": "3.0.0",
-  "description": "MamaCare Pro — #1 AI Pregnancy Calculator & Health Platform",
+  "description": "MomCalc — #1 AI Pregnancy Calculator & Health Platform",
   "private": true,
   "scripts": {
     "dev": "node local-dev-server.js",

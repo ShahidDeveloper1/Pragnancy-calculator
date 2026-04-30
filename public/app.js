@@ -1,5 +1,5 @@
 /* ============================================================
-   MamaCare Pro — Main Application Logic
+   MomCalc — Main Application Logic
    Complete 40-Week Pregnancy Data + All Trackers
    v2.0 — Baby Images, Countdown, Lbs/Inches, Screenings
    ============================================================ */
@@ -258,7 +258,7 @@ const fetalMeasurements = {
 // ====== MULTILINGUAL SYSTEM (i18n) ======
 const langDict = {
   en: {
-    nav_brand_title: "MamaCare Pro",
+    nav_brand_title: "MomCalc",
     nav_brand_sub: "Pregnancy Companion",
     nav_home: "Home",
     nav_dashboard: "Dashboard",
@@ -295,7 +295,7 @@ const langDict = {
     tab_trackers: "Trackers"
   },
   ms: {
-    nav_brand_title: "MamaCare Pro",
+    nav_brand_title: "MomCalc",
     nav_brand_sub: "Teman Kehamilan",
     nav_home: "Utama",
     nav_dashboard: "Papan Pemuka",
@@ -332,7 +332,7 @@ const langDict = {
     tab_trackers: "Penjejak"
   },
   zh: {
-    nav_brand_title: "MamaCare Pro",
+    nav_brand_title: "MomCalc",
     nav_brand_sub: "怀孕伴侣",
     nav_home: "首页",
     nav_dashboard: "仪表板",
@@ -369,7 +369,7 @@ const langDict = {
     tab_trackers: "追踪器"
   },
   es: {
-    nav_brand_title: "MamaCare Pro",
+    nav_brand_title: "MomCalc",
     nav_brand_sub: "Compañero de Embarazo",
     nav_home: "Inicio",
     nav_dashboard: "Panel",
@@ -443,7 +443,7 @@ const langDict = {
     tab_trackers: "تتبع"
   },
   fr: {
-    nav_brand_title: "MamaCare Pro",
+    nav_brand_title: "MomCalc",
     nav_brand_sub: "Compagnon de Grossesse",
     nav_home: "Accueil",
     nav_dashboard: "Tableau de Bord",
@@ -480,7 +480,7 @@ const langDict = {
     tab_trackers: "Suivis"
   },
   de: {
-    nav_brand_title: "MamaCare Pro",
+    nav_brand_title: "MomCalc",
     nav_brand_sub: "Schwangerschaftsbegleiter",
     nav_home: "Startseite",
     nav_dashboard: "Dashboard",
@@ -643,12 +643,10 @@ const screenings = [
 
 // ====== THEME TOGGLE ======
 const themeToggle = document.getElementById('themeToggle');
-const themeIcon   = document.getElementById('themeIcon');
 let isDark = localStorage.getItem('mcTheme') === 'dark';
 
 function applyTheme() {
   document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-  themeIcon.textContent = isDark ? '☀️' : '🌙';
   localStorage.setItem('mcTheme', isDark ? 'dark' : 'light');
 }
 themeToggle.addEventListener('click', () => { isDark = !isDark; applyTheme(); });

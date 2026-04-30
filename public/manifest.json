@@ -1,6 +1,6 @@
 {
-  "name": "MamaCare Pro",
-  "short_name": "MamaCare",
+  "name": "MomCalc",
+  "short_name": "MomCalc",
   "description": "Premium AI Pregnancy Calculator & Health Companion",
   "start_url": "./index.html",
   "display": "standalone",
