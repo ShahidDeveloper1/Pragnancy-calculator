@@ -716,76 +716,7 @@
         </div>
       </div>
 
-      <!-- ====== DOCTORS TAB ====== -->
-      <div class="tab-panel" id="panel-doctors">
-        <div class="section-heading">🩺 <span>Find a Doctor Nearby</span></div>
-        <p class="section-sub">Locate gynecologists, obstetricians, and women's clinics near you.</p>
-
-        <!-- Search and Filter Bar -->
-        <div class="doctor-search-container"
-          style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px;">
-          <div class="doctor-btn-row" style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <input type="text" class="input-field" id="addressSearch" placeholder="Enter city, zip, or address..."
-              style="flex: 1; min-width: 200px;">
-            <button class="calc-btn doctor-action-btn"
-              style="flex: 0 0 auto; width: auto; padding: 0 28px; font-size: 0.9rem;" onclick="searchByAddress()"
-              id="addressSearchBtn">🔍 Search</button>
-            <button class="calc-btn doctor-action-btn"
-              style="flex: 0 0 auto; width: auto; padding: 0 28px; font-size: 0.9rem; background: var(--gradient-rose); box-shadow: 0 4px 14px rgba(190,24,93,0.3);"
-              onclick="detectLocation()" id="locateBtn">📍 Locate Me</button>
-          </div>
-
-          <!-- Inline Filters -->
-          <div
-            style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between; padding: 12px; background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
-            <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
-              <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary);">Min Rating:</span>
-                <select id="docFilterRating" onchange="applyDoctorFilters()"
-                  style="padding: 4px 8px; border-radius: 8px; border: 1px solid var(--border-color); font-family: var(--font-body);">
-                  <option value="0">Any</option>
-                  <option value="3">3+ ⭐</option>
-                  <option value="4">4+ ⭐</option>
-                  <option value="4.5">4.5+ ⭐</option>
-                </select>
-              </div>
-              <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary);">Max Distance:</span>
-                <select id="docFilterDistance" onchange="applyDoctorFilters()"
-                  style="padding: 4px 8px; border-radius: 8px; border: 1px solid var(--border-color); font-family: var(--font-body);">
-                  <option value="100000">100 km</option>
-                  <option value="50000">50 km</option>
-                  <option value="20000">20 km</option>
-                  <option value="10000">10 km</option>
-                  <option value="5000">5 km</option>
-                </select>
-              </div>
-            </div>
-
-            <div
-              style="display: flex; align-items: center; gap: 8px; padding-left: 12px; border-left: 1px solid var(--border-color);">
-              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary);">Saved Only:</span>
-              <label class="switch-ui" style="position: relative; display: inline-block; width: 34px; height: 20px;">
-                <input type="checkbox" id="showSavedOnly" onchange="applyDoctorFilters()"
-                  style="opacity: 0; width: 0; height: 0;">
-                <span class="slider-ui"
-                  style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px;"></span>
-              </label>
-            </div>
-          </div>
-        </div>
-        <div id="doctorStatusMsg"
-          style="margin-bottom:16px; font-size:0.9rem; font-weight:600; display:none; padding:12px; border-radius:12px; background:var(--bg-secondary);">
-        </div>
-        <div id="doctorsMap"
-          style="height:350px; border-radius:var(--radius-lg); margin-bottom:24px; display:none; border:1px solid var(--border-color); z-index: 1;">
-        </div>
-        <div class="doctors-grid" id="doctorsGrid">
-          <div style="text-align:center;width:100%;font-size:0.9rem;color:var(--text-muted);padding:24px;">
-            Click "Locate Me" to find nearby specialists.
-          </div>
-        </div>
-      </div>
+      <!-- Doctor Finder Removed -->
     </div><!-- /tab-panels-container -->
 
     <!-- Results Banner -->

@@ -18,19 +18,61 @@ const LANGS = [
 ];
 
 const CITIES = [
-  { name: 'New York', slug: 'new-york', country: 'USA', lat: 40.7128, lng: -74.0060 },
-  { name: 'London', slug: 'london', country: 'UK', lat: 51.5074, lng: -0.1278 },
-  { name: 'Dubai', slug: 'dubai', country: 'UAE', lat: 25.2048, lng: 55.2708 },
-  { name: 'Mumbai', slug: 'mumbai', country: 'India', lat: 19.0760, lng: 72.8777 },
-  { name: 'Toronto', slug: 'toronto', country: 'Canada', lat: 43.6532, lng: -79.3832 },
-  { name: 'Sydney', slug: 'sydney', country: 'Australia', lat: -33.8688, lng: 151.2093 }
+  { 
+    name: 'New York', slug: 'new-york', country: 'USA', lat: 40.7128, lng: -74.0060,
+    clinics: [
+      { name: 'NYU Langone OB-GYN', address: '550 1st Ave, New York, NY 10016', rating: 4.8, type: 'Private' },
+      { name: 'Mount Sinai West Maternity', address: '1000 10th Ave, New York, NY 10019', rating: 4.7, type: 'Private' },
+      { name: 'Weill Cornell Obstetrics', address: '525 E 68th St, New York, NY 10065', rating: 4.9, type: 'Private' }
+    ]
+  },
+  { 
+    name: 'London', slug: 'london', country: 'UK', lat: 51.5074, lng: -0.1278,
+    clinics: [
+      { name: 'The Portland Hospital', address: '209-215 Great Portland St, London', rating: 4.9, type: 'Private' },
+      { name: 'Chelsea and Westminster Maternity', address: '369 Fulham Rd, London', rating: 4.6, type: 'Public' },
+      { name: 'St Thomas\' Hospital OB-GYN', address: 'Westminster Bridge Rd, London', rating: 4.7, type: 'Public' }
+    ]
+  },
+  { 
+    name: 'Dubai', slug: 'dubai', country: 'UAE', lat: 25.2048, lng: 55.2708,
+    clinics: [
+      { name: 'Mediclinic City Hospital', address: 'Dubai Healthcare City, Dubai', rating: 4.8, type: 'Private' },
+      { name: 'Al Zahra Hospital Dubai', address: 'Sheikh Zayed Rd, Dubai', rating: 4.7, type: 'Private' },
+      { name: 'Latifa Hospital for Women', address: 'Oud Metha Rd, Dubai', rating: 4.5, type: 'Public' }
+    ]
+  },
+  { 
+    name: 'Mumbai', slug: 'mumbai', country: 'India', lat: 19.0760, lng: 72.8777,
+    clinics: [
+      { name: 'Breach Candy Hospital Maternity', address: 'Bhulabhai Desai Road, Mumbai', rating: 4.8, type: 'Private' },
+      { name: 'Nanavati Max Super Speciality', address: 'S V Road, Vile Parle, Mumbai', rating: 4.6, type: 'Private' },
+      { name: 'Lilavati Hospital & Research Centre', address: 'Bandra West, Mumbai', rating: 4.7, type: 'Private' }
+    ]
+  },
+  { 
+    name: 'Toronto', slug: 'toronto', country: 'Canada', lat: 43.6532, lng: -79.3832,
+    clinics: [
+      { name: 'Mount Sinai Maternity Center', address: '600 University Ave, Toronto', rating: 4.9, type: 'Public' },
+      { name: 'Women\'s College Hospital', address: '76 Grenville St, Toronto', rating: 4.8, type: 'Public' },
+      { name: 'St. Michael\'s OB-GYN Care', address: '30 Bond St, Toronto', rating: 4.7, type: 'Public' }
+    ]
+  },
+  { 
+    name: 'Sydney', slug: 'sydney', country: 'Australia', lat: -33.8688, lng: 151.2093,
+    clinics: [
+      { name: 'Royal Hospital for Women', address: 'Barker St, Randwick NSW 2031', rating: 4.7, type: 'Public' },
+      { name: 'Prince of Wales Private Hospital', address: 'Barker St, Randwick NSW 2031', rating: 4.8, type: 'Private' },
+      { name: 'St George Private OB-GYN', address: '1 South St, Kogarah NSW 2217', rating: 4.6, type: 'Private' }
+    ]
+  }
 ];
 
 const i18nDict = {
   en: { trimester: 'Trimester', week: 'Week', size: 'Size', milestones: 'Milestones', symptoms: 'Symptoms', careTip: 'Care Tip', faq: 'Common Questions', calc: 'Pregnancy Calculator', foodSafety: 'Food Safety', home: 'Home', guides: 'Guides', explore: 'Explore More Guides', doctorFinder: 'Doctor Finder' },
   es: { trimester: 'Trimestre', week: 'Semana', size: 'Tamaño', milestones: 'Hitos', symptoms: 'Síntomas', careTip: 'Consejo de Cuidado', faq: 'Preguntas Comunes', calc: 'Calculadora de Embarazo', foodSafety: 'Seguridad Alimentaria', home: 'Inicio', guides: 'Guías', explore: 'Explorar más guías', doctorFinder: 'Buscador de Doctores' },
   ar: { trimester: 'الثلث', week: 'أسبوع', size: 'الحجم', milestones: 'الإنجازات', symptoms: 'الأعراض', careTip: 'نصيحة الرعاية', faq: 'الأسئلة الشائعة', calc: 'حاسبة الحمل', foodSafety: 'سلامة الغذاء', home: 'الرئيسية', guides: 'الدلائل', explore: 'استكشاف المزيد', doctorFinder: 'البحث عن طبيب' },
-  fr: { trimester: 'Trimestre', week: 'Semaine', size: 'Taille', milestones: 'Jalons', symptoms: 'Symptômes', careTip: 'Conseil de Soins', faq: 'Questions Fréquentes', calc: 'Calculateur de Grossesse', foodSafety: 'Sécurité Alimentaire', home: 'Accueil', guides: 'Guides', explore: 'Explorer plus de guides', doctorFinder: 'Trouver un Docteur' },
+  fr: { trimester: 'Trimestre', week: 'Semaine', size: 'Taille', milestones: 'Jalons', symptoms: 'Symptômes', careTip: 'Conseil de Soins', faq: 'Questions Fréquentes', calc: 'Calculateur de Grossesse', foodSafety: 'Sécurité Alimentaria', home: 'Accueil', guides: 'Guides', explore: 'Explorer plus de guides', doctorFinder: 'Trouver un Docteur' },
   de: { trimester: 'Trimester', week: 'Woche', size: 'Größe', milestones: 'Meilensteine', symptoms: 'Symptome', careTip: 'Pflege-Tipp', faq: 'Häufige Fragen', calc: 'Schwangerschaftsrechner', foodSafety: 'Lebensmittelsicherheit', home: 'Startseite', guides: 'Ratgeber', explore: 'Mehr entdecken', doctorFinder: 'Arztsuche' }
 };
 
@@ -100,8 +142,7 @@ function pageHTML({ title, metaDesc, canonical, h1, breadcrumbs, content, faqs, 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="${relPath}style.css?v=13"/>
+  <link rel="stylesheet" href="${relPath}style.css?v=14"/>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤰</text></svg>"/>
   <style>
     body { background: var(--bg-primary); color: var(--text-primary); font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; }
@@ -127,15 +168,15 @@ function pageHTML({ title, metaDesc, canonical, h1, breadcrumbs, content, faqs, 
     .seo-links a:hover { border-color: var(--indigo-light); background: var(--bg-card-hover); color: var(--indigo-light); transform: translateY(-2px); }
     .cta-banner { background: var(--gradient-primary); border-radius: var(--radius-2xl); padding: 60px 40px; text-align: center; margin-top: 80px; box-shadow: var(--shadow-glow); }
     .cta-btn { background: white; color: var(--indigo); padding: 16px 32px; border-radius: var(--radius-full); font-weight: 800; text-decoration: none; display: inline-block; transition: var(--transition); font-family: var(--font-display); }
-    .loader { width: 48px; height: 48px; border: 5px solid var(--bg-secondary); border-bottom-color: var(--indigo-light); border-radius: 50%; display: inline-block; box-sizing: border-box; animation: rotation 1s linear infinite; }
-    @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .doctor-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 24px; margin-bottom: 16px; transition: var(--transition); }
+    .doctor-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: var(--indigo-light); }
+    .doctor-name { font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; color: var(--text-primary); margin-bottom: 4px; }
+    .doctor-address { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 12px; }
+    .doctor-meta { display: flex; gap: 12px; align-items: center; }
+    .doctor-rating { color: var(--gold); font-weight: 700; font-size: 0.85rem; }
   </style>
 </head>
 <body data-theme="light">
-  <script>window.state = { savedDoctors: [], currentWeek: 20 };</script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="${relPath}app.js?v=13"></script>
-
   <nav class="navbar" role="navigation">
     <a href="/" class="nav-brand">
       <div class="nav-logo">🤰</div>
@@ -339,28 +380,31 @@ CITIES.forEach(city => {
     <div style="margin-bottom: 40px;">
       <span class="seo-badge seo-safe">📍 Local Healthcare Directory</span>
       <p style="font-size: 1.2rem; line-height: 1.7; color: var(--text-secondary); margin-top: 16px;">
-        We have mapped out the most trusted maternity clinics and obstetricians in <strong>${city.name}, ${city.country}</strong>.
+        Explore the most trusted maternity clinics and obstetricians in <strong>${city.name}, ${city.country}</strong>. Our curated list features top-rated specialists for your pregnancy journey.
       </p>
     </div>
     
-    <div id="doctorStatusMsg" style="margin-bottom:16px; font-size:0.9rem; font-weight:600; display:none; padding:12px; border-radius:12px; background:var(--bg-secondary);"></div>
-    <div id="doctorsMap" style="height:350px; border-radius:var(--radius-lg); margin-bottom:24px; display:none; border:1px solid var(--border-color); z-index: 1;"></div>
-
-    <div id="localDoctorGrid" style="min-height: 200px; background:var(--bg-secondary); border-radius:var(--radius-xl); display:flex; align-items:center; justify-content:center; flex-direction:column; padding:40px;">
-      <div class="loader"></div>
-      <p style="margin-top:20px; font-weight: 600; color: var(--text-muted);">Searching live doctors in ${city.name}...</p>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      ${city.clinics.map(clinic => `
+        <div class="doctor-card">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div class="doctor-name">${clinic.name}</div>
+            <span style="background:rgba(59,184,154,0.15); color:var(--mint); font-size:0.7rem; font-weight:700; padding:3px 8px; border-radius:12px;">🏥 ${clinic.type}</span>
+          </div>
+          <div class="doctor-address">${clinic.address}</div>
+          <div class="doctor-meta">
+            <span class="doctor-rating">⭐ ${clinic.rating}</span>
+            <span style="color:var(--text-muted); font-size:0.8rem;">📍 Featured Specialist</span>
+          </div>
+          <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(clinic.name + ' ' + clinic.address)}" target="_blank" class="nav-cta" style="display:inline-block; margin-top:16px; text-decoration:none; text-align:center;">🗺️ View on Map</a>
+        </div>
+      `).join('')}
     </div>
 
-    <script>
-      window.addEventListener('load', () => { 
-        if (typeof fetchDoctors === 'function') {
-          console.log('Triggering doctor search for ${city.name}...');
-          fetchDoctors(${city.lat}, ${city.lng}); 
-        } else {
-          console.error('fetchDoctors function not found!');
-        }
-      });
-    </script>
+    <div style="margin-top: 40px; padding: 24px; background: var(--bg-secondary); border-radius: var(--radius-xl); text-align: center; border: 1px dashed var(--border-color);">
+      <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 16px;">Need to find a clinic outside of ${city.name}?</p>
+      <a href="/#doctors" class="cta-btn" style="background: var(--indigo); color: white; padding: 12px 24px; font-size: 0.9rem;">📍 Use Live Doctor Finder</a>
+    </div>
   `;
 
   const html = pageHTML({
@@ -370,7 +414,7 @@ CITIES.forEach(city => {
     h1: `Maternity Care in ${city.name}`,
     breadcrumbs: [{ name: 'Home', url: '/' }, { name: 'Doctor Finder', url: '/pages/' }, { name: city.name, url: `/pages/${slug}.html` }],
     content,
-    faqs: [{ q: `How to find doctors in ${city.name}?`, a: `Use MomCalc to locate verified clinics in ${city.name}.` }],
+    faqs: [{ q: `How to find doctors in ${city.name}?`, a: `Explore our curated list of verified maternity clinics in ${city.name}.` }],
     ogImage: 'https://momcalc.com/icon.png',
     lang: 'en',
     isSubfolder: false

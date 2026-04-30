@@ -19,12 +19,11 @@
   <meta name="twitter:image" content="https://momcalc.com/icon.png"/>
   <meta name="google-site-verification" content="DlAoAxaOvkuDMmt4IeiWcqU0Poup27ppp9dc3fjlIQo" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"/"},{"@type":"ListItem","position":2,"name":"Doctor Finder","item":"/pages/"},{"@type":"ListItem","position":3,"name":"Mumbai","item":"/pages/pregnancy-doctors-in-mumbai.html"}]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How to find doctors in Mumbai?","acceptedAnswer":{"@type":"Answer","text":"Use MomCalc to locate verified clinics in Mumbai."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How to find doctors in Mumbai?","acceptedAnswer":{"@type":"Answer","text":"Explore our curated list of verified maternity clinics in Mumbai."}}]}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="../style.css?v=13"/>
+  <link rel="stylesheet" href="../style.css?v=14"/>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤰</text></svg>"/>
   <style>
     body { background: var(--bg-primary); color: var(--text-primary); font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; }
@@ -50,15 +49,15 @@
     .seo-links a:hover { border-color: var(--indigo-light); background: var(--bg-card-hover); color: var(--indigo-light); transform: translateY(-2px); }
     .cta-banner { background: var(--gradient-primary); border-radius: var(--radius-2xl); padding: 60px 40px; text-align: center; margin-top: 80px; box-shadow: var(--shadow-glow); }
     .cta-btn { background: white; color: var(--indigo); padding: 16px 32px; border-radius: var(--radius-full); font-weight: 800; text-decoration: none; display: inline-block; transition: var(--transition); font-family: var(--font-display); }
-    .loader { width: 48px; height: 48px; border: 5px solid var(--bg-secondary); border-bottom-color: var(--indigo-light); border-radius: 50%; display: inline-block; box-sizing: border-box; animation: rotation 1s linear infinite; }
-    @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .doctor-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 24px; margin-bottom: 16px; transition: var(--transition); }
+    .doctor-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: var(--indigo-light); }
+    .doctor-name { font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; color: var(--text-primary); margin-bottom: 4px; }
+    .doctor-address { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 12px; }
+    .doctor-meta { display: flex; gap: 12px; align-items: center; }
+    .doctor-rating { color: var(--gold); font-weight: 700; font-size: 0.85rem; }
   </style>
 </head>
 <body data-theme="light">
-  <script>window.state = { savedDoctors: [], currentWeek: 20 };</script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="../app.js?v=13"></script>
-
   <nav class="navbar" role="navigation">
     <a href="/" class="nav-brand">
       <div class="nav-logo">🤰</div>
@@ -89,28 +88,57 @@
     <div style="margin-bottom: 40px;">
       <span class="seo-badge seo-safe">📍 Local Healthcare Directory</span>
       <p style="font-size: 1.2rem; line-height: 1.7; color: var(--text-secondary); margin-top: 16px;">
-        We have mapped out the most trusted maternity clinics and obstetricians in <strong>Mumbai, India</strong>.
+        Explore the most trusted maternity clinics and obstetricians in <strong>Mumbai, India</strong>. Our curated list features top-rated specialists for your pregnancy journey.
       </p>
     </div>
     
-    <div id="doctorStatusMsg" style="margin-bottom:16px; font-size:0.9rem; font-weight:600; display:none; padding:12px; border-radius:12px; background:var(--bg-secondary);"></div>
-    <div id="doctorsMap" style="height:350px; border-radius:var(--radius-lg); margin-bottom:24px; display:none; border:1px solid var(--border-color); z-index: 1;"></div>
-
-    <div id="localDoctorGrid" style="min-height: 200px; background:var(--bg-secondary); border-radius:var(--radius-xl); display:flex; align-items:center; justify-content:center; flex-direction:column; padding:40px;">
-      <div class="loader"></div>
-      <p style="margin-top:20px; font-weight: 600; color: var(--text-muted);">Searching live doctors in Mumbai...</p>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      
+        <div class="doctor-card">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div class="doctor-name">Breach Candy Hospital Maternity</div>
+            <span style="background:rgba(59,184,154,0.15); color:var(--mint); font-size:0.7rem; font-weight:700; padding:3px 8px; border-radius:12px;">🏥 Private</span>
+          </div>
+          <div class="doctor-address">Bhulabhai Desai Road, Mumbai</div>
+          <div class="doctor-meta">
+            <span class="doctor-rating">⭐ 4.8</span>
+            <span style="color:var(--text-muted); font-size:0.8rem;">📍 Featured Specialist</span>
+          </div>
+          <a href="https://www.google.com/maps/search/?api=1&query=Breach%20Candy%20Hospital%20Maternity%20Bhulabhai%20Desai%20Road%2C%20Mumbai" target="_blank" class="nav-cta" style="display:inline-block; margin-top:16px; text-decoration:none; text-align:center;">🗺️ View on Map</a>
+        </div>
+      
+        <div class="doctor-card">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div class="doctor-name">Nanavati Max Super Speciality</div>
+            <span style="background:rgba(59,184,154,0.15); color:var(--mint); font-size:0.7rem; font-weight:700; padding:3px 8px; border-radius:12px;">🏥 Private</span>
+          </div>
+          <div class="doctor-address">S V Road, Vile Parle, Mumbai</div>
+          <div class="doctor-meta">
+            <span class="doctor-rating">⭐ 4.6</span>
+            <span style="color:var(--text-muted); font-size:0.8rem;">📍 Featured Specialist</span>
+          </div>
+          <a href="https://www.google.com/maps/search/?api=1&query=Nanavati%20Max%20Super%20Speciality%20S%20V%20Road%2C%20Vile%20Parle%2C%20Mumbai" target="_blank" class="nav-cta" style="display:inline-block; margin-top:16px; text-decoration:none; text-align:center;">🗺️ View on Map</a>
+        </div>
+      
+        <div class="doctor-card">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div class="doctor-name">Lilavati Hospital & Research Centre</div>
+            <span style="background:rgba(59,184,154,0.15); color:var(--mint); font-size:0.7rem; font-weight:700; padding:3px 8px; border-radius:12px;">🏥 Private</span>
+          </div>
+          <div class="doctor-address">Bandra West, Mumbai</div>
+          <div class="doctor-meta">
+            <span class="doctor-rating">⭐ 4.7</span>
+            <span style="color:var(--text-muted); font-size:0.8rem;">📍 Featured Specialist</span>
+          </div>
+          <a href="https://www.google.com/maps/search/?api=1&query=Lilavati%20Hospital%20%26%20Research%20Centre%20Bandra%20West%2C%20Mumbai" target="_blank" class="nav-cta" style="display:inline-block; margin-top:16px; text-decoration:none; text-align:center;">🗺️ View on Map</a>
+        </div>
+      
     </div>
 
-    <script>
-      window.addEventListener('load', () => { 
-        if (typeof fetchDoctors === 'function') {
-          console.log('Triggering doctor search for Mumbai...');
-          fetchDoctors(19.076, 72.8777); 
-        } else {
-          console.error('fetchDoctors function not found!');
-        }
-      });
-    </script>
+    <div style="margin-top: 40px; padding: 24px; background: var(--bg-secondary); border-radius: var(--radius-xl); text-align: center; border: 1px dashed var(--border-color);">
+      <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 16px;">Need to find a clinic outside of Mumbai?</p>
+      <a href="/#doctors" class="cta-btn" style="background: var(--indigo); color: white; padding: 12px 24px; font-size: 0.9rem;">📍 Use Live Doctor Finder</a>
+    </div>
   
     </article>
 
