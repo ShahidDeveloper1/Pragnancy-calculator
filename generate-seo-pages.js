@@ -252,10 +252,16 @@ function pageHTML({ title, metaDesc, canonical, h1, breadcrumbs, content, prev, 
     .cta-btn:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.2); }
 
     @media (max-width: 768px) {
-      .navbar { height: auto; padding: 15px 5%; flex-wrap: wrap; justify-content: center; text-align: center; gap: 12px; }
+      .navbar { 
+        height: auto; 
+        padding: 16px; 
+        flex-direction: column;
+        gap: 12px;
+        text-align: center; 
+      }
       .nav-brand { width: 100%; justify-content: center; }
-      .nav-actions { width: 100%; justify-content: center; gap: 20px; }
-      .seo-container { padding-top: 180px; padding-bottom: 60px; }
+      .nav-actions { width: 100%; justify-content: center; gap: 12px; flex-wrap: wrap; }
+      .seo-container { padding-top: 160px; padding-bottom: 60px; }
       .article-title { font-size: 2rem; }
       .content-card { padding: 32px 20px; }
       .seo-grid { grid-template-columns: 1fr; gap: 16px; }
