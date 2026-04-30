@@ -38,6 +38,7 @@ function pageHTML({ title, metaDesc, canonical, h1, breadcrumbs, content, prev, 
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:title" content="${title}"/>
   <meta name="twitter:description" content="${metaDesc}"/>
+  <meta name="google-site-verification" content="DlAoAxaOvkuDMmt4IeiWcqU0Poup27ppp9dc3fjlIQo" />
   <script type="application/ld+json">${bcSchema}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
