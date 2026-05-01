@@ -520,6 +520,7 @@ fs.writeFileSync(path.join(OUT, 'index.html'), indexHTML);
 // ====== GENERATE SITEMAP ======
 console.log('📄 Generating sitemap...');
 let sEntries = `  <url><loc>${SITE}/</loc><priority>1.0</priority></url>\n`;
+sEntries += `  <url><loc>${SITE}/pages/</loc><priority>0.9</priority></url>\n`;
 LANGS.forEach(l => {
   const p = l.dir ? l.dir + '/' : '';
   weekData.forEach(w => sEntries += `  <url><loc>${SITE}/pages/${p}pregnancy-week-${w.week}.html</loc><priority>0.8</priority></url>\n`);
