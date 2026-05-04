@@ -16,9 +16,9 @@
   --border-color:  rgba(99, 102, 241, 0.10);
   --border-card:   rgba(99, 102, 241, 0.07);
 
-  --text-primary:   #0F0D1A;
-  --text-secondary: #3F3D56;
-  --text-muted:     #6E6B85;
+  --text-primary:   #000000;
+  --text-secondary: #000000;
+  --text-muted:     #000000;
   --text-accent:    #6366F1;
 
   /* Brand Colors — Refined */
@@ -2572,19 +2572,19 @@ input:checked + .slider-ui:before {
 
 /* ====== FOOTER (SaaS Premium) ====== */
 .saas-footer {
-  background: #0B0F19; /* Premium dark SaaS background */
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: #FFFFFF;
+  border-top: 1px solid var(--border-color);
   padding: 80px 40px 40px;
   position: relative;
   overflow: hidden;
-  color: #8A94A6; /* Soft muted text for dark bg */
+  color: #000000;
 }
 .saas-footer::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(108, 59, 228, 0.5), transparent);
+  background: linear-gradient(90deg, transparent, rgba(108, 59, 228, 0.2), transparent);
 }
 .saas-footer-grid {
   max-width: 1200px;
@@ -2602,27 +2602,29 @@ input:checked + .slider-ui:before {
   font-family: var(--font-display);
   font-size: 1.1rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: #000000;
   margin-bottom: 8px;
 }
 .saas-footer-col a {
-  color: #8A94A6;
+  color: #000000;
   text-decoration: none;
   font-size: 0.95rem;
   transition: all 0.2s ease;
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  opacity: 0.8;
 }
 .saas-footer-col a:hover {
-  color: #FFFFFF;
+  color: var(--indigo);
+  opacity: 1;
   transform: translateX(4px);
 }
 .saas-footer-brand {
   font-family: var(--font-display);
   font-size: 1.8rem;
   font-weight: 800;
-  color: #FFFFFF;
+  color: #000000;
   margin-bottom: 12px;
 }
 .saas-footer-brand span {
@@ -2634,12 +2636,13 @@ input:checked + .slider-ui:before {
   max-width: 1200px;
   margin: 60px auto 0;
   padding-top: 32px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--border-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #64748B;
+  color: #000000;
   font-size: 0.9rem;
+  opacity: 0.8;
 }
 @media (max-width: 768px) {
   .saas-footer-grid {
