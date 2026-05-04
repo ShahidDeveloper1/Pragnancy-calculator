@@ -2570,4 +2570,170 @@ input:checked + .slider-ui:before {
   .fert-result-grid { grid-template-columns: 1fr; }
 }
 
+/* ====== FOOTER (SaaS Premium) ====== */
+.saas-footer {
+  background: #0B0F19; /* Premium dark SaaS background */
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 80px 40px 40px;
+  position: relative;
+  overflow: hidden;
+  color: #8A94A6; /* Soft muted text for dark bg */
+}
+.saas-footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(108, 59, 228, 0.5), transparent);
+}
+.saas-footer-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+}
+.saas-footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.saas-footer-col h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 8px;
+}
+.saas-footer-col a {
+  color: #8A94A6;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.saas-footer-col a:hover {
+  color: #FFFFFF;
+  transform: translateX(4px);
+}
+.saas-footer-brand {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 12px;
+}
+.saas-footer-brand span {
+  background: linear-gradient(135deg, #A78BFA 0%, #EC4899 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.saas-footer-bottom {
+  max-width: 1200px;
+  margin: 60px auto 0;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #64748B;
+  font-size: 0.9rem;
+}
+@media (max-width: 768px) {
+  .saas-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .saas-footer-bottom {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+}
+
+/* ====== LANGUAGE DROPDOWN ====== */
+.lang-dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+.lang-dropdown-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+.lang-dropdown-btn:hover {
+  border-color: var(--indigo-light);
+  box-shadow: var(--shadow-md);
+}
+.lang-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  padding: 8px;
+  width: 200px;
+  max-height: 400px;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: var(--transition);
+  z-index: 1001;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+}
+.lang-dropdown-container:hover .lang-dropdown-menu,
+.lang-dropdown-container:focus-within .lang-dropdown-menu,
+.lang-dropdown-menu.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.lang-dropdown-item {
+  padding: 8px 12px;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.lang-dropdown-item:hover, .lang-dropdown-item.active {
+  background: var(--bg-secondary);
+  color: var(--indigo-light);
+  font-weight: 600;
+}
+
+/* Enforce black paragraph text in light mode */
+:root p, :root .footer-disc, :root .calc-subtitle {
+  color: #000000;
+}
+[data-theme="dark"] p, [data-theme="dark"] .footer-disc, [data-theme="dark"] .calc-subtitle {
+  color: var(--text-secondary);
+}
+
 
