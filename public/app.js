@@ -519,7 +519,7 @@ const langDict = {
 };
 
 const i18n = {
-  currentLang: localStorage.getItem('mamaCareLang') || (['ms','zh','es','fr','de','ar'].includes(navigator.language.slice(0,2)) ? navigator.language.slice(0,2) : 'en'),
+  currentLang: localStorage.getItem('mamaCareLang') || (['en','es','zh','hi','ar','bn','pt','ru','ja','fr','de','ko','tr','it','vi','mr'].includes(navigator.language.slice(0,2)) ? navigator.language.slice(0,2) : 'en'),
   rtlLangs: ['ar'],
   cache: JSON.parse(localStorage.getItem('mamaCareTranslationCache') || '{}'),
 
@@ -536,27 +536,25 @@ const i18n = {
     const label = document.getElementById('currentLangLabel');
     if (label) {
       const labels = {
-        en: 'English',
-        zh: '中文',
-        es: 'Español',
-        ar: 'العربية',
-        fr: 'Français',
-        de: 'Deutsch',
-        ms: 'Bahasa Melayu'
+        en: 'English', es: 'Español', zh: '中文', hi: 'हिन्दी',
+        ar: 'العربية', bn: 'বাংলা', pt: 'Português', ru: 'Русский',
+        ja: '日本語', fr: 'Français', de: 'Deutsch', ko: '한국어',
+        tr: 'Türkçe', it: 'Italiano', vi: 'Tiếng Việt', mr: 'मराठी'
       };
       label.textContent = labels[this.currentLang] || 'English';
     }
   },
 
-  applyStaticTranslations() {
-    const dict = langDict[this.currentLang] || langDict.en;
-    document.querySelectorAll('[data-i18n]').forEach(el => {
+  async applyStaticTranslations() {
+    document.querySelectorAll('[data-i18n]').forEach(async (el) => {
       const key = el.getAttribute('data-i18n');
-      if (dict[key]) {
+      const enText = langDict.en[key];
+      if (enText) {
+        const translatedText = await this.translate(enText);
         if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-          el.placeholder = dict[key];
+          el.placeholder = translatedText;
         } else {
-          el.textContent = dict[key];
+          el.textContent = translatedText;
         }
       }
     });
@@ -569,11 +567,13 @@ const i18n = {
     if (this.cache[cacheKey]) return this.cache[cacheKey];
 
     const dict = langDict[this.currentLang];
-    const dictMatch = Object.keys(langDict.en).find(k => langDict.en[k] === text);
-    if (dictMatch && dict[dictMatch]) return dict[dictMatch];
+    if (dict) {
+      const dictMatch = Object.keys(langDict.en).find(k => langDict.en[k] === text);
+      if (dictMatch && dict[dictMatch]) return dict[dictMatch];
+    }
 
     try {
-      const res = await fetch("https://libretranslate.de/translate", {
+      const res = await fetch("http://localhost:5000/translate", {
         method: "POST",
         body: JSON.stringify({
           q: text,
@@ -600,6 +600,11 @@ const i18n = {
   setLang(lang) {
     this.currentLang = lang;
     localStorage.setItem('mamaCareLang', lang);
+    
+    // Clear Google Translate cookie to avoid conflicts
+    document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;
+    document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    
     this.init();
     if (typeof state !== 'undefined' && state.weeksPregnant) {
       showDashboard(); 
@@ -616,7 +621,7 @@ const i18n = {
       dropdown.classList.toggle('visible');
     };
 
-    document.querySelectorAll('.lang-option').forEach(opt => {
+    document.querySelectorAll('.lang-dropdown-item').forEach(opt => {
       opt.onclick = () => {
         this.setLang(opt.getAttribute('data-value'));
         dropdown.classList.remove('visible');

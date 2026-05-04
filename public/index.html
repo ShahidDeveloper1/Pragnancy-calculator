@@ -31,9 +31,8 @@
   <link rel="icon" href="https://momcalc.com/icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
-    rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"></noscript>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -43,7 +42,7 @@
   <meta name="google-site-verification" content="DlAoAxaOvkuDMmt4IeiWcqU0Poup27ppp9dc3fjlIQo" />
   
   <!-- Security Hardening -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://localhost:3000 http://127.0.0.1:3000; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:3000 http://127.0.0.1:3000 https://www.googletagmanager.com https://unpkg.com https://cdn.jsdelivr.net https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' http://localhost:3000 http://127.0.0.1:3000 https://fonts.googleapis.com https://unpkg.com https://cdn.jsdelivr.net; img-src 'self' data: https: https://images.unsplash.com https://cdn-icons-png.flaticon.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' http://localhost:3000 http://127.0.0.1:3000 https://www.google-analytics.com https://libretranslate.de https://nominatim.openstreetmap.org; frame-src 'none'; object-src 'none';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://localhost:3000 http://127.0.0.1:3000; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:3000 http://127.0.0.1:3000 https://www.googletagmanager.com https://unpkg.com https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://translate.google.com https://translate.googleapis.com; style-src 'self' 'unsafe-inline' http://localhost:3000 http://127.0.0.1:3000 https://fonts.googleapis.com https://unpkg.com https://cdn.jsdelivr.net https://translate.googleapis.com; img-src 'self' data: https: https://images.unsplash.com https://cdn-icons-png.flaticon.com https://www.google.com https://www.gstatic.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' http://localhost:3000 http://127.0.0.1:3000 http://localhost:5000 https://www.google-analytics.com https://libretranslate.de https://nominatim.openstreetmap.org https://translate.googleapis.com; frame-src 'none'; object-src 'none';">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <script>
@@ -66,12 +65,38 @@
       },
     }
   </script>
-  <link rel="stylesheet" href="style.css?v=15" />
+  <link rel="stylesheet" href="style.css?v=16" />
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#6C3BE4" />
   <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3209/3209121.png" />
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤰</text></svg>" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "MomCalc",
+    "operatingSystem": "Web",
+    "applicationCategory": "HealthApplication",
+    "description": "MomCalc is a premium pregnancy calculator and health tracker for modern mothers.",
+    "url": "https://momcalc.com",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "MomCalc",
+    "url": "https://momcalc.com",
+    "logo": "https://momcalc.com/icon.png",
+    "sameAs": []
+  }
+  </script>
 </head>
 
 <body>
@@ -111,17 +136,27 @@
 
     <div class="nav-actions">
       <button class="install-btn" id="pwaInstallBtn" onclick="installApp()" style="display:none;" aria-label="Install App">📥 Install App</button>
-      <div class="lang-switcher">
-        <button class="lang-btn" id="langBtn" aria-label="Switch language">🌐 <span
-            id="currentLangLabel">English</span></button>
-        <div class="lang-dropdown" id="langDropdown">
-          <div class="lang-option" data-value="en">English</div>
-          <div class="lang-option" data-value="zh">中文 (Mandarin)</div>
-          <div class="lang-option" data-value="es">Español</div>
-          <div class="lang-option" data-value="ar">العربية (Arabic)</div>
-          <div class="lang-option" data-value="fr">Français</div>
-          <div class="lang-option" data-value="de">Deutsch</div>
-          <div class="lang-option" data-value="ms">Bahasa Melayu</div>
+      <div class="lang-dropdown-container">
+        <button class="lang-dropdown-btn" id="langBtn" aria-label="Switch language">
+          🌐 <span id="currentLangLabel">English</span>
+        </button>
+        <div class="lang-dropdown-menu" id="langDropdown">
+          <button class="lang-dropdown-item" data-value="en">English</button>
+          <button class="lang-dropdown-item" data-value="es">Español</button>
+          <button class="lang-dropdown-item" data-value="zh">中文 (Mandarin)</button>
+          <button class="lang-dropdown-item" data-value="hi">हिन्दी (Hindi)</button>
+          <button class="lang-dropdown-item" data-value="ar">العربية (Arabic)</button>
+          <button class="lang-dropdown-item" data-value="bn">বাংলা (Bengali)</button>
+          <button class="lang-dropdown-item" data-value="pt">Português</button>
+          <button class="lang-dropdown-item" data-value="ru">Русский (Russian)</button>
+          <button class="lang-dropdown-item" data-value="ja">日本語 (Japanese)</button>
+          <button class="lang-dropdown-item" data-value="fr">Français</button>
+          <button class="lang-dropdown-item" data-value="de">Deutsch</button>
+          <button class="lang-dropdown-item" data-value="ko">한국어 (Korean)</button>
+          <button class="lang-dropdown-item" data-value="tr">Türkçe (Turkish)</button>
+          <button class="lang-dropdown-item" data-value="it">Italiano</button>
+          <button class="lang-dropdown-item" data-value="vi">Tiếng Việt</button>
+          <button class="lang-dropdown-item" data-value="mr">मराठी (Marathi)</button>
         </div>
       </div>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle theme">
@@ -172,18 +207,7 @@
 
       <!-- Calculator Card -->
       <div class="calculator-card fade-in-up" id="calculator" style="animation-delay:.15s">
-        <!-- API Key Row -->
-        <div class="api-key-row" id="apiKeyRow">
-          <div class="api-key-badge">🔗 RapidAPI Connected</div>
-          <div class="api-key-input-wrap">
-            <input type="password" class="input-field api-key-input" id="apiKey" placeholder="Enter your RapidAPI Key…"
-              title="Get your key at rapidapi.com — Pregnancy Calculator API" />
-            <button class="api-key-save-btn" onclick="saveApiKey()" id="apiKeySaveBtn" data-i18n="btn_save_key">Save
-              Key</button>
-          </div>
-          <p class="api-key-hint">🔒 Key stored locally. <a href="https://rapidapi.com/" target="_blank"
-              rel="noopener">Get free key →</a></p>
-        </div>
+
         <h2 class="calc-title" data-i18n="calc_title">Due Date Calculator</h2>
         <p class="calc-subtitle" data-i18n="calc_subtitle">Choose your calculation method below</p>
 
@@ -286,11 +310,6 @@
           ✨ Calculate My Due Date
         </button>
 
-        <!-- API Live Status -->
-        <div class="api-status-bar" id="apiStatusBar">
-          <span class="api-dot" id="apiDot"></span>
-          <span id="apiStatusText">API Ready — Enter your key above to enable live data</span>
-        </div>
 
         <!-- Pre-fill hint -->
         <p style="font-size:0.75rem;color:var(--text-muted);text-align:center;margin-top:12px;" id="calcHint">
@@ -980,27 +999,68 @@
   <!-- ====== FOOTER ====== -->
 
 
-  <footer class="footer">
-    <div class="footer-brand">MomCalc 🤰</div>
-    <p class="footer-disc">
-      ⚠️ This app provides general educational information only and is not medical advice. Always consult your
-      healthcare provider for pregnancy concerns.
-    </p>
+  <footer class="saas-footer">
+    <div class="saas-footer-grid">
+      <!-- Column 1: Brand -->
+      <div class="saas-footer-col">
+        <div class="saas-footer-brand">MomCalc <span>🤰</span></div>
+        <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px;">
+          The world's most advanced AI-powered pregnancy companion. Calculate due dates, track fetal growth, and monitor your health milestones with precision.
+        </p>
+        <p class="footer-disc" style="font-size: 0.8rem; background: var(--bg-secondary); padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-color); color: var(--text-muted);">
+          ⚠️ Educational purposes only. Not medical advice. Always consult your healthcare provider.
+        </p>
+      </div>
 
-    <div class="footer-links"
-      style="margin: 12px 0; display: flex; gap: 16px; justify-content: center; font-size: 0.85rem;">
-      <a href="/pages/" style="color: var(--indigo); font-weight: 600; text-decoration: none;">📚 Pregnancy Guides (Week
-        by Week)</a>
-      <a href="/sitemap.xml" style="color: var(--text-muted); text-decoration: none;">🗺️ Sitemap</a>
+      <!-- Column 2: Product -->
+      <div class="saas-footer-col">
+        <h4>Product</h4>
+        <a href="#hero">Due Date Calculator</a>
+        <a href="#dashboard">Weekly Tracker</a>
+        <a href="#dashboard">Kick Counter</a>
+        <a href="#dashboard">Contraction Timer</a>
+        <a href="#dashboard">Doctor Finder</a>
+        <a href="#dashboard">Ovulation Predictor</a>
+      </div>
+
+      <!-- Column 3: Resources -->
+      <div class="saas-footer-col">
+        <h4>Resources</h4>
+        <a href="/pages/">📚 Pregnancy Guides</a>
+        <a href="/pages/can-i-eat-sushi.html">🍣 Food Safety Guide</a>
+        <a href="/pages/pregnancy-week-12.html">👶 First Trimester</a>
+        <a href="/pages/pregnancy-week-20.html">✨ Second Trimester</a>
+        <a href="/pages/pregnancy-week-36.html">🤰 Third Trimester</a>
+        <a href="/sitemap.xml">🗺️ Sitemap</a>
+      </div>
+
+      <!-- Column 4: Company & Legal -->
+      <div class="saas-footer-col">
+        <h4>Legal & Support</h4>
+        <a href="mailto:support@momcalc.com">Contact Support</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+        <div style="display:flex; gap:16px; margin-top:12px;">
+          <a href="#" style="font-size: 1.4rem;">𝕏</a>
+          <a href="#" style="font-size: 1.4rem;">📸</a>
+          <a href="#" style="font-size: 1.4rem;">📌</a>
+        </div>
+      </div>
     </div>
 
-    <p class="footer-copy">© 2026 MomCalc. Made with 💗 for every mama.</p>
+    <div class="saas-footer-bottom">
+      <div>© 2026 MomCalc Inc. All rights reserved. Made with 💗 for every mama.</div>
+      <div style="display: flex; gap: 24px; align-items: center;">
+        <span style="display:flex; align-items:center; gap:6px;"><span style="color:var(--mint);font-size:1.2rem;">●</span> All Systems Operational</span>
+      </div>
+    </div>
   </footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr" crossorigin="anonymous"></script>
-  <script src="app.js?v=3"></script>
+  <script src="app.js?v=4"></script>
   <script>
     if ('serviceWorker' in navigator && (window.location.protocol === 'http:' || window.location.protocol === 'https:')) {
       window.addEventListener('load', () => {
