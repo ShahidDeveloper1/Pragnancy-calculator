@@ -12,23 +12,29 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MomCalc — AI Pregnancy Calculator & Health Companion | Powered by RapidAPI</title>
+  <title>MamaCare Pro — AI Pregnancy Calculator & Health Companion | Powered by RapidAPI</title>
   <meta name="description"
-    content="MomCalc is a $10B premium pregnancy calculator and health tracker for modern mothers. Calculate due dates, track fetal growth, and monitor health milestones.">
+    content="MamaCare Pro is a $10B premium pregnancy calculator and health tracker for modern mothers. Calculate due dates, track fetal growth, and monitor health milestones.">
 
   <meta name="keywords"
     content="pregnancy calculator, due date calculator, pregnancy week by week, baby development, pregnancy health" />
-  <link rel="canonical" href="https://momcalc.com/" />
+  <link rel="canonical" href="https://MamaCare Pro.com/" />
+  <link rel="alternate" hreflang="en" href="https://MamaCare Pro.com/" />
+  <link rel="alternate" hreflang="es" href="https://MamaCare Pro.com/" />
+  <link rel="alternate" hreflang="ar" href="https://MamaCare Pro.com/" />
+  <link rel="alternate" hreflang="fr" href="https://MamaCare Pro.com/" />
+  <link rel="alternate" hreflang="de" href="https://MamaCare Pro.com/" />
+  <link rel="alternate" hreflang="x-default" href="https://MamaCare Pro.com/" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="MomCalc — AI Pregnancy Calculator & Health Companion" />
-  <meta property="og:description" content="MomCalc is a $10B premium pregnancy tracker. Calculate due dates, track fetal growth, and monitor health milestones with AI-powered insights." />
-  <meta property="og:image" content="https://momcalc.com/icon.png" />
-  <meta property="og:url" content="https://momcalc.com/" />
+  <meta property="og:title" content="MamaCare Pro — AI Pregnancy Calculator & Health Companion" />
+  <meta property="og:description" content="MamaCare Pro is a $10B premium pregnancy tracker. Calculate due dates, track fetal growth, and monitor health milestones with AI-powered insights." />
+  <meta property="og:image" content="https://MamaCare Pro.com/icon.png" />
+  <meta property="og:url" content="https://MamaCare Pro.com/" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="MomCalc — AI Pregnancy Calculator" />
+  <meta name="twitter:title" content="MamaCare Pro — AI Pregnancy Calculator" />
   <meta name="twitter:description" content="Premium pregnancy tracking for modern mothers." />
-  <meta name="twitter:image" content="https://momcalc.com/icon.png" />
-  <link rel="icon" href="https://momcalc.com/icon.png">
+  <meta name="twitter:image" content="https://MamaCare Pro.com/icon.png" />
+  <link rel="icon" type="image/png" href="icon.png?v=3">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -42,9 +48,10 @@
   <meta name="google-site-verification" content="DlAoAxaOvkuDMmt4IeiWcqU0Poup27ppp9dc3fjlIQo" />
   
   <!-- Security Hardening -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://localhost:3000 http://127.0.0.1:3000; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:3000 http://127.0.0.1:3000 https://www.googletagmanager.com https://unpkg.com https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://translate.google.com https://translate.googleapis.com; style-src 'self' 'unsafe-inline' http://localhost:3000 http://127.0.0.1:3000 https://fonts.googleapis.com https://unpkg.com https://cdn.jsdelivr.net https://translate.googleapis.com; img-src 'self' data: https: https://images.unsplash.com https://cdn-icons-png.flaticon.com https://www.google.com https://www.gstatic.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' http://localhost:3000 http://127.0.0.1:3000 http://localhost:5000 https://www.google-analytics.com https://libretranslate.de https://nominatim.openstreetmap.org https://translate.googleapis.com; frame-src 'none'; object-src 'none';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://localhost:3001 http://localhost:3000 http://127.0.0.1:3001 http://127.0.0.1:3000; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:3001 http://localhost:3000 http://127.0.0.1:3001 http://127.0.0.1:3000 https://www.googletagmanager.com https://unpkg.com https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://translate.google.com https://translate.googleapis.com; style-src 'self' 'unsafe-inline' http://localhost:3001 http://localhost:3000 http://127.0.0.1:3001 http://127.0.0.1:3000 https://fonts.googleapis.com https://unpkg.com https://cdn.jsdelivr.net https://translate.googleapis.com; img-src 'self' data: blob: https: http://localhost:3001 http://localhost:3000; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' http://localhost:3001 http://localhost:3000 http://127.0.0.1:3001 http://127.0.0.1:3000 http://localhost:5000 https://www.google-analytics.com https://libretranslate.de https://nominatim.openstreetmap.org https://overpass-api.de https://translate.googleapis.com; frame-src 'none'; object-src 'none';">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
   <script>
     tailwind.config = {
       darkMode: ['selector', '[data-theme="dark"]'],
@@ -65,21 +72,23 @@
       },
     }
   </script>
-  <link rel="stylesheet" href="style.css?v=17" />
+  <link rel="stylesheet" href="style.css?v=18" />
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#6C3BE4" />
-  <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3209/3209121.png" />
-  <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤰</text></svg>" />
+  <link rel="apple-touch-icon" href="icon.png?v=3" />
+  <link rel="icon" type="image/png" sizes="512x512" href="icon.png?v=3" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icon.png?v=3" />
+  <link rel="icon" type="image/png" sizes="32x32" href="icon.png?v=3" />
+  <link rel="icon" type="image/png" sizes="16x16" href="icon.png?v=3" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "MomCalc",
+    "name": "MamaCare Pro",
     "operatingSystem": "Web",
     "applicationCategory": "HealthApplication",
-    "description": "MomCalc is a premium pregnancy calculator and health tracker for modern mothers.",
-    "url": "https://momcalc.com",
+    "description": "MamaCare Pro is a premium pregnancy calculator and health tracker for modern mothers.",
+    "url": "https://MamaCare Pro.com",
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -91,15 +100,18 @@
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "MomCalc",
-    "url": "https://momcalc.com",
-    "logo": "https://momcalc.com/icon.png",
+    "name": "MamaCare Pro",
+    "url": "https://MamaCare Pro.com",
+    "logo": "https://MamaCare Pro.com/icon.png",
     "sameAs": []
   }
   </script>
 </head>
 
 <body>
+
+  <!-- Floating Bubbles Background -->
+  <div class="bubbles-container" id="bubblesContainer" aria-hidden="true"></div>
 
   <!-- Background Orbs -->
   <div class="bg-orbs" aria-hidden="true">
@@ -118,10 +130,12 @@
 
   <!-- ====== NAVBAR ====== -->
   <nav class="navbar" role="navigation" aria-label="Main navigation">
-    <a href="#hero" class="nav-brand" aria-label="MomCalc Home">
-      <div class="nav-logo" aria-hidden="true">🤰</div>
+    <a href="#hero" class="nav-brand" aria-label="MamaCare Pro Home">
+      <div class="nav-logo" aria-hidden="true">
+        <img src="icon.png?v=3" alt="Logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
+      </div>
       <div>
-        <div class="nav-title" data-i18n="nav_brand_title">MomCalc</div>
+        <div class="nav-title" data-i18n="nav_brand_title">MamaCare Pro</div>
         <div class="nav-sub" data-i18n="nav_brand_sub">Pregnancy Companion</div>
       </div>
     </a>
@@ -135,7 +149,7 @@
     </ul>
 
     <div class="nav-actions">
-      <button class="install-btn" id="pwaInstallBtn" onclick="installApp()" style="display:none;" aria-label="Install App">📥 Install App</button>
+      <button class="install-btn install-btn-bounce" id="pwaInstallBtn" onclick="installApp()" aria-label="Install App">📥 Install App</button>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle theme">
         <div class="theme-toggle-knob"></div>
       </button>
@@ -980,7 +994,12 @@
     <div class="saas-footer-grid">
       <!-- Column 1: Brand -->
       <div class="saas-footer-col" style="flex: 2;">
-        <div class="saas-footer-brand"><div class="logo-icon" style="display:inline-block; margin-right:8px; font-size:1.8rem; background:none; -webkit-text-fill-color:initial;">🤰</div><span>MomCalc</span></div>
+        <div class="saas-footer-brand">
+          <div class="logo-icon" style="display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; margin-right:8px; border-radius:8px; overflow:hidden;">
+            <img src="icon.png?v=3" alt="Logo" style="width:100%; height:100%; object-fit:contain;">
+          </div>
+          <span>MamaCare Pro</span>
+        </div>
         <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
           The world's most advanced AI-powered pregnancy companion. Calculate due dates, track fetal growth, and monitor your health milestones with precision.
         </p>
@@ -992,12 +1011,12 @@
       <!-- Column 2: Product -->
       <div class="saas-footer-col">
         <h4>Product</h4>
-        <a href="#hero">Due Date Calculator</a>
-        <a href="#dashboard">Weekly Tracker</a>
-        <a href="#dashboard">Kick Counter</a>
-        <a href="#dashboard">Contraction Timer</a>
-        <a href="#dashboard">Doctor Finder</a>
-        <a href="#dashboard">Ovulation Predictor</a>
+        <a href="#calculator" onclick="document.getElementById('calculator').scrollIntoView({behavior:'smooth',block:'center'});return false;">Due Date Calculator</a>
+        <a href="#dashboard" onclick="navigateToFeature('baby');return false;">Weekly Tracker</a>
+        <a href="#dashboard" onclick="navigateToFeature('trackers');return false;">Kick Counter</a>
+        <a href="#dashboard" onclick="navigateToFeature('trackers');return false;">Contraction Timer</a>
+        <a href="#dashboard" onclick="navigateToFeature('doctors');return false;">Doctor Finder</a>
+        <a href="#dashboard" onclick="navigateToFeature('fertility');return false;">Ovulation Predictor</a>
       </div>
 
       <!-- Column 3: Resources -->
@@ -1014,23 +1033,14 @@
       <!-- Column 4: Company & Legal -->
       <div class="saas-footer-col">
         <h4>Legal & Support</h4>
-        <a href="mailto:support@momcalc.com">Contact Support</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Cookie Policy</a>
-        <div style="display:flex; gap:16px; margin-top:12px;">
-          <a href="#" style="font-size: 1.8rem;">𝕏</a>
-          <a href="#" style="font-size: 1.8rem;">📸</a>
-          <a href="#" style="font-size: 1.8rem;">📌</a>
-        </div>
+        <a href="javascript:void(0)" onclick="alert('Privacy Policy coming soon!')" title="Coming soon">Privacy Policy</a>
+        <a href="javascript:void(0)" onclick="alert('Terms of Service coming soon!')" title="Coming soon">Terms of Service</a>
+        <a href="javascript:void(0)" onclick="alert('Cookie Policy coming soon!')" title="Coming soon">Cookie Policy</a>
       </div>
     </div>
 
-    <div class="saas-footer-bottom">
-      <div>© 2026 MomCalc Inc. All rights reserved. Made with 💗 for every mama.</div>
-      <div style="display: flex; gap: 24px; align-items: center;">
-        <span style="display:flex; align-items:center; gap:6px;"><span style="color:var(--mint);font-size:1.2rem;">●</span> All Systems Operational</span>
-      </div>
+    <div class="saas-footer-bottom" style="justify-content: center; text-align: center;">
+      <div>© 2026 MamaCare Pro Inc. All rights reserved. Made with 💗 for every mama.</div>
     </div>
   </footer>
 
@@ -1048,6 +1058,65 @@
     } else {
       console.log('Service Worker registration skipped: Protocol not supported (likely opening file directly).');
     }
+  </script>
+
+  <!-- Floating Bubbles Generator -->
+  <script>
+    (function() {
+      const container = document.getElementById('bubblesContainer');
+      if (!container) return;
+
+      const bubbleConfigs = [
+        { color: 'rgba(139, 92, 246, 0.20)', border: 'rgba(139, 92, 246, 0.30)' },
+        { color: 'rgba(236, 72, 153, 0.18)', border: 'rgba(236, 72, 153, 0.28)' },
+        { color: 'rgba(16, 185, 129, 0.15)', border: 'rgba(16, 185, 129, 0.25)' },
+        { color: 'rgba(245, 158, 11, 0.15)', border: 'rgba(245, 158, 11, 0.25)' },
+        { color: 'rgba(99, 102, 241, 0.18)', border: 'rgba(99, 102, 241, 0.28)' },
+        { color: 'rgba(168, 85, 247, 0.16)', border: 'rgba(168, 85, 247, 0.26)' },
+        { color: 'rgba(244, 114, 182, 0.16)', border: 'rgba(244, 114, 182, 0.26)'},
+        { color: 'rgba(251, 191, 36, 0.14)', border: 'rgba(251, 191, 36, 0.22)' },
+      ];
+
+      function createBubble() {
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        const size = Math.random() * 10 + 4;     // 4–14px micro
+        const left = Math.random() * 96 + 2;
+        const duration = Math.random() * 14 + 10;
+        const delay = Math.random() * 4;
+        const cfg = bubbleConfigs[Math.floor(Math.random() * bubbleConfigs.length)];
+
+        bubble.style.cssText = `
+          width: ${size}px;
+          height: ${size}px;
+          left: ${left}%;
+          background: radial-gradient(circle at 30% 30%, ${cfg.color}, transparent 80%);
+          border: 1px solid ${cfg.border};
+          animation-duration: ${duration}s;
+          animation-delay: ${delay}s;
+        `;
+
+        container.appendChild(bubble);
+
+        setTimeout(() => {
+          if (bubble.parentNode) bubble.parentNode.removeChild(bubble);
+        }, (duration + delay + 1) * 1000);
+      }
+
+      // Create initial burst
+      const initialCount = window.innerWidth < 768 ? 4 : 7;
+      for (let i = 0; i < initialCount; i++) {
+        setTimeout(() => createBubble(), i * 600);
+      }
+
+      // Continuously spawn
+      const maxBubbles = window.innerWidth < 768 ? 6 : 12;
+      setInterval(() => {
+        if (document.querySelectorAll('.bubble').length < maxBubbles) {
+          createBubble();
+        }
+      }, 2500);
+    })();
   </script>
 </body>
 

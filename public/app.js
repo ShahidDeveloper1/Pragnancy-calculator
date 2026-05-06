@@ -1,5 +1,5 @@
 /* ============================================================
-   MomCalc — Main Application Logic
+   MamaCare Pro — Main Application Logic
    Complete 40-Week Pregnancy Data + All Trackers
    v2.0 — Baby Images, Countdown, Lbs/Inches, Screenings
    ============================================================ */
@@ -258,7 +258,7 @@ const fetalMeasurements = {
 // ====== MULTILINGUAL SYSTEM (i18n) ======
 const langDict = {
   en: {
-    nav_brand_title: "MomCalc",
+    nav_brand_title: "MamaCare Pro",
     nav_brand_sub: "Pregnancy Companion",
     nav_home: "Home",
     nav_dashboard: "Dashboard",
@@ -295,7 +295,7 @@ const langDict = {
     tab_trackers: "Trackers"
   },
   ms: {
-    nav_brand_title: "MomCalc",
+    nav_brand_title: "MamaCare Pro",
     nav_brand_sub: "Teman Kehamilan",
     nav_home: "Utama",
     nav_dashboard: "Papan Pemuka",
@@ -332,7 +332,7 @@ const langDict = {
     tab_trackers: "Penjejak"
   },
   zh: {
-    nav_brand_title: "MomCalc",
+    nav_brand_title: "MamaCare Pro",
     nav_brand_sub: "怀孕伴侣",
     nav_home: "首页",
     nav_dashboard: "仪表板",
@@ -369,7 +369,7 @@ const langDict = {
     tab_trackers: "追踪器"
   },
   es: {
-    nav_brand_title: "MomCalc",
+    nav_brand_title: "MamaCare Pro",
     nav_brand_sub: "Compañero de Embarazo",
     nav_home: "Inicio",
     nav_dashboard: "Panel",
@@ -443,7 +443,7 @@ const langDict = {
     tab_trackers: "تتبع"
   },
   fr: {
-    nav_brand_title: "MomCalc",
+    nav_brand_title: "MamaCare Pro",
     nav_brand_sub: "Compagnon de Grossesse",
     nav_home: "Accueil",
     nav_dashboard: "Tableau de Bord",
@@ -480,7 +480,7 @@ const langDict = {
     tab_trackers: "Suivis"
   },
   de: {
-    nav_brand_title: "MomCalc",
+    nav_brand_title: "MamaCare Pro",
     nav_brand_sub: "Schwangerschaftsbegleiter",
     nav_home: "Startseite",
     nav_dashboard: "Dashboard",
@@ -2566,7 +2566,20 @@ window.addEventListener('beforeinstallprompt', (e) => {
 });
 
 async function installApp() {
-  if (!deferredPrompt) return;
+  if (!deferredPrompt) {
+    const toast = document.createElement('div');
+    toast.style.cssText = `
+      position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+      background:linear-gradient(135deg,#4F46E5,#7C3AED); color:white;
+      padding:14px 28px; border-radius:999px; font-weight:600; font-size:0.9rem;
+      box-shadow:0 8px 32px rgba(99,102,241,0.4); z-index:99999;
+      animation:fadeInUp 0.4s ease; white-space:nowrap;
+    `;
+    toast.textContent = '📱 Open in browser menu → "Add to Home Screen"';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 4000);
+    return;
+  }
   deferredPrompt.prompt();
   const { outcome } = await deferredPrompt.userChoice;
   if (outcome === 'accepted') {

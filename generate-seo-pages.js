@@ -153,7 +153,7 @@ function trimesterName(t, lang = 'en') {
 }
 
 // ====== PAGE TEMPLATE ======
-function pageHTML({ title, metaDesc, canonical, h1, breadcrumbs, content, faqs, ogImage, prev, next, relatedLinks, lang = 'en', isSubfolder = false }) {
+function pageHTML({ title, metaDesc, canonical, h1, breadcrumbs, content, faqs, ogImage, prev, next, relatedLinks, lang = 'en', isSubfolder = false, hreflangs = '' }) {
   const relPath = isSubfolder ? '../../' : '../';
   
   const bcSchema = JSON.stringify({
@@ -170,6 +170,18 @@ function pageHTML({ title, metaDesc, canonical, h1, breadcrumbs, content, faqs, 
       "acceptedAnswer": { "@type": "Answer", "text": f.a }
     }))
   }) : null;
+
+  const articleSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": ["Article", "MedicalWebPage"],
+    "headline": title,
+    "description": metaDesc,
+    "image": ogImage || 'https://momcalc.com/icon.png',
+    "author": { "@type": "Organization", "name": "MomCalc Medical Team" },
+    "publisher": { "@type": "Organization", "name": "MomCalc", "logo": { "@type": "ImageObject", "url": "https://momcalc.com/icon.png" } },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": canonical },
+    "medicalAudience": { "@type": "MedicalAudience", "audienceType": "Patients" }
+  });
 
   const dict = i18nDict[lang] || i18nDict.en;
 
@@ -198,11 +210,14 @@ function pageHTML({ title, metaDesc, canonical, h1, breadcrumbs, content, faqs, 
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://localhost:3000 http://127.0.0.1:3000; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:3000 http://127.0.0.1:3000 https://www.googletagmanager.com https://unpkg.com https://cdn.jsdelivr.net https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' http://localhost:3000 http://127.0.0.1:3000 https://fonts.googleapis.com https://unpkg.com https://cdn.jsdelivr.net; img-src 'self' data: https: https://images.unsplash.com https://cdn-icons-png.flaticon.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' http://localhost:3000 http://127.0.0.1:3000 https://www.google-analytics.com https://libretranslate.de https://nominatim.openstreetmap.org; frame-src 'none'; object-src 'none';">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  ${hreflangs}
   <script type="application/ld+json">${bcSchema}</script>
+  <script type="application/ld+json">${articleSchema}</script>
   ${faqSchema ? `<script type="application/ld+json">${faqSchema}</script>` : ''}
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"/></noscript>
   <link rel="stylesheet" href="${relPath}style.css?v=15"/>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤰</text></svg>"/>
   <style>
@@ -235,6 +250,32 @@ function pageHTML({ title, metaDesc, canonical, h1, breadcrumbs, content, faqs, 
     .doctor-address { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 12px; }
     .doctor-meta { display: flex; gap: 12px; align-items: center; }
     .doctor-rating { color: var(--gold); font-weight: 700; font-size: 0.85rem; }
+    @media (max-width: 768px) {
+      .navbar { padding: 12px 16px; flex-direction: column; gap: 8px; height: auto; min-height: 56px; }
+      .nav-brand { justify-content: center; width: 100%; }
+      .nav-actions { width: 100%; justify-content: center; gap: 8px; flex-wrap: wrap; }
+      .seo-container { padding: 100px 16px 48px; }
+      .content-card { padding: 24px 18px; border-radius: 16px; }
+      .cta-banner { padding: 40px 20px; border-radius: 16px; }
+      .cta-banner h2 { font-size: 1.6rem !important; }
+      .footer { padding: 36px 20px; }
+      .nav-cta { font-size: 0.78rem; padding: 7px 14px; }
+      .install-btn { padding: 7px 12px; font-size: 0.78rem; }
+      .seo-links { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)) !important; gap: 6px !important; }
+      .seo-links a { padding: 8px 12px; font-size: 0.8rem; }
+      .article-title { font-size: 1.6rem !important; }
+    }
+    @media (max-width: 480px) {
+      .seo-container { padding: 90px 12px 36px; }
+      .content-card { padding: 20px 14px; }
+      .nav-logo { font-size: 22px; }
+      .nav-title { font-size: 1.1rem; }
+      .cta-banner h2 { font-size: 1.3rem !important; }
+      .cta-banner p { font-size: 0.95rem !important; }
+      .cta-btn { padding: 12px 24px; font-size: 0.9rem; }
+      .article-title { font-size: 1.3rem !important; }
+      .seo-grid { grid-template-columns: 1fr !important; }
+    }
   </style>
 </head>
 <body data-theme="light">
@@ -371,6 +412,11 @@ LANGS.forEach(lang => {
 
     let ogImage = `https://momcalc.com/images/stage${Math.min(5, Math.floor(w.week/8)+1)}.png`;
 
+    const hreflangs = LANGS.map(l => {
+      const p = l.dir ? `${l.dir}/` : '';
+      return `<link rel="alternate" hreflang="${l.code}" href="${SITE}/pages/${p}${slug}.html" />`;
+    }).join('\n  ');
+
     const html = pageHTML({
       title: `${dict.week} ${w.week} ${dict.calc}: ${w.title} | MomCalc`,
       metaDesc: `Learn about Week ${w.week} of pregnancy. Your baby is the size of a ${w.size}. Discover development milestones, symptoms, and health tips.`,
@@ -384,6 +430,7 @@ LANGS.forEach(lang => {
       ogImage,
       lang: lang.code,
       isSubfolder: !!lang.dir,
+      hreflangs,
       prev: prevW ? { url: `pregnancy-week-${prevW.week}.html`, label: `${dict.week} ${prevW.week}` } : null,
       next: nextW ? { url: `pregnancy-week-${nextW.week}.html`, label: `${dict.week} ${nextW.week}` } : null,
       relatedLinks
@@ -415,6 +462,11 @@ LANGS.forEach(lang => {
       </div>
     `;
 
+    const hreflangs = LANGS.map(l => {
+      const p = l.dir ? `${l.dir}/` : '';
+      return `<link rel="alternate" hreflang="${l.code}" href="${SITE}/pages/${p}${slug}.html" />`;
+    }).join('\n  ');
+
     const html = pageHTML({
       title: `${f.title} | ${dict.foodSafety} Guide`,
       metaDesc: `Wondering if you can eat ${f.food} during pregnancy? Read our expert safety guide.`,
@@ -425,6 +477,7 @@ LANGS.forEach(lang => {
       faqs: [{ q: `Can I eat ${f.food} while pregnant?`, a: f.answer }],
       lang: lang.code,
       isSubfolder: !!lang.dir,
+      hreflangs,
       ogImage: 'https://momcalc.com/icon.png'
     });
 
