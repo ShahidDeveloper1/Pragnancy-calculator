@@ -1,6 +1,6 @@
 {
-  "name": "MamaCare Pro",
-  "short_name": "MamaCare Pro",
+  "name": "MomCalc",
+  "short_name": "MomCalc",
   "description": "Premium AI Pregnancy Calculator & Health Companion",
   "start_url": "./index.html",
   "display": "standalone",
@@ -8,13 +8,13 @@
   "theme_color": "#6C3BE4",
   "icons": [
     {
-      "src": "icon.png",
+      "src": "https://cdn-icons-png.flaticon.com/512/3209/3209121.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "icon.png",
+      "src": "https://cdn-icons-png.flaticon.com/512/3209/3209121.png",
       "sizes": "192x192",
       "type": "image/png"
     }

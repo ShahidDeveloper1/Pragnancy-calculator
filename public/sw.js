@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mamacare-pro-v19';
+const CACHE_NAME = 'mamacare-pro-v14';
 const ASSETS = [
   './',
   './index.html',

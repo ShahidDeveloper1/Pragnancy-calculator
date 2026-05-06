@@ -173,90 +173,6 @@ body::before {
   66% { transform: translate(-20px, 30px) scale(0.95); }
 }
 
-/* ====== FLOATING BUBBLES ====== */
-.bubbles-container {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-.bubble {
-  position: absolute;
-  bottom: -80px;
-  border-radius: 50%;
-  opacity: 0;
-  animation: bubbleFloat linear infinite;
-  backdrop-filter: blur(2px);
-}
-.bubble::before {
-  content: '';
-  position: absolute;
-  top: 15%; left: 20%;
-  width: 30%; height: 30%;
-  background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 70%);
-  border-radius: 50%;
-}
-
-@keyframes bubbleFloat {
-  0% {
-    transform: translateX(0) scale(0.4);
-    opacity: 0;
-    bottom: -80px;
-  }
-  8% {
-    opacity: 1;
-    transform: translateX(10px) scale(0.8);
-  }
-  50% {
-    opacity: 0.6;
-    transform: translateX(-25px) scale(1);
-  }
-  90% {
-    opacity: 0.25;
-    transform: translateX(15px) scale(0.9);
-  }
-  100% {
-    opacity: 0;
-    bottom: 110%;
-    transform: translateX(-10px) scale(0.6);
-  }
-}
-
-/* ====== INSTALL BUTTON BOUNCE ====== */
-.install-btn-bounce {
-  animation: installBounce 3s ease-in-out infinite, installGlow 4s ease-in-out infinite;
-  position: relative;
-  overflow: hidden;
-}
-.install-btn-bounce::after {
-  content: '';
-  position: absolute;
-  top: -50%; left: -50%;
-  width: 200%; height: 200%;
-  background: linear-gradient(
-    45deg,
-    transparent 30%,
-    rgba(255,255,255,0.25) 50%,
-    transparent 70%
-  );
-  animation: installShine 3s ease-in-out infinite;
-}
-
-@keyframes installBounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
-}
-@keyframes installGlow {
-  0%, 100% { box-shadow: var(--shadow-md), 0 0 0 0 rgba(139, 92, 246, 0); }
-  50% { box-shadow: var(--shadow-lg), 0 0 20px 4px rgba(139, 92, 246, 0.3); }
-}
-@keyframes installShine {
-  0% { transform: translateX(-100%) rotate(45deg); }
-  60%, 100% { transform: translateX(100%) rotate(45deg); }
-}
-
 /* ====== NAVBAR ====== */
 .navbar {
   position: fixed; top: 0; left: 0; right: 0;
@@ -1372,40 +1288,33 @@ body::before {
 @media (max-width: 1024px) {
   .hero-inner { grid-template-columns: 1fr; text-align: center; }
   .hero-desc { margin: 0 auto 32px; }
-  .hero-stats { justify-content: center; flex-wrap: wrap; }
+  .hero-stats { justify-content: center; }
   .baby-panel { grid-template-columns: 1fr; }
-  .baby-info-cards { grid-template-columns: 1fr 1fr; }
   .mom-grid, .nutrition-grid, .features-grid, .results-banner { grid-template-columns: repeat(2, 1fr); }
   .calculator-card { padding: 28px; }
-  .saas-footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
 }
 
 @media (max-width: 768px) {
   .navbar { 
     height: auto; 
     min-height: 64px; 
-    padding: 12px 16px; 
+    padding: 16px; 
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
   }
   .nav-brand { margin-bottom: 0; justify-content: center; width: 100%; }
-  .nav-actions { width: 100%; justify-content: center; gap: 10px; flex-wrap: wrap; }
+  .nav-actions { width: 100%; justify-content: center; gap: 12px; flex-wrap: wrap; }
   .nav-links { display: none !important; }
   .nav-cta-link { display: block; }
   
-  .hero { padding-top: 140px; padding-left: 16px; padding-right: 16px; }
-  .hero-title { font-size: 2.4rem; }
+  .hero { padding-top: 130px; padding-left: 16px; padding-right: 16px; }
+  .hero-title { font-size: 2.8rem; }
   .hero-desc { font-size: 1rem; }
-  .hero-stats { gap: 16px; }
-  .stat-num { font-size: 1.5rem; }
-  .stat-label { font-size: 0.72rem; }
-  
   .dashboard { padding: 24px 16px; }
   .results-banner { grid-template-columns: 1fr 1fr; gap: 12px; }
   .result-item { padding: 20px 16px; }
   .result-value { font-size: 1.3rem; }
   .trackers-grid, .mom-grid, .medical-grid, .foods-grid, .nutrition-grid, .features-grid { grid-template-columns: 1fr; }
-  .baby-info-cards { grid-template-columns: 1fr; }
   .main-tabs { 
     justify-content: flex-start; 
     padding-bottom: 10px; 
@@ -1413,7 +1322,7 @@ body::before {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
   }
-  .main-tab { padding: 10px 14px; font-size: 0.8rem; text-align: center; white-space: nowrap; }
+  .main-tab { padding: 10px 16px; font-size: 0.8rem; text-align: center; white-space: nowrap; }
   .calculator-card { padding: 24px 18px; border-radius: var(--radius-xl); }
   .section-heading { font-size: 1.4rem; }
   .feature-card { padding: 22px; }
@@ -1425,100 +1334,34 @@ body::before {
     flex: 1 1 100% !important;
   }
   .doctor-search-container > div:first-child input { min-width: 100% !important; }
-  .doctors-grid { grid-template-columns: 1fr; }
-  .doctors-map { height: 280px; }
   
   .tab-panels-container { padding: 18px 14px; }
   .countdown-card { flex-direction: column; text-align: center; padding: 16px 20px; }
-  .countdown-label { font-size: 0.75rem; }
-  
-  .input-row { grid-template-columns: 1fr; gap: 8px; }
-  
-  .cycle-cal-grid { gap: 6px; }
-  .cycle-cal-day { font-size: 0.8rem; }
-  
-  .saas-footer { padding: 48px 20px 32px; }
-  .saas-footer-grid { grid-template-columns: 1fr; gap: 28px; }
-  .saas-footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
-  
-  .pregnancy-progress { padding: 24px 20px; }
-  .week-nav { padding: 16px 12px; }
-  
-  .screening-row { padding: 10px 14px; flex-direction: column; align-items: flex-start; gap: 6px; }
-  
-  .method-tabs { grid-template-columns: 1fr 1fr; gap: 6px; }
-  .method-tab { font-size: 0.75rem; padding: 8px 6px; }
-  
-  .install-btn { padding: 8px 14px; font-size: 0.8rem; }
-  .nav-cta { font-size: 0.8rem !important; padding: 7px 16px !important; }
 }
 
 @media (max-width: 480px) {
-  .hero-title { font-size: 2rem; }
-  .hero-desc { font-size: 0.88rem; }
-  .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .stat-item { text-align: center; }
+  .hero-title { font-size: 2.2rem; }
+  .hero-desc { font-size: 0.9rem; }
   .results-banner { grid-template-columns: 1fr !important; }
   .calc-btn { font-size: 0.9rem; padding: 14px 20px; }
   .nav-title { font-size: 1.1rem; }
   .calculator-card { padding: 20px 14px; }
-  .section-heading { font-size: 1.15rem; }
-  .result-value { font-size: 1.1rem; }
-  .hero { padding-top: 130px; }
-  .features-section { padding: 40px 14px; }
-  .features-title { font-size: 1.5rem; }
+  .section-heading { font-size: 1.2rem; }
+  .result-value { font-size: 1.15rem; }
+  .hero { padding-top: 120px; }
+  .features-section { padding: 48px 16px; }
+  .features-title { font-size: 1.6rem; }
   .feature-card { padding: 18px; }
   .main-tabs { grid-template-columns: repeat(2, 1fr); gap: 6px; }
-  .main-tab { font-size: 0.72rem; padding: 8px 8px; }
-  
-  .baby-measurements { gap: 8px; }
-  .measure-item { padding: 8px 10px; }
-  .measure-val { font-size: 0.95rem; }
-  
-  .kick-count { font-size: 3rem; }
-  .contraction-time { font-size: 2.8rem; }
-  
-  .tracker-card { padding: 20px; }
-  .tracker-icon { width: 40px; height: 40px; font-size: 18px; }
-  
-  .cycle-cal-grid { grid-template-columns: repeat(7, 1fr); gap: 4px; }
-  .cycle-cal-day { font-size: 0.7rem; border-radius: 6px; }
-  .cycle-cal-day .day-label { font-size: 0.5rem; bottom: -18px; }
-  
-  .doctors-map { height: 220px; }
-  
-  .api-live-panel { padding: 18px 14px; }
-  .api-live-value { font-size: 1.2rem; }
-  .api-live-card { padding: 14px; }
-  
-  .fertility-calc-card { padding: 20px 16px; }
-  .fertility-icon { width: 44px; height: 44px; font-size: 22px; }
-  .fertility-title { font-size: 1rem; }
-  
-  .fert-card { padding: 16px 10px; }
-  .fert-card-icon { font-size: 24px; }
-  .fert-card-value { font-size: 0.9rem; }
-  
-  .future-cycles-grid { grid-template-columns: 1fr; }
-  
-  .weight-form { flex-direction: column; gap: 8px; }
-  .add-btn { width: 100%; text-align: center; }
+  .main-tab { font-size: 0.75rem; padding: 8px 10px; }
 }
 
 @media (max-width: 360px) {
-  .hero-title { font-size: 1.8rem; }
-  .hero-stats { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .hero-title { font-size: 1.9rem; }
   .dashboard { padding: 16px 10px; }
   .calculator-card { padding: 16px 12px; }
   .results-banner { gap: 8px; }
-  .result-item { padding: 14px 10px; }
-  .result-label { font-size: 0.65rem; }
-  .result-value { font-size: 1rem; }
-  .main-tab { font-size: 0.68rem; padding: 7px 6px; }
-  .tab-panels-container { padding: 14px 10px; }
-  .section-heading { font-size: 1.05rem; }
-  .countdown-timer { font-size: 1.2rem !important; }
-  .saas-footer { padding: 36px 14px 24px; }
+  .result-item { padding: 16px 12px; }
 }
 
 /* ====== GLOBAL ANTI-ITALIC ====== */
@@ -2896,97 +2739,5 @@ input:checked + .slider-ui:before {
 [data-theme="dark"] p, [data-theme="dark"] .footer-disc, [data-theme="dark"] .calc-subtitle {
   color: var(--text-secondary);
 }
-
-
-/* ====== EXTRA MICRO-ANIMATIONS ====== */
-
-/* Feature cards subtle float on hover */
-.feature-card {
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
-}
-.feature-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: var(--shadow-xl);
-}
-
-/* Hero badge gentle pulse */
-.hero-badge {
-  animation: heroBadgePulse 3s ease-in-out infinite;
-}
-@keyframes heroBadgePulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.03); opacity: 0.9; }
-}
-
-/* Stat items hover glow */
-.stat-item {
-  transition: transform 0.3s ease, background 0.3s ease;
-}
-.stat-item:hover {
-  transform: translateY(-4px);
-}
-.stat-num {
-  transition: color 0.3s ease;
-}
-
-/* Gradient text shimmer on hero */
-.gradient-text {
-  background-size: 200% auto;
-  animation: gradientShimmer 4s linear infinite;
-}
-@keyframes gradientShimmer {
-  0% { background-position: 0% center; }
-  50% { background-position: 100% center; }
-  100% { background-position: 0% center; }
-}
-
-/* CTA button pulse on hero */
-.calc-btn:hover {
-  animation: ctaPulse 0.6s ease;
-}
-@keyframes ctaPulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-/* Result items entrance stagger */
-.result-item {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.result-item:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-}
-
-/* Theme toggle spin on click */
-.theme-toggle:active .theme-toggle-knob {
-  transform: scale(0.85);
-}
-
-/* Nav logo subtle bounce on hover */
-.nav-logo {
-  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-.nav-brand:hover .nav-logo {
-  transform: scale(1.15) rotate(-5deg);
-}
-
-/* Tracker cards pulse on hover */
-.tracker-card:hover .tracker-icon {
-  animation: trackerPop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-@keyframes trackerPop {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2) rotate(10deg); }
-  100% { transform: scale(1); }
-}
-
-/* Footer brand hover */
-.saas-footer-brand:hover {
-  transform: scale(1.03);
-  transition: transform 0.3s ease;
-}
-
 
 
