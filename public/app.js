@@ -1707,7 +1707,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ============================================================
-   RAPIDAPI INTEGRATION
+   LIVE API INTEGRATION
    ============================================================ */
 
 const RAPID_API_HOST = 'pregnancy-calculator-api.p.rapidapi.com';
@@ -1728,7 +1728,7 @@ function saveApiKey() {
   const el = document.getElementById('apiKey');
   const key = el ? el.value.trim() : '';
   if (!key) {
-    setApiStatus('error', '❌ Please enter a valid RapidAPI key');
+    setApiStatus('error', '❌ Please enter a valid API key');
     return;
   }
   _apiKey = key;
@@ -1769,7 +1769,7 @@ async function callTrimesterAPI(lmpDateObj) {
     return null;
   }
 
-  setApiStatus('loading', '⏳ Fetching live data from RapidAPI…');
+  setApiStatus('loading', '⏳ Fetching live data…');
 
   const lmpStr = toApiDate(lmpDateObj);
   const url = `https://${RAPID_API_HOST}/trimester-calculator?lmp=${lmpStr}`;

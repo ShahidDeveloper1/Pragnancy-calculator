@@ -287,10 +287,10 @@ function pageHTML({ title, metaDesc, canonical, h1, breadcrumbs, content, faqs, 
     </section>
   </main>
 
-  <footer class="footer">
+  <footer class="footer" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
     <div class="footer-brand">MomCalc 🤰</div>
     <p class="footer-disc">⚠️ <strong>Medical Disclaimer:</strong> This platform provides educational information only. Please consult your doctor for medical advice.</p>
-    <p class="footer-copy">© 2026 MomCalc. Premium Pregnancy Tracking.</p>
+    <p class="footer-copy" style="margin: 0 auto;">© 2026 MomCalc. Premium Pregnancy Tracking.</p>
   </footer>
 
   <script>
