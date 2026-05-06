@@ -406,7 +406,7 @@ const langDict = {
     tab_trackers: "Rastreadores"
   },
   ar: {
-    nav_brand_title: "ماي كير برو",
+    nav_brand_title: "MomCalc",
     nav_brand_sub: "رفيق الحمل",
     nav_home: "الرئيسية",
     nav_dashboard: "لوحة التحكم",
@@ -519,9 +519,9 @@ const langDict = {
 };
 
 const i18n = {
-  currentLang: localStorage.getItem('mamaCareLang') || (['en','es','zh','hi','ar','bn','pt','ru','ja','fr','de','ko','tr','it','vi','mr'].includes(navigator.language.slice(0,2)) ? navigator.language.slice(0,2) : 'en'),
+  currentLang: localStorage.getItem('momCalcLang') || (['en','es','zh','hi','ar','bn','pt','ru','ja','fr','de','ko','tr','it','vi','mr'].includes(navigator.language.slice(0,2)) ? navigator.language.slice(0,2) : 'en'),
   rtlLangs: ['ar'],
-  cache: JSON.parse(localStorage.getItem('mamaCareTranslationCache') || '{}'),
+  cache: JSON.parse(localStorage.getItem('momCalcTranslationCache') || '{}'),
 
   async init() {
     this.updateLayout();
@@ -594,12 +594,12 @@ const i18n = {
   },
 
   saveCache() {
-    localStorage.setItem('mamaCareTranslationCache', JSON.stringify(this.cache));
+    localStorage.setItem('momCalcTranslationCache', JSON.stringify(this.cache));
   },
 
   setLang(lang) {
     this.currentLang = lang;
-    localStorage.setItem('mamaCareLang', lang);
+    localStorage.setItem('momCalcLang', lang);
     
     // Clear Google Translate cookie to avoid conflicts
     document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;

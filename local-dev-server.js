@@ -53,7 +53,7 @@ async function searchOSM(lat, lng, type) {
         body: "data=" + encodeURIComponent(overpassQuery),
         headers: { 
             'Content-Type': 'application/x-www-form-urlencoded',
-            'User-Agent': 'MamaCarePro/1.0 (https://mamacarepro.com)'
+            'User-Agent': 'MomCalc/1.0 (https://momcalc.com)'
         }
     });
 
