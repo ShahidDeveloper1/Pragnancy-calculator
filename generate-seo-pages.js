@@ -1,10 +1,18 @@
 // ====== PROGRAMMATIC SEO PAGE GENERATOR ======
-// Generates static HTML pages for pregnancy weeks, food safety, and local clinics in multiple languages.
-// Run: node generate-seo-pages.js
-
 const fs = require('fs');
 const path = require('path');
-const { weekData, foodData } = require('./seo-data');
+const { weekDataRich1 } = require('./seo-data-rich-1');
+const { weekDataRich2 } = require('./seo-data-rich-2');
+const { weekDataRich3 } = require('./seo-data-rich-3');
+const { weekDataRich4 } = require('./seo-data-rich-4');
+let weekData = [...weekDataRich1, ...weekDataRich2, ...weekDataRich3, ...weekDataRich4]; // Initialize with batches 1-4
+let foodData = [];
+try {
+  const sd = require('./seo-data');
+  if (sd.foodData) foodData = sd.foodData;
+} catch (e) {
+  console.log("Could not load original seo-data.js, skipping food data.");
+}
 
 const SITE = 'https://momcalc.com';
 const OUT = path.join(__dirname, 'public', 'pages');
@@ -319,63 +327,154 @@ LANGS.forEach(lang => {
       `<a href="pregnancy-week-${ww.week}.html">${dict.week} ${ww.week}</a>`
     ).join('');
 
-    const content = `
-      <div style="margin-bottom: 32px;">
-        <span class="seo-badge seo-safe" style="background: var(--gradient-primary); color: white; border: none;">${trimesterName(w.trimester, lang.code)} ${dict.trimester}</span>
-        <p style="font-size: 1.25rem; line-height: 1.6; color: var(--text-primary); margin-top: 16px; font-weight: 600;">
-          ${dict.size}: ${w.size}
-        </p>
-        <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-top: 12px;">${w.desc}</p>
-      </div>
+    const isRich = !!w.hook;
+    let content = '';
+    let faqs = [];
+    let pageTitle = '';
+    let pageMetaDesc = '';
+    let pageH1 = '';
 
-      <div class="seo-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:24px; margin-bottom:40px;">
-        <div class="feature-tag" style="background:var(--bg-secondary); padding:20px; border-radius:var(--radius-xl); border:1px solid var(--border-color); display:flex; align-items:center; gap:16px;">
-          <span style="font-size:24px;">📅</span>
-          <div><span style="display:block; font-weight:800; font-size:1.1rem;">${dict.week} ${w.week}</span><span style="color:var(--text-muted); font-size:0.8rem;">Stage</span></div>
+    if (isRich) {
+      content = `
+        <!-- STAGE BADGE + STATS -->
+        <div style="margin-bottom: 32px;">
+          <span class="seo-badge seo-safe" style="background: var(--gradient-primary); color: white; border: none; padding: 6px 18px; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem; display:inline-block;">🌱 ${trimesterName(w.trimester, lang.code)} Trimester · Week ${w.week} of 40</span>
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap:16px; margin-top: 24px;">
+            <div style="background:var(--bg-secondary); padding:20px; border-radius:var(--radius-xl); border:1px solid var(--border-color); display:flex; align-items:center; gap:14px;">
+              <span style="font-size:22px;">🍉</span>
+              <div><span style="display:block; font-weight:800; font-size:1rem;">${w.size}</span><span style="color:var(--text-muted); font-size:0.78rem; text-transform:uppercase; letter-spacing:.5px;">Baby's Size</span></div>
+            </div>
+            <div style="background:var(--bg-secondary); padding:20px; border-radius:var(--radius-xl); border:1px solid var(--border-color); display:flex; align-items:center; gap:14px;">
+              <span style="font-size:22px;">📏</span>
+              <div><span style="display:block; font-weight:800; font-size:1rem;">${w.length}</span><span style="color:var(--text-muted); font-size:0.78rem; text-transform:uppercase; letter-spacing:.5px;">Length</span></div>
+            </div>
+            <div style="background:var(--bg-secondary); padding:20px; border-radius:var(--radius-xl); border:1px solid var(--border-color); display:flex; align-items:center; gap:14px;">
+              <span style="font-size:22px;">⚖️</span>
+              <div><span style="display:block; font-weight:800; font-size:1rem;">${w.weight}</span><span style="color:var(--text-muted); font-size:0.78rem; text-transform:uppercase; letter-spacing:.5px;">Weight</span></div>
+            </div>
+          </div>
         </div>
-        <div class="feature-tag" style="background:var(--bg-secondary); padding:20px; border-radius:var(--radius-xl); border:1px solid var(--border-color); display:flex; align-items:center; gap:16px;">
-          <span style="font-size:24px;">📏</span>
-          <div><span style="display:block; font-weight:800; font-size:1.1rem;">${w.length}</span><span style="color:var(--text-muted); font-size:0.8rem;">Length</span></div>
+
+        <!-- HOOK -->
+        <hook>
+          ${w.hook}
+        </hook>
+
+        <!-- BABY DEVELOPMENT -->
+        <baby_development>
+          <h2 style="font-family:var(--font-display); font-size:1.75rem; margin-bottom: 16px; color:var(--text-primary);">🍼 What's Happening With Your Baby</h2>
+          <div style="background: var(--bg-secondary); border-radius: var(--radius-xl); padding: 32px; border: 1px solid var(--border-color); margin-bottom: 32px;">
+            ${w.babyDev.map(p => `<p style="font-size: 1.08rem; line-height: 1.85; color: var(--text-secondary); margin-bottom: 16px;">${p}</p>`).join('')}
+          </div>
+        </baby_development>
+
+        <!-- MOTHER SYMPTOMS -->
+        <mother_symptoms>
+          <h2 style="font-family:var(--font-display); font-size:1.75rem; margin-bottom: 16px; color:var(--text-primary);">🤰 What You're Feeling This Week</h2>
+          <div style="background: var(--bg-secondary); border-radius: var(--radius-xl); padding: 32px; border: 1px solid var(--border-color); margin-bottom: 16px;">
+            ${w.symptomsText.map(p => `<p style="font-size: 1.08rem; line-height: 1.85; color: var(--text-secondary); margin-bottom: 16px;">${p}</p>`).join('')}
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px;">
+            ${w.symptomsTags.map(tag => `<span style="background:rgba(99,102,241,0.08); color:var(--indigo-light); padding:10px 18px; border-radius:var(--radius-md); font-weight:700; font-size:0.88rem; border:1px solid var(--border-color);">${tag}</span>`).join('')}
+          </div>
+        </mother_symptoms>
+
+        <!-- MILESTONE CALLOUT -->
+        <milestone_callout>
+          <div style="background: linear-gradient(135deg, rgba(99,102,241,0.12) 0%, rgba(168,85,247,0.12) 100%); border: 2px solid var(--indigo-light); border-radius: var(--radius-2xl); padding: 36px 32px; margin-bottom: 32px; text-align: center;">
+            <div style="font-size: 2.8rem; margin-bottom: 12px;">🏆</div>
+            <h3 style="font-family:var(--font-display); font-size:1.4rem; font-weight:800; color:var(--text-primary); margin-bottom:12px;">${w.milestoneTitle}</h3>
+            <p style="font-size: 1.15rem; line-height: 1.7; color: var(--text-secondary); max-width: 560px; margin: 0 auto;">${w.milestoneText}</p>
+          </div>
+        </milestone_callout>
+
+        <!-- WEEKLY ACTIONS -->
+        <weekly_actions>
+          <h2 style="font-family:var(--font-display); font-size:1.75rem; margin-bottom: 16px; color:var(--text-primary);">✅ What To Do This Week</h2>
+          <div style="background: var(--bg-secondary); border-radius: var(--radius-xl); padding: 32px; border: 1px solid var(--border-color); margin-bottom: 32px;">
+            <ul style="list-style: none; padding: 0; margin: 0;">
+              ${w.actions.map(a => `
+              <li style="display:flex; gap:16px; margin-bottom:20px; font-size:1.05rem; line-height:1.6;">
+                <span style="color: var(--mint); font-weight: bold; font-size: 1.3rem; flex-shrink:0;">${a.icon}</span>
+                <div>${a.text}</div>
+              </li>`).join('')}
+            </ul>
+          </div>
+        </weekly_actions>
+
+        <!-- BODY NOTE -->
+        <body_note>
+          <div style="background: linear-gradient(135deg, rgba(59,184,154,0.08) 0%, rgba(99,102,241,0.08) 100%); border-radius: var(--radius-xl); padding: 32px; border: 1px solid rgba(59,184,154,0.3); margin-bottom: 8px;">
+            <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); font-style: italic; margin: 0;">${w.bodyNote}</p>
+            <p style="text-align: right; font-weight: 700; color: var(--text-primary); margin-top: 16px; margin-bottom: 0; font-size: 0.9rem;">— A Note From Your Body, Week ${w.week}</p>
+          </div>
+        </body_note>
+      `;
+      faqs = w.faqs;
+      pageTitle = w.metaTitle;
+      pageMetaDesc = w.metaDesc;
+      pageH1 = `Week ${w.week}: ${w.title}`;
+    } else {
+      content = `
+        <div style="margin-bottom: 32px;">
+          <span class="seo-badge seo-safe" style="background: var(--gradient-primary); color: white; border: none;">${trimesterName(w.trimester, lang.code)} ${dict.trimester}</span>
+          <p style="font-size: 1.25rem; line-height: 1.6; color: var(--text-primary); margin-top: 16px; font-weight: 600;">
+            ${dict.size}: ${w.size}
+          </p>
+          <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-top: 12px;">${w.desc}</p>
         </div>
-        <div class="feature-tag" style="background:var(--bg-secondary); padding:20px; border-radius:var(--radius-xl); border:1px solid var(--border-color); display:flex; align-items:center; gap:16px;">
-          <span style="font-size:24px;">⚖️</span>
-          <div><span style="display:block; font-weight:800; font-size:1.1rem;">${w.weight}</span><span style="color:var(--text-muted); font-size:0.8rem;">Weight</span></div>
+
+        <div class="seo-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:24px; margin-bottom:40px;">
+          <div class="feature-tag" style="background:var(--bg-secondary); padding:20px; border-radius:var(--radius-xl); border:1px solid var(--border-color); display:flex; align-items:center; gap:16px;">
+            <span style="font-size:24px;">📅</span>
+            <div><span style="display:block; font-weight:800; font-size:1.1rem;">${dict.week} ${w.week}</span><span style="color:var(--text-muted); font-size:0.8rem;">Stage</span></div>
+          </div>
+          <div class="feature-tag" style="background:var(--bg-secondary); padding:20px; border-radius:var(--radius-xl); border:1px solid var(--border-color); display:flex; align-items:center; gap:16px;">
+            <span style="font-size:24px;">📏</span>
+            <div><span style="display:block; font-weight:800; font-size:1.1rem;">${w.length}</span><span style="color:var(--text-muted); font-size:0.8rem;">Length</span></div>
+          </div>
+          <div class="feature-tag" style="background:var(--bg-secondary); padding:20px; border-radius:var(--radius-xl); border:1px solid var(--border-color); display:flex; align-items:center; gap:16px;">
+            <span style="font-size:24px;">⚖️</span>
+            <div><span style="display:block; font-weight:800; font-size:1.1rem;">${w.weight}</span><span style="color:var(--text-muted); font-size:0.8rem;">Weight</span></div>
+          </div>
         </div>
-      </div>
 
-      <h2 style="font-family:var(--font-display); font-size:1.8rem; margin-bottom: 24px; color:var(--text-primary);">${dict.milestones}</h2>
-      <div style="background: var(--bg-secondary); border-radius: var(--radius-xl); padding: 32px; border: 1px solid var(--border-color); margin-bottom:40px;">
-        <ul style="list-style: none; padding: 0; margin: 0;">
-          ${w.devPoints.map(d => `<li style="display:flex; gap:16px; margin-bottom:16px; font-size:1.05rem; line-height:1.5;">
-            <span style="color: var(--mint); font-weight: bold; font-size: 1.2rem;">✦</span> 
-            <span style="color: var(--text-secondary);">${d}</span>
-          </li>`).join('')}
-        </ul>
-      </div>
+        <h2 style="font-family:var(--font-display); font-size:1.8rem; margin-bottom: 24px; color:var(--text-primary);">${dict.milestones}</h2>
+        <div style="background: var(--bg-secondary); border-radius: var(--radius-xl); padding: 32px; border: 1px solid var(--border-color); margin-bottom:40px;">
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            ${w.devPoints ? w.devPoints.map(d => `<li style="display:flex; gap:16px; margin-bottom:16px; font-size:1.05rem; line-height:1.5;">
+              <span style="color: var(--mint); font-weight: bold; font-size: 1.2rem;">✦</span> 
+              <span style="color: var(--text-secondary);">${d}</span>
+            </li>`).join('') : ''}
+          </ul>
+        </div>
 
-      <h2 style="font-family:var(--font-display); font-size:1.8rem; margin-bottom: 24px; color:var(--text-primary);">${dict.symptoms}</h2>
-      <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom:40px;">
-        ${w.symptoms.map(s => `<span style="background:rgba(99, 102, 241, 0.08); color:var(--indigo-light); padding:12px 20px; border-radius:var(--radius-md); font-weight:700; font-size:0.9rem; border: 1px solid var(--border-color);">${s}</span>`).join('')}
-      </div>
+        <h2 style="font-family:var(--font-display); font-size:1.8rem; margin-bottom: 24px; color:var(--text-primary);">${dict.symptoms}</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom:40px;">
+          ${w.symptoms ? w.symptoms.map(s => `<span style="background:rgba(99, 102, 241, 0.08); color:var(--indigo-light); padding:12px 20px; border-radius:var(--radius-md); font-weight:700; font-size:0.9rem; border: 1px solid var(--border-color);">${s}</span>`).join('') : ''}
+        </div>
 
-      <h2 style="font-family:var(--font-display); font-size:1.8rem; margin-bottom: 24px; color:var(--text-primary);">${dict.careTip}</h2>
-      <div style="background: var(--bg-secondary); padding: 32px; border-radius: var(--radius-xl); border: 1px solid var(--indigo-light); margin-bottom:40px;">
-        <p style="font-size: 1.1rem; line-height: 1.7; font-weight: 500; color: var(--text-primary);">${w.tips}</p>
-      </div>
-    `;
-
-    const faqs = [
-      { q: `How large is the baby at ${w.week} weeks?`, a: `Your baby is roughly the size of a ${w.size}, measuring about ${w.length} and weighing around ${w.weight}.` },
-      { q: `Which trimester is week ${w.week}?`, a: `Week ${w.week} is part of your ${trimesterName(w.trimester, lang.code)} Trimester.` }
-    ];
+        <h2 style="font-family:var(--font-display); font-size:1.8rem; margin-bottom: 24px; color:var(--text-primary);">${dict.careTip}</h2>
+        <div style="background: var(--bg-secondary); padding: 32px; border-radius: var(--radius-xl); border: 1px solid var(--indigo-light); margin-bottom:40px;">
+          <p style="font-size: 1.1rem; line-height: 1.7; font-weight: 500; color: var(--text-primary);">${w.tips}</p>
+        </div>
+      `;
+      faqs = [
+        { q: `How large is the baby at ${w.week} weeks?`, a: `Your baby is roughly the size of a ${w.size}, measuring about ${w.length} and weighing around ${w.weight}.` },
+        { q: `Which trimester is week ${w.week}?`, a: `Week ${w.week} is part of your ${trimesterName(w.trimester, lang.code)} Trimester.` }
+      ];
+      pageTitle = `${dict.week} ${w.week} ${dict.calc}: ${w.title} | MomCalc`;
+      pageMetaDesc = `Learn about Week ${w.week} of pregnancy. Your baby is the size of a ${w.size}. Discover development milestones, symptoms, and health tips.`;
+      pageH1 = `${dict.week} ${w.week}: ${w.title}`;
+    }
 
     let ogImage = `https://momcalc.com/images/stage${Math.min(5, Math.floor(w.week/8)+1)}.png`;
 
     const html = pageHTML({
-      title: `${dict.week} ${w.week} ${dict.calc}: ${w.title} | MomCalc`,
-      metaDesc: `Learn about Week ${w.week} of pregnancy. Your baby is the size of a ${w.size}. Discover development milestones, symptoms, and health tips.`,
+      title: pageTitle,
+      metaDesc: pageMetaDesc,
       canonical: `${SITE}/pages/${lPrefix}${slug}.html`,
-      h1: `${dict.week} ${w.week}: ${w.title}`,
+      h1: pageH1,
       breadcrumbs: [
         { name: dict.home, url: '/' }, { name: dict.guides, url: '/pages/' }, { name: `${dict.week} ${w.week}`, url: `/pages/${lPrefix}${slug}.html` }
       ],

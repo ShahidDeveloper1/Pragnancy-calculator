@@ -1,0 +1,195 @@
+// Part 1\n const d=[
+ {
+  "week": 1,
+  "tri": 1,
+  "title": "The Beginning of Your Journey",
+  "size": "Poppy Seed",
+  "wt": "<0.01g",
+  "len": "<1mm",
+  "desc": "Your body is preparing for one of life's greatest miracles. Though not technically pregnant yet, your uterus is building a lush lining ready to host new life, and FSH hormone is kicking off the follicle race.",
+  "dev": [
+   "FSH hormone stimulates dominant follicle selection in your ovaries",
+   "Uterine lining thickens to prepare a nourishing home for implantation",
+   "Estrogen levels begin climbing to support the growing follicle",
+   "Your cervical mucus starts changing to eventually guide sperm"
+  ],
+  "sym": [
+   "Mild pelvic cramping from menstruation",
+   "Light bloating and fluid retention",
+   "Breast tenderness as hormones shift"
+  ],
+  "tip": "Start prenatal vitamins with 400mcg of folic acid now — neural tube development begins before most women know they are pregnant.",
+  "nut": "Eat folate-rich foods like spinach, lentils, and avocado to build your stores before conception.",
+  "ex": "30 minutes of daily brisk walking supports healthy circulation and hormonal balance.",
+  "partner": "Research prenatal vitamins together and clear the kitchen of alcohol and processed foods.",
+  "faqs": [
+   {
+    "q": "Am I pregnant during week 1?",
+    "a": "Not yet. Week 1 is your last menstrual period. Pregnancy dating starts here, but conception happens around week 2-3. Use this time to prepare your body."
+   },
+   {
+    "q": "What should I do in week 1 of pregnancy?",
+    "a": "Begin prenatal vitamins, especially folic acid. Avoid alcohol and smoking, track your cycle, and eat a nutrient-dense diet to optimize your fertility."
+   },
+   {
+    "q": "Can a pregnancy test detect pregnancy in week 1?",
+    "a": "No. There is no hCG hormone present yet since fertilization has not occurred. Wait until at least 10-14 days after ovulation to get an accurate result."
+   }
+  ]
+ },
+ {
+  "week": 2,
+  "tri": 1,
+  "title": "The Magic of Ovulation",
+  "size": "Sesame Seed",
+  "wt": "<0.01g",
+  "len": "<1mm",
+  "desc": "Your most fertile moment arrives this week as a mature egg is released from your ovary. If a sperm meets this egg in the next 24 hours, conception will occur and your pregnancy begins.",
+  "dev": [
+   "LH hormone surges to trigger the dominant follicle to release its egg",
+   "The egg travels down the fallopian tube awaiting fertilization",
+   "Progesterone begins rising to maintain the uterine lining",
+   "Cervical mucus peaks in quality to help sperm reach the egg"
+  ],
+  "sym": [
+   "Mittelschmerz — a brief twinge on one side of your abdomen",
+   "Egg-white cervical mucus indicating peak fertility",
+   "Slight bloating and a rise in basal body temperature"
+  ],
+  "tip": "Use ovulation predictor kits or track cervical mucus changes to pinpoint your exact fertile window this week.",
+  "nut": "Zinc from pumpkin seeds and chickpeas supports healthy egg quality during ovulation.",
+  "ex": "Keep exercise moderate this week — high-intensity workouts can temporarily suppress ovulation.",
+  "partner": "Prioritize stress reduction together; cortisol negatively impacts both sperm quality and ovulation timing.",
+  "faqs": [
+   {
+    "q": "How do I know if I am ovulating in week 2?",
+    "a": "Watch for clear, slippery egg-white cervical mucus, a brief sharp pain on one side of your pelvis, and an LH surge on an ovulation test strip. Your temperature rises slightly after ovulation."
+   },
+   {
+    "q": "How long does the egg survive after ovulation?",
+    "a": "The egg lives for only 12-24 hours after release. Sperm can survive up to 5 days in the reproductive tract, so the fertile window is roughly 5 days before ovulation and the day of."
+   },
+   {
+    "q": "Can I take a pregnancy test in week 2?",
+    "a": "Not yet. hCG hormone is only produced after a fertilized egg implants in the uterus, which happens around weeks 3-4. Testing now will always give a negative result."
+   }
+  ]
+ },
+ {
+  "week": 3,
+  "tri": 1,
+  "title": "Implantation and the Spark of Life",
+  "size": "Blueberry",
+  "wt": "<0.01g",
+  "len": "1mm",
+  "desc": "The miraculous journey of your tiny embryo is complete this week. Your fertilized egg has traveled down the fallopian tube and is now burrowing into the rich lining of your uterus in a process called implantation.",
+  "dev": [
+   "The blastocyst burrows into the uterine lining completing implantation",
+   "hCG hormone production begins — the hormone pregnancy tests detect",
+   "The inner cell mass begins differentiating into the embryo proper",
+   "Primitive placental cells start forming to supply nutrition"
+  ],
+  "sym": [
+   "Light implantation spotting — pink or brown discharge lasting 1-2 days",
+   "Subtle cramping similar to early period pains",
+   "Heightened fatigue as your body works overtime",
+   "Breasts may begin feeling tender and heavy"
+  ],
+  "tip": "If you see light spotting this week, do not panic — implantation bleeding is common and completely normal.",
+  "nut": "Iron from red meat, tofu, or fortified cereal supports the increased blood volume your body begins building.",
+  "ex": "Gentle yoga or light walking is ideal — avoid high-impact exercise until your pregnancy is confirmed.",
+  "partner": "Be patient and supportive; your partner may be anxious waiting for a positive test.",
+  "faqs": [
+   {
+    "q": "What is implantation bleeding and when does it occur?",
+    "a": "Implantation bleeding is light spotting that occurs when the fertilized egg embeds into the uterine wall, usually 6-12 days after ovulation. It is lighter than a period and lasts only 1-3 days."
+   },
+   {
+    "q": "Can I feel implantation happening?",
+    "a": "Some women feel mild cramping or a slight twinge during implantation, but many feel nothing at all. The sensation is usually milder than menstrual cramps if felt at all."
+   },
+   {
+    "q": "When can I take a pregnancy test after implantation?",
+    "a": "hCG levels need 2-3 days to rise to detectable levels after implantation. For the most accurate result, wait until the first day of your missed period or use a sensitive early-detection test."
+   }
+  ]
+ },
+ {
+  "week": 4,
+  "tri": 1,
+  "title": "Your First Positive Test",
+  "size": "Poppyseed",
+  "wt": "0.04g",
+  "len": "2mm",
+  "desc": "This is the week most women discover they are pregnant. Your hCG levels are now high enough to show up on a home pregnancy test, and deep inside you a cluster of cells is rapidly organizing itself into the beginnings of a human being.",
+  "dev": [
+   "The embryo divides into three distinct germ layers — ectoderm, mesoderm, endoderm",
+   "The neural tube that becomes the brain and spine begins to form",
+   "Primitive heart cells cluster together and begin rhythmic contractions",
+   "The amniotic sac and yolk sac form to protect and nourish the embryo"
+  ],
+  "sym": [
+   "Missed period — the classic first sign",
+   "Breast tenderness and fullness",
+   "Fatigue that hits like a wave",
+   "Slight nausea beginning for some women"
+  ],
+  "tip": "Take your pregnancy test with first morning urine for the most concentrated hCG reading and most accurate result.",
+  "nut": "Folic acid is most critical RIGHT NOW as the neural tube closes. Ensure you are getting 400-800mcg daily.",
+  "ex": "Continue gentle exercise but avoid hot tubs and saunas which can harm early embryo development.",
+  "partner": "Be the first support person your partner tells — share the joy and the responsibility from day one.",
+  "faqs": [
+   {
+    "q": "When is the best time to take a pregnancy test?",
+    "a": "Use your first morning urine for the highest hCG concentration. A digital test or a sensitive strip test (10 mIU sensitivity) gives the most reliable result from the first day of a missed period."
+   },
+   {
+    "q": "What does a week 4 embryo look like?",
+    "a": "At 4 weeks, the embryo is a tiny flat disc of cells called a trilaminar disc, about 2mm across. It does not yet look human — it resembles a tiny layered pancake with a forming groove down the center."
+   },
+   {
+    "q": "Is light cramping normal at 4 weeks pregnant?",
+    "a": "Yes. Mild cramping is common as the uterus begins to expand and the embryo settles in. However, heavy bleeding or severe one-sided pain should be evaluated immediately by your doctor."
+   }
+  ]
+ },
+ {
+  "week": 5,
+  "tri": 1,
+  "title": "The Tiny Heart Beats",
+  "size": "Sesame Seed",
+  "wt": "0.1g",
+  "len": "3mm",
+  "desc": "Your baby's heart is beating for the very first time this week — a rapid flutter of 80-100 beats per minute that may be visible on an early ultrasound. Though smaller than a sesame seed, your embryo is an explosion of biological activity.",
+  "dev": [
+   "The primitive heart tube begins beating rhythmically at 80-100bpm",
+   "The neural tube closes — a critical milestone for brain and spinal cord formation",
+   "The placenta takes over hormone production from the corpus luteum",
+   "Arm and leg buds emerge as tiny protrusions on the embryo body"
+  ],
+  "sym": [
+   "Morning sickness begins — nausea that can strike at any time of day",
+   "Extreme fatigue and the need for extra sleep",
+   "Frequent urination as kidneys start processing more fluid",
+   "Heightened sense of smell making certain foods unbearable"
+  ],
+  "tip": "For nausea, try eating small frequent meals of bland foods like crackers and keep a snack on your nightstand.",
+  "nut": "Vitamin B6 (from bananas, chicken, or supplements) is clinically proven to reduce morning sickness severity.",
+  "ex": "Gentle swimming is excellent this trimester — it relieves nausea and supports your growing belly without impact.",
+  "partner": "Take over strong-smelling cooking tasks this week — your partner's heightened sense of smell may make kitchen odors overwhelming.",
+  "faqs": [
+   {
+    "q": "When does morning sickness start and how long does it last?",
+    "a": "Nausea typically begins around week 5-6 and peaks around week 8-10. For most women, it improves significantly by the end of the first trimester around week 12-14. A small percentage experience it throughout pregnancy."
+   },
+   {
+    "q": "Is it normal to have no symptoms at 5 weeks pregnant?",
+    "a": "Yes, completely normal. Some women have very few or no symptoms in early pregnancy. The absence of symptoms does not indicate a problem. Symptoms vary widely between individuals and pregnancies."
+   },
+   {
+    "q": "Can you see a heartbeat at 5 weeks on ultrasound?",
+    "a": "A heartbeat may be detectable by transvaginal ultrasound at 5-6 weeks, though it is sometimes too early. By 6-7 weeks, a heartbeat should be clearly visible on most ultrasounds."
+   }
+  ]
+ }
+];module.exports=d;
