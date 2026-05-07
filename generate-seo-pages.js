@@ -5,14 +5,9 @@ const { weekDataRich1 } = require('./seo-data-rich-1');
 const { weekDataRich2 } = require('./seo-data-rich-2');
 const { weekDataRich3 } = require('./seo-data-rich-3');
 const { weekDataRich4 } = require('./seo-data-rich-4');
-let weekData = [...weekDataRich1, ...weekDataRich2, ...weekDataRich3, ...weekDataRich4]; // Initialize with batches 1-4
-let foodData = [];
-try {
-  const sd = require('./seo-data');
-  if (sd.foodData) foodData = sd.foodData;
-} catch (e) {
-  console.log("Could not load original seo-data.js, skipping food data.");
-}
+const { foodDataRich } = require('./seo-data-food-rich');
+let weekData = [...weekDataRich1, ...weekDataRich2, ...weekDataRich3, ...weekDataRich4];
+let foodData = foodDataRich;
 
 const SITE = 'https://momcalc.com';
 const OUT = path.join(__dirname, 'public', 'pages');
@@ -494,7 +489,7 @@ LANGS.forEach(lang => {
 });
 
 // ====== GENERATE FOOD SAFETY PAGES ======
-console.log('📄 Generating food safety pages (Multilingual)...');
+console.log('📄 Generating food safety pages (Premium Content)...');
 LANGS.forEach(lang => {
   foodData.forEach(f => {
     const slug = `can-i-eat-${f.food}`;
@@ -502,26 +497,56 @@ LANGS.forEach(lang => {
     const lPrefix = lang.dir ? `${lang.dir}/` : '';
 
     const content = `
-      <div style="margin-bottom: 32px;">
-        <span class="seo-badge ${f.safe ? 'seo-safe' : 'seo-unsafe'}" style="background:${f.safe ? 'var(--mint)' : 'var(--rose)'}; color:white; padding:8px 16px; border-radius:var(--radius-full);">
-          ${f.safe ? '✅ Generally Safe' : '⚠️ Caution Advised'}
-        </span>
-        <h2 style="font-size: 1.8rem; margin-top: 24px;">${f.food}: Is it safe during pregnancy?</h2>
+      ${f.hook}
+
+      <div style="margin-bottom: 40px; display: flex; align-items: center; gap: 16px; background: ${f.safe ? 'rgba(59,184,154,0.08)' : 'rgba(244,63,94,0.08)'}; padding: 24px; border-radius: var(--radius-xl); border: 1px solid ${f.safe ? 'var(--mint)' : 'var(--rose)'};">
+        <div style="font-size: 2.5rem;">${f.safe ? '✅' : '⚠️'}</div>
+        <div>
+          <h3 style="margin: 0; color: var(--text-primary); font-size: 1.3rem;">Safety Verdict</h3>
+          <p style="margin: 4px 0 0; color: var(--text-secondary); line-height: 1.5;">${f.safetyVerdict}</p>
+        </div>
       </div>
-      <div style="background: var(--bg-secondary); border-radius: var(--radius-xl); padding: 40px; border: 1px solid var(--border-color);">
-        <p style="line-height: 1.8; color: var(--text-secondary); font-size: 1.1rem;">${f.answer}</p>
-        ${f.alternatives ? `<p style="margin-top:24px;"><strong>Alternatives:</strong> ${f.alternatives}</p>` : ''}
+
+      <h2 style="font-family:var(--font-display); font-size:1.8rem; margin-bottom: 24px; color:var(--text-primary);">Medical Insights & Science</h2>
+      <div style="background: var(--bg-secondary); border-radius: var(--radius-xl); padding: 32px; border: 1px solid var(--border-color); margin-bottom:40px;">
+        <p style="line-height: 1.8; color: var(--text-secondary); font-size: 1.1rem; margin: 0;">${f.medicalInsights}</p>
+      </div>
+
+      <h2 style="font-family:var(--font-display); font-size:1.8rem; margin-bottom: 24px; color:var(--text-primary);">Risks & Benefits</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-bottom: 40px;">
+        <div style="background: var(--bg-secondary); padding: 24px; border-radius: var(--radius-xl); border: 1px solid var(--border-color);">
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            ${f.risksAndBenefits.map(item => `<li style="display:flex; gap:12px; margin-bottom:12px; font-size:1rem; color:var(--text-secondary);"><span style="color:var(--indigo-light);">•</span> ${item}</li>`).join('')}
+          </ul>
+        </div>
+      </div>
+
+      <h2 style="font-family:var(--font-display); font-size:1.8rem; margin-bottom: 24px; color:var(--text-primary);">Safety Guidelines</h2>
+      <div style="background: var(--bg-secondary); border-radius: var(--radius-xl); padding: 32px; border: 1px solid var(--border-color); margin-bottom:40px;">
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          ${f.safetyGuidelines.map(g => `
+            <li style="display:flex; gap:16px; margin-bottom:20px; align-items: flex-start;">
+              <span style="font-size:1.5rem; line-height: 1;">${g.icon}</span>
+              <span style="color: var(--text-secondary); line-height: 1.6; font-size: 1.05rem;">${g.text}</span>
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+
+      <h2 style="font-family:var(--font-display); font-size:1.8rem; margin-bottom: 24px; color:var(--text-primary);">Safe Alternatives</h2>
+      <div style="background: linear-gradient(135deg, rgba(99,102,241,0.05) 0%, rgba(168,85,247,0.05) 100%); padding: 32px; border-radius: var(--radius-xl); border: 1px solid rgba(99,102,241,0.2); margin-bottom:40px;">
+        <p style="font-size: 1.1rem; line-height: 1.7; color: var(--text-primary); font-weight: 500; margin: 0;">${f.alternatives}</p>
       </div>
     `;
 
     const html = pageHTML({
-      title: `${f.title} | ${dict.foodSafety} Guide`,
-      metaDesc: `Wondering if you can eat ${f.food} during pregnancy? Read our expert safety guide.`,
+      title: f.metaTitle,
+      metaDesc: f.metaDesc,
       canonical: `${SITE}/pages/${lPrefix}${slug}.html`,
       h1: f.title,
       breadcrumbs: [{ name: dict.home, url: '/' }, { name: dict.foodSafety, url: '/pages/' }, { name: f.food, url: `/pages/${lPrefix}${slug}.html` }],
       content,
-      faqs: [{ q: `Can I eat ${f.food} while pregnant?`, a: f.answer }],
+      faqs: f.faqs,
       lang: lang.code,
       isSubfolder: !!lang.dir,
       ogImage: 'https://momcalc.com/icon.png'
