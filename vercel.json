@@ -1,26 +1,6 @@
 {
+{
   "version": 2,
-  "builds": [
-    {
-      "src": "api/doctors.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "public"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/doctors",
-      "dest": "/api/doctors.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ]
+  "outputDirectory": "public",
+  "cleanUrls": true
 }
