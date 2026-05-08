@@ -194,10 +194,53 @@
     </section>
   </main>
 
-  <footer class="footer" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
-    <div class="footer-brand">MomCalc 🤰</div>
-    <p class="footer-disc">⚠️ <strong>Medical Disclaimer:</strong> This platform provides educational information only. Please consult your doctor for medical advice.</p>
-    <p class="footer-copy" style="margin: 0 auto;">© 2026 MomCalc. Premium Pregnancy Tracking.</p>
+  <footer class="saas-footer">
+    <div class="saas-footer-grid">
+      <!-- Column 1: Brand -->
+      <div class="saas-footer-col" style="flex: 2;">
+        <div class="saas-footer-brand"><div class="logo-icon" style="display:inline-block; margin-right:8px; font-size:1.8rem; background:none; -webkit-text-fill-color:initial;">🤰</div><span>MomCalc</span></div>
+        <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
+          The world's most advanced AI-powered pregnancy companion. Calculate due dates, track fetal growth, and monitor your health milestones with precision.
+        </p>
+        <p class="footer-disc" style="font-size: 0.8rem; background: var(--bg-secondary); padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+          ⚠️ Educational purposes only. Not medical advice. Always consult your healthcare provider.
+        </p>
+      </div>
+
+      <!-- Column 2: Product -->
+      <div class="saas-footer-col">
+        <h4>Product</h4>
+        <a href="/#calculator" onclick="if(window.navigateToFeature){ navigateToFeature('calculator'); return false; }">Due Date Calculator</a>
+        <a href="/#dashboard" onclick="if(window.navigateToFeature){ navigateToFeature('baby'); return false; }">Weekly Tracker</a>
+        <a href="/#dashboard" onclick="if(window.navigateToFeature){ navigateToFeature('trackers'); return false; }">Kick Counter</a>
+        <a href="/#dashboard" onclick="if(window.navigateToFeature){ navigateToFeature('trackers'); return false; }">Contraction Timer</a>
+        <a href="/#dashboard" onclick="if(window.navigateToFeature){ navigateToFeature('doctors'); return false; }">Doctor Finder</a>
+        <a href="/#dashboard" onclick="if(window.navigateToFeature){ navigateToFeature('fertility'); return false; }">Ovulation Predictor</a>
+      </div>
+
+      <!-- Column 3: Resources -->
+      <div class="saas-footer-col">
+        <h4>Resources</h4>
+        <a href="/pages/">Pregnancy Guides</a>
+        <a href="/pages/can-i-eat-sushi.html">Food Safety Guide</a>
+        <a href="/pages/pregnancy-week-12.html">First Trimester</a>
+        <a href="/pages/pregnancy-week-20.html">Second Trimester</a>
+        <a href="/pages/pregnancy-week-36.html">Third Trimester</a>
+        <a href="/sitemap.xml">Sitemap</a>
+      </div>
+
+      <!-- Column 4: Company & Legal -->
+      <div class="saas-footer-col">
+        <h4>Legal</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+
+    <div class="saas-footer-bottom" style="display: flex; justify-content: center; text-align: center;">
+      <div>© 2026 MomCalc Inc. All rights reserved. Made with 💗 for every mama.</div>
+    </div>
   </footer>
 
   <script>
