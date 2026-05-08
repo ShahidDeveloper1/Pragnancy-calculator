@@ -161,7 +161,7 @@ function pageHTML({ title, metaDesc, canonical, h1, breadcrumbs, content, faqs, 
   
   const bcSchema = JSON.stringify({
     "@context": "https://schema.org", "@type": "BreadcrumbList",
-    "itemListElement": breadcrumbs.map((b, i) => ({ "@type": "ListItem", "position": i + 1, "name": b.name, "item": b.url }))
+    "itemListElement": breadcrumbs.map((b, i) => ({ "@type": "ListItem", "position": i + 1, "name": b.name, "item": b.url.startsWith('http') ? b.url : SITE + b.url }))
   });
 
   const faqSchema = faqs ? JSON.stringify({
