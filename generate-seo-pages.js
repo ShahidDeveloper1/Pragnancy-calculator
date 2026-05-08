@@ -328,9 +328,9 @@ function pageHTML({ title, metaDesc, canonical, h1, breadcrumbs, content, faqs, 
       <!-- Column 4: Company & Legal -->
       <div class="saas-footer-col">
         <h4>Legal</h4>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Cookie Policy</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+        <a href="/cookies.html">Cookie Policy</a>
       </div>
     </div>
 
