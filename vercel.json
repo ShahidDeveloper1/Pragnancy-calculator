@@ -1,19 +1,5 @@
 {
   "buildCommand": "node generate-seo-pages.js",
   "outputDirectory": "public",
-  "framework": null,
-  "cleanUrls": true,
-  "trailingSlash": false,
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" }
-      ]
-    }
-  ],
-  "rewrites": [
-    { "source": "/api/doctors", "destination": "/api/doctors.js" },
-    { "source": "/", "destination": "/index.html" }
-  ]
+  "framework": null
 }
